@@ -1,0 +1,5 @@
+airlines_app:
+    resource: "@AirlinesAppBundle/Controller/"
+    type:     annotation
+    prefix:   /
+

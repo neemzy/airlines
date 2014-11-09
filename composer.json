@@ -1,10 +1,9 @@
 {
-    "name": "symfony/framework-standard-edition",
-    "license": "MIT",
+    "name": "airlines",
     "type": "project",
-    "description": "The \"Symfony Standard Edition\" distribution",
+    "description": "IT team planning board with a nice UI",
     "autoload": {
-        "psr-0": { "": "src/", "SymfonyStandard": "app/" }
+        "psr-0": { "Airlines": "src/", "SymfonyStandard": "app/" }
     },
     "require": {
         "php": ">=5.3.3",
