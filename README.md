@@ -2,22 +2,11 @@
 
 Airlines est un tableau LEAN collaboratif virtuel, où chaque utilisateur gère ses tâches planifiées sur chaque jour de la semaine. Une vue globale est disponible dans l'objectif d'être visualisée sur un écran commun.
 
-## Solution technique
+## Test cases
 
-- Symfony (framework PHP MVC)
-- PHPUnit (moteur de tests unitaires PHP)
-- React.js (framework JS front-end)
-- Gulp (builder front-end embarquant LESS, Browserify...)
-- Jenkins (outil d'intégration continue)
+getBoardTasks
 
-## Ébauche conceptuelle
-
-Table
-Row
-Day
-Task (load, consumed, remaining)
-
-## Use case
+## Use cases
 
 - L'utilisateur crée un tableau
 - L'utilisateur ajoute des collaborateurs au tableau
