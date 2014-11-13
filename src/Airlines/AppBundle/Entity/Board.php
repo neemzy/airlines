@@ -126,4 +126,54 @@ class Board
     {
         return $this->end;
     }
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->weeks = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
+     * Add weeks
+     *
+     * @param \Airlines\AppBundle\Entity\Week $weeks
+     * @return Board
+     */
+    public function addWeek(\Airlines\AppBundle\Entity\Week $weeks)
+    {
+        $this->weeks[] = $weeks;
+
+        return $this;
+    }
+
+    /**
+     * Remove weeks
+     *
+     * @param \Airlines\AppBundle\Entity\Week $weeks
+     */
+    public function removeWeek(\Airlines\AppBundle\Entity\Week $weeks)
+    {
+        $this->weeks->removeElement($weeks);
+    }
+
+    /**
+     * Get weeks
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getWeeks()
+    {
+        return $this->weeks;
+    }
+
+    /**
+     * String representation
+     *
+     * @return string
+     */
+    public function __toString()
+    {
+        return $this->name;
+    }
 }

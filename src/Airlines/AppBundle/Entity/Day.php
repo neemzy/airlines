@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
  * Day
  *
  * @ORM\Table()
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="Airlines\AppBundle\Entity\DayRepository")
  */
 class Day
 {
@@ -71,5 +71,78 @@ class Day
     public function getDate()
     {
         return $this->date;
+    }
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->tasks = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
+     * Set week
+     *
+     * @param \Airlines\AppBundle\Entity\Week $week
+     * @return Day
+     */
+    public function setWeek(\Airlines\AppBundle\Entity\Week $week = null)
+    {
+        $this->week = $week;
+
+        return $this;
+    }
+
+    /**
+     * Get week
+     *
+     * @return \Airlines\AppBundle\Entity\Week 
+     */
+    public function getWeek()
+    {
+        return $this->week;
+    }
+
+    /**
+     * Add tasks
+     *
+     * @param \Airlines\AppBundle\Entity\Task $tasks
+     * @return Day
+     */
+    public function addTask(\Airlines\AppBundle\Entity\Task $tasks)
+    {
+        $this->tasks[] = $tasks;
+
+        return $this;
+    }
+
+    /**
+     * Remove tasks
+     *
+     * @param \Airlines\AppBundle\Entity\Task $tasks
+     */
+    public function removeTask(\Airlines\AppBundle\Entity\Task $tasks)
+    {
+        $this->tasks->removeElement($tasks);
+    }
+
+    /**
+     * Get tasks
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getTasks()
+    {
+        return $this->tasks;
+    }
+
+    /**
+     * String representation
+     *
+     * @return string
+     */
+    public function __toString()
+    {
+        return $this->date->format('d/m/Y');
     }
 }

@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
  * Week
  *
  * @ORM\Table()
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="Airlines\AppBundle\Entity\WeekRepository")
  */
 class Week
 {
@@ -69,6 +69,79 @@ class Week
      * @return string 
      */
     public function getName()
+    {
+        return $this->name;
+    }
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->days = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
+     * Set board
+     *
+     * @param \Airlines\AppBundle\Entity\Board $board
+     * @return Week
+     */
+    public function setBoard(\Airlines\AppBundle\Entity\Board $board = null)
+    {
+        $this->board = $board;
+
+        return $this;
+    }
+
+    /**
+     * Get board
+     *
+     * @return \Airlines\AppBundle\Entity\Board 
+     */
+    public function getBoard()
+    {
+        return $this->board;
+    }
+
+    /**
+     * Add days
+     *
+     * @param \Airlines\AppBundle\Entity\Day $days
+     * @return Week
+     */
+    public function addDay(\Airlines\AppBundle\Entity\Day $days)
+    {
+        $this->days[] = $days;
+
+        return $this;
+    }
+
+    /**
+     * Remove days
+     *
+     * @param \Airlines\AppBundle\Entity\Day $days
+     */
+    public function removeDay(\Airlines\AppBundle\Entity\Day $days)
+    {
+        $this->days->removeElement($days);
+    }
+
+    /**
+     * Get days
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getDays()
+    {
+        return $this->days;
+    }
+
+    /**
+     * String representation
+     *
+     * @return string
+     */
+    public function __toString()
     {
         return $this->name;
     }

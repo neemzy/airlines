@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
  * Task
  *
  * @ORM\Table()
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="Airlines\AppBundle\Entity\TaskRepository")
  */
 class Task
 {
@@ -156,5 +156,28 @@ class Task
     public function getRemaining()
     {
         return $this->remaining;
+    }
+
+    /**
+     * Set day
+     *
+     * @param \Airlines\AppBundle\Entity\Day $day
+     * @return Task
+     */
+    public function setDay(\Airlines\AppBundle\Entity\Day $day = null)
+    {
+        $this->day = $day;
+
+        return $this;
+    }
+
+    /**
+     * Get day
+     *
+     * @return \Airlines\AppBundle\Entity\Day 
+     */
+    public function getDay()
+    {
+        return $this->day;
     }
 }
