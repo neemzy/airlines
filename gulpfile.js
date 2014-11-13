@@ -45,14 +45,21 @@ gulp.task('scripts', function () {
 
 
 gulp.task('workflow', function () {
-    if (! tasks.util.env.dist) {
+    if (!tasks.util.env.dist) {
+        gulp.src('gulpfile.js')
+            .pipe(tasks.open('', { url: 'http://localhost:8002/', app: 'firefox' }));
+
         server.listen(35729, function (err) {
             gulp.watch(src + 'stylesheets/**/*.less', ['stylesheets']);
             gulp.watch(src + 'scripts/**/*', ['scripts']);
+
+            gulp.watch('app/Resources/views/**/*.twig', function () {
+                gulp.src('').pipe(tasks.livereload());
+            });
         });
     }
 });
 
 
 
-gulp.task('default', [/*'clean', */'stylesheets', 'scripts', 'workflow']);
+gulp.task('default', ['clean', 'stylesheets', 'scripts', 'workflow']);
