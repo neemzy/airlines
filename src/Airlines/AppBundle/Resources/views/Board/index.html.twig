@@ -8,8 +8,6 @@
             <tr>
                 <th>Id</th>
                 <th>Name</th>
-                <th>Start</th>
-                <th>End</th>
                 <th>Actions</th>
             </tr>
         </thead>
@@ -18,8 +16,6 @@
             <tr>
                 <td><a href="{{ path('board_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
                 <td>{{ entity.name }}</td>
-                <td>{% if entity.start %}{{ entity.start|date('Y-m-d H:i:s') }}{% endif %}</td>
-                <td>{% if entity.end %}{{ entity.end|date('Y-m-d H:i:s') }}{% endif %}</td>
                 <td>
                 <ul>
                     <li>

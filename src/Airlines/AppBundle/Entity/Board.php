@@ -29,23 +29,9 @@ class Board
     private $name;
 
     /**
-     * @var \DateTime
-     *
-     * @ORM\Column(name="start", type="date")
+     * @ORM\OneToMany(targetEntity="Member", mappedBy="board")
      */
-    private $start;
-
-    /**
-     * @var \DateTime
-     *
-     * @ORM\Column(name="end", type="date")
-     */
-    private $end;
-
-    /**
-     * @ORM\OneToMany(targetEntity="Week", mappedBy="board")
-     */
-    private $weeks;
+    private $members;
 
 
     /**
@@ -82,89 +68,44 @@ class Board
     }
 
     /**
-     * Set start
-     *
-     * @param \DateTime $start
-     * @return Board
-     */
-    public function setStart($start)
-    {
-        $this->start = $start;
-
-        return $this;
-    }
-
-    /**
-     * Get start
-     *
-     * @return \DateTime 
-     */
-    public function getStart()
-    {
-        return $this->start;
-    }
-
-    /**
-     * Set end
-     *
-     * @param \DateTime $end
-     * @return Board
-     */
-    public function setEnd($end)
-    {
-        $this->end = $end;
-
-        return $this;
-    }
-
-    /**
-     * Get end
-     *
-     * @return \DateTime 
-     */
-    public function getEnd()
-    {
-        return $this->end;
-    }
-    /**
      * Constructor
      */
     public function __construct()
     {
-        $this->weeks = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->members = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
     /**
-     * Add weeks
+     * Add members
      *
-     * @param \Airlines\AppBundle\Entity\Week $weeks
+     * @param \Airlines\AppBundle\Entity\Member $members
      * @return Board
      */
-    public function addWeek(\Airlines\AppBundle\Entity\Week $weeks)
+    public function addMember(\Airlines\AppBundle\Entity\Member $members)
     {
-        $this->weeks[] = $weeks;
+        $this->members[] = $members;
 
         return $this;
     }
 
     /**
-     * Remove weeks
+     * Remove members
      *
-     * @param \Airlines\AppBundle\Entity\Week $weeks
+     * @param \Airlines\AppBundle\Entity\Member $members
      */
-    public function removeWeek(\Airlines\AppBundle\Entity\Week $weeks)
+    public function removeMember(\Airlines\AppBundle\Entity\Member $members)
     {
-        $this->weeks->removeElement($weeks);
+        $this->members->removeElement($members);
     }
 
     /**
-     * Get weeks
+     * Get members
      *
      * @return \Doctrine\Common\Collections\Collection 
      */
-    public function getWeeks()
+    public function getMembers()
     {
-        return $this->weeks;
+        return $this->members;
     }
 
     /**

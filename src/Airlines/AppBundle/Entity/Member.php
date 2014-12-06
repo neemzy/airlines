@@ -5,12 +5,12 @@ namespace Airlines\AppBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Day
+ * Member
  *
  * @ORM\Table()
- * @ORM\Entity(repositoryClass="Airlines\AppBundle\Entity\DayRepository")
+ * @ORM\Entity(repositoryClass="Airlines\AppBundle\Entity\MemberRepository")
  */
-class Day
+class Member
 {
     /**
      * @var integer
@@ -22,20 +22,20 @@ class Day
     private $id;
 
     /**
-     * @var \DateTime
+     * @var string
      *
-     * @ORM\Column(name="date", type="date")
+     * @ORM\Column(name="name", type="string", length=255)
      */
-    private $date;
+    private $name;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Week", inversedBy="days")
-     * @ORM\JoinColumn(name="week_id", referencedColumnName="id")
+     * @ORM\ManyToOne(targetEntity="Board", inversedBy="weeks")
+     * @ORM\JoinColumn(name="board_id", referencedColumnName="id")
      */
-    private $week;
+    private $board;
 
     /**
-     * @ORM\OneToMany(targetEntity="Task", mappedBy="day")
+     * @ORM\OneToMany(targetEntity="Task", mappedBy="member")
      */
     private $tasks;
 
@@ -51,26 +51,26 @@ class Day
     }
 
     /**
-     * Set date
+     * Set name
      *
-     * @param \DateTime $date
-     * @return Day
+     * @param string $name
+     * @return Week
      */
-    public function setDate($date)
+    public function setName($name)
     {
-        $this->date = $date;
+        $this->name = $name;
 
         return $this;
     }
 
     /**
-     * Get date
+     * Get name
      *
-     * @return \DateTime 
+     * @return string 
      */
-    public function getDate()
+    public function getName()
     {
-        return $this->date;
+        return $this->name;
     }
     /**
      * Constructor
@@ -81,33 +81,33 @@ class Day
     }
 
     /**
-     * Set week
+     * Set board
      *
-     * @param \Airlines\AppBundle\Entity\Week $week
-     * @return Day
+     * @param \Airlines\AppBundle\Entity\Board $board
+     * @return Week
      */
-    public function setWeek(\Airlines\AppBundle\Entity\Week $week = null)
+    public function setBoard(\Airlines\AppBundle\Entity\Board $board = null)
     {
-        $this->week = $week;
+        $this->board = $board;
 
         return $this;
     }
 
     /**
-     * Get week
+     * Get board
      *
-     * @return \Airlines\AppBundle\Entity\Week 
+     * @return \Airlines\AppBundle\Entity\Board 
      */
-    public function getWeek()
+    public function getBoard()
     {
-        return $this->week;
+        return $this->board;
     }
 
     /**
      * Add tasks
      *
      * @param \Airlines\AppBundle\Entity\Task $tasks
-     * @return Day
+     * @return Week
      */
     public function addTask(\Airlines\AppBundle\Entity\Task $tasks)
     {
@@ -143,6 +143,6 @@ class Day
      */
     public function __toString()
     {
-        return $this->date->format('d/m/Y');
+        return $this->name;
     }
 }

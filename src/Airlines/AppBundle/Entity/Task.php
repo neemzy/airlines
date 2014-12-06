@@ -31,6 +31,13 @@ class Task
     /**
      * @var string
      *
+     * @ORM\Column(name="date", type="date")
+     */
+    private $date;
+
+    /**
+     * @var string
+     *
      * @ORM\Column(name="estimate", type="decimal")
      */
     private $estimate;
@@ -50,10 +57,10 @@ class Task
     private $remaining;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Day", inversedBy="tasks")
-     * @ORM\JoinColumn(name="day_id", referencedColumnName="id")
+     * @ORM\ManyToOne(targetEntity="Member", inversedBy="tasks")
+     * @ORM\JoinColumn(name="member_id", referencedColumnName="id")
      */
-    private $day;
+    private $member;
 
 
     /**
@@ -87,6 +94,29 @@ class Task
     public function getName()
     {
         return $this->name;
+    }
+
+    /**
+     * Set date
+     *
+     * @param string $date
+     * @return Task
+     */
+    public function setDate($date)
+    {
+        $this->date = $date;
+
+        return $this;
+    }
+
+    /**
+     * Get date
+     *
+     * @return string 
+     */
+    public function getDate()
+    {
+        return $this->date;
     }
 
     /**
@@ -159,25 +189,25 @@ class Task
     }
 
     /**
-     * Set day
+     * Set member
      *
-     * @param \Airlines\AppBundle\Entity\Day $day
+     * @param \Airlines\AppBundle\Entity\Member $member
      * @return Task
      */
-    public function setDay(\Airlines\AppBundle\Entity\Day $day = null)
+    public function setMember(\Airlines\AppBundle\Entity\Member $member = null)
     {
-        $this->day = $day;
+        $this->member = $member;
 
         return $this;
     }
 
     /**
-     * Get day
+     * Get member
      *
-     * @return \Airlines\AppBundle\Entity\Day 
+     * @return \Airlines\AppBundle\Entity\Member 
      */
-    public function getDay()
+    public function getMember()
     {
-        return $this->day;
+        return $this->member;
     }
 }

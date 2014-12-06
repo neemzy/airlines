@@ -14,6 +14,10 @@
                 <td>{{ entity.name }}</td>
             </tr>
             <tr>
+                <th>Date</th>
+                <td>{{ entity.date|date('Y-m-d H:i:s') }}</td>
+            </tr>
+            <tr>
                 <th>Estimate</th>
                 <td>{{ entity.estimate }}</td>
             </tr>

@@ -8,6 +8,7 @@
             <tr>
                 <th>Id</th>
                 <th>Name</th>
+                <th>Date</th>
                 <th>Estimate</th>
                 <th>Consumed</th>
                 <th>Remaining</th>
@@ -19,6 +20,7 @@
             <tr>
                 <td><a href="{{ path('task_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
                 <td>{{ entity.name }}</td>
+                <td>{% if entity.date %}{{ entity.date|date('Y-m-d') }}{% endif %}</td>
                 <td>{{ entity.estimate }}</td>
                 <td>{{ entity.consumed }}</td>
                 <td>{{ entity.remaining }}</td>
