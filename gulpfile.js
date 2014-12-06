@@ -54,7 +54,7 @@ gulp.task('workflow', function () {
             gulp.watch(src + 'scripts/**/*', ['scripts']);
 
             gulp.watch('app/Resources/views/**/*.twig', function () {
-                gulp.src('').pipe(tasks.livereload());
+                gulp.src('').pipe(tasks.livereload(server));
             });
         });
     }

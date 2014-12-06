@@ -19,6 +19,8 @@ Airlines est un outil de gestion de tableau LEAN virtuel collaboratif, permettan
 
 - `name`
 - `board`
+- `avatar` TODO
+- `smiley` TODO
 
 ### Task
 
@@ -27,6 +29,7 @@ Airlines est un outil de gestion de tableau LEAN virtuel collaboratif, permettan
 - `estimate`
 - `consumed`
 - `remaining`
+- `color` TODO
 - `member`
 
 ## API

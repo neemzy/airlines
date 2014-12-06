@@ -1,0 +1,30 @@
+.member {
+    .table-row();
+
+    &__info, &__day {
+        .table-cell();
+    }
+
+    &__identity,
+    &__numbers,
+    &__name,
+    &__smiley {
+        display: inline-block;
+    }
+
+    &__avatar,
+    &__smiley {
+        background-position: center center;
+        background-size: cover;
+    }
+
+    &__avatar {
+        width: 100px;
+        height: 100px;
+    }
+
+    &__smiley {
+        width: 20px;
+        height: 20px;
+    }
+}

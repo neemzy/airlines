@@ -1,0 +1,17 @@
+.board {
+    display: table;
+    width: 100%;
+    border-collapse: collapse;
+
+    &__header,
+    &__footer {
+        .table-row();
+    }
+
+    &__head-title,
+    &__head-day,
+    &__foot-title,
+    &__foot-day {
+        .table-cell();
+    }
+}
