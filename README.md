@@ -6,36 +6,19 @@ Airlines est un outil de gestion de tableau LEAN virtuel collaboratif, permettan
 
 - L'utilisateur crée un tableau
 - L'utilisateur ajoute des collaborateurs au tableau
-- Les collaborateurs accèdent au tableau, puis à leur propre ligne
+- Les collaborateurs accèdent au tableau
 - Les collaborateurs renseignent les tâches qui leur sont affectées ainsi que leur charge, l'objectif étant d'obtenir un total de 5
 
-## Schéma
+## Installation
 
-### Board
+TODO
 
-- `name`
-
-### Member
-
-- `name`
-- `board`
-- `avatar` TODO
-- `smiley` TODO
-
-### Task
-
-- `name`
-- `date`
-- `estimate`
-- `consumed`
-- `remaining`
-- `color` TODO
-- `member`
-
-## API
+## Utilisation
 
 TODO
 
 ## Logs
 
-- Génération des entités Doctrine avec Symfony
+- Génération des entités Doctrine avec Symfony et des CRUDs associés
+- Installation de [JMSSerializerBundle](https://github.com/schmittjoh/JMSSerializerBundle)
+- Mise en place d'une API JSON RESTful pour la gestion des tâches (en cours)
