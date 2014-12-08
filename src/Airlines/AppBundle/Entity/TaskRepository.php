@@ -12,4 +12,19 @@ use Doctrine\ORM\EntityRepository;
  */
 class TaskRepository extends EntityRepository
 {
+    /**
+     * Fetches tasks by member and date
+     *
+     * @param Member $member Member instance
+     * @param string $date   SQL-formatted date
+     */
+    public function findByMemberAndDate(Member $member, $date)
+    {
+        return $this->findBy(
+            [
+                'member' => $member->getId(),
+                'date' => new \DateTime($date)
+            ]
+        );
+    }
 }

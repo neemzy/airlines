@@ -3,6 +3,8 @@
 namespace Airlines\AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+use JMS\Serializer\Annotation\Exclude;
 
 /**
  * Task
@@ -25,6 +27,7 @@ class Task
      * @var string
      *
      * @ORM\Column(name="name", type="string", length=255)
+     * @Assert\NotBlank
      */
     private $name;
 
@@ -38,27 +41,31 @@ class Task
     /**
      * @var string
      *
-     * @ORM\Column(name="estimate", type="decimal")
+     * @ORM\Column(name="estimate", type="decimal", precision=4, scale=3)
+     * @Assert\Range(min=0, max=1)
      */
     private $estimate;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="consumed", type="decimal")
+     * @ORM\Column(name="consumed", type="decimal", precision=4, scale=3)
+     * @Assert\Range(min=0, max=1)
      */
     private $consumed;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="remaining", type="decimal")
+     * @ORM\Column(name="remaining", type="decimal", precision=4, scale=3)
+     * @Assert\Range(min=0, max=1)
      */
     private $remaining;
 
     /**
      * @ORM\ManyToOne(targetEntity="Member", inversedBy="tasks")
      * @ORM\JoinColumn(name="member_id", referencedColumnName="id")
+     * @Exclude
      */
     private $member;
 

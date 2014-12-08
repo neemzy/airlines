@@ -21,4 +21,4 @@ TODO
 
 - Génération des entités Doctrine avec Symfony et des CRUDs associés
 - Installation de [JMSSerializerBundle](https://github.com/schmittjoh/JMSSerializerBundle)
-- Mise en place d'une API JSON RESTful pour la gestion des tâches (en cours)
+- Mise en place d'une API JSON RESTful pour la gestion des tâches
