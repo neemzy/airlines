@@ -42,7 +42,7 @@ class Task
      * @var string
      *
      * @ORM\Column(name="estimate", type="decimal", precision=4, scale=3)
-     * @Assert\Range(min=0, max=1)
+     * @Assert\Range(min=0, max=5)
      */
     private $estimate;
 
@@ -50,7 +50,7 @@ class Task
      * @var string
      *
      * @ORM\Column(name="consumed", type="decimal", precision=4, scale=3)
-     * @Assert\Range(min=0, max=1)
+     * @Assert\Range(min=0, max=5)
      */
     private $consumed;
 
@@ -58,7 +58,7 @@ class Task
      * @var string
      *
      * @ORM\Column(name="remaining", type="decimal", precision=4, scale=3)
-     * @Assert\Range(min=0, max=1)
+     * @Assert\Range(min=0, max=5)
      */
     private $remaining;
 

@@ -26,7 +26,7 @@ class JsonTaskController extends Controller
      *
      * @return Response
      */
-    private function toJSON($data, $code = Response::HTTP_OK)
+    private function createJsonResponse($data, $code = Response::HTTP_OK)
     {
         $serializer = $this->get('jms_serializer');
         $json = $serializer->serialize($data, 'json');
@@ -37,130 +37,180 @@ class JsonTaskController extends Controller
 
 
     /**
-     * Retrieves all tasks for the given Member and date
+     * Returns a "No Content" (204) response
      *
-     * @param Member $member Member instance
-     * @param string $date   SQL-formatted date
+     * @return Response
+     */
+    private function createNoContentResponse()
+    {
+        return new Response(null, Response::HTTP_NO_CONTENT);
+    }
+
+
+
+    /**
+     * Fetches a task
+     *
+     * @param Task $task
      *
      * @return Response
      *
-     * @Route("/{id}/{date}", name="getTasks")
-     * @ParamConverter("member", class="AirlinesAppBundle:Member")
+     * @Route("/{id}", name="tasks.get", requirements={"id": "\d+"})
      * @Method("GET")
      */
-    public function getAction(Member $member, $date)
+    public function getAction(Task $task)
+    {
+        return $this->createJsonResponse($task);
+    }
+
+
+
+
+    /**
+     * Fetches all tasks for the given Member and date
+     *
+     * @param Member   $member
+     * @param DateTime $date
+     *
+     * @return Response
+     *
+     * @Route("/{id}/{date}", name="tasks.list", requirements={"id": "\d+", "date": "\d{4}-\d{2}-\d{2}"})
+     * @Method("GET")
+     */
+    public function listAction(Member $member, \DateTime $date)
     {
         $em = $this->getDoctrine()->getManager();
         $tasks = $em->getRepository('AirlinesAppBundle:Task')->findByMemberAndDate($member, $date);
 
-        return $this->toJSON($tasks);
+        return $this->createJsonResponse($tasks);
     }
 
 
 
     /**
      * Creates a new task for the given Member and date
+     * The newly created task will be returned as JSON
      *
-     * @param Member $member Member instance
-     * @param string $date   SQL-formatted date
+     * @param Member   $member
+     * @param DateTime $date
      *
      * @return Response
      *
-     * @Route("/{id}/{date}", name="createTask")
-     * @ParamConverter("member", class="AirlinesAppBundle:Member")
+     * @Route("/{id}/{date}", name="tasks.create", requirements={"id": "\d+", "date": "\d{4}-\d{2}-\d{2}"})
      * @Method("POST")
      */
-    public function postAction(Request $request, Member $member, $date)
+    public function postAction(Request $request, Member $member, \DateTime $date)
     {
-        // This is ugly, how can I do this differently ?
-        $task = new Task();
-        $task->setName($request->get('name'));
-        $task->setDate(new \DateTime($date));
-        $task->setEstimate($request->get('estimate'));
-        $task->setConsumed($request->get('consumed'));
-        $task->setRemaining($request->get('remaining'));
+        $manager = $this->get('airlines.task_manager');
+
+        $task = $manager->hydrateFromRequest(new Task(), $request);
+        $task->setDate($date);
         $task->setMember($member);
 
-        $validator = $this->get('validator');
-        $errors = $validator->validate($task);
+        $errors = $manager->validateAndPersist($task);
 
         if (0 < count($errors)) {
-            return $this->toJSON($errors, Response::HTTP_BAD_REQUEST);
+            return $this->createJsonResponse($errors, Response::HTTP_BAD_REQUEST);
         }
 
-        $em = $this->getDoctrine()->getManager();
-        $em->persist($task);
-        $em->flush();
-
-        return $this->toJSON($task, Response::HTTP_CREATED);
+        return $this->createJsonResponse($task, Response::HTTP_CREATED);
     }
 
 
 
     /**
-     * Updates the task at the given id
+     * Updates a task
+     * The updated task will be returned as JSON
      *
-     * @param int $id Task id
+     * @param Task $task
      *
      * @return Response
      *
-     * @Route("/{id}", name="updateTask")
+     * @Route("/{id}", name="tasks.update", requirements={"id": "\d+"})
      * @Method("PUT")
      */
-    public function putAction(Request $request, $id)
+    public function putAction(Request $request, Task $task)
     {
-        $em = $this->getDoctrine()->getManager();
-        $task = $em->getRepository('AirlinesAppBundle:Task')->find($id);
+        $manager = $this->get('airlines.task_manager');
 
-        if (!$task) {
-            throw $this->createNotFoundException();
-        }
-
-        // This is ugly, how can I do this differently ?
-        $request->request->has('name')      && $task->setName($request->get('name'));
-        $request->request->has('estimate')  && $task->setEstimate($request->get('estimate'));
-        $request->request->has('consumed')  && $task->setConsumed($request->get('consumed'));
-        $request->request->has('remaining') && $task->setRemaining($request->get('remaining'));
-
-        $validator = $this->get('validator');
-        $errors = $validator->validate($task);
+        $task = $manager->hydrateFromRequest($task, $request);
+        $errors = $manager->validateAndPersist($task);
 
         if (0 < count($errors)) {
-            return $this->toJSON($errors, Response::HTTP_BAD_REQUEST);
+            return $this->createJsonResponse($errors, Response::HTTP_BAD_REQUEST);
         }
-
-        $em->persist($task);
-        $em->flush();
 
         // We use 200 OK instead of 204 No Content for a successful PUT,
         // because the latter prevents any content to be sent (which pretty much makes sense)
-        return $this->toJSON($task);
+        return $this->createJsonResponse($task);
     }
 
 
 
     /**
-     * Deletes the task at the given id
+     * Deletes a task
      *
-     * @param int $id Task id
+     * @param Task $task
      *
      * @return Response
      *
-     * @Route("/{id}", name="deleteTask")
+     * @Route("/{id}", name="tasks.remove", requirements={"id": "\d+"})
      * @Method("DELETE")
      */
-    public function deleteAction($id)
+    public function deleteAction(Task $task)
     {
         $em = $this->getDoctrine()->getManager();
-        $task = $em->getRepository('AirlinesAppBundle:Task')->find($id);
-
-        if (!$task) {
-            throw $this->createNotFoundException();
-        }
-
         $em->remove($task);
         $em->flush();
 
-        return $this->toJSON($task, Response::HTTP_NO_CONTENT);
+        return $this->createNoContentResponse();
+    }
+
+
+
+    /**
+     * Splits a task in two
+     * The new task will be created for the same member and date as the original one,
+     * so we just have to fetch tasks according to these parameters again to update the view
+     *
+     * @param Task $task
+     *
+     * @return Response
+     *
+     * @Route("/split/{id}", name="tasks.split", requirements={"id": "\d+"})
+     * @Method("POST")
+     */
+    public function splitAction(Task $task)
+    {
+        $manager = $this->get('airlines.task_manager');
+        $manager->split($task);
+
+        return $this->createNoContentResponse();
+    }
+
+
+
+    /**
+     * Merges a task into another
+     * The resulting task will be returned as JSON (the merged one can be removed from the view)
+     *
+     * @param Task $task   Merged task
+     * @param Task $target Target task (in which the other one will be merged)
+     *
+     * @return Response
+     *
+     * @Route("/merge/{id}/{target}", name="tasks.merge", requirements={"id": "\d+", "target": "\d+"})
+     * @Method("POST")
+     */
+    public function mergeAction(Task $task, Task $target)
+    {
+        $manager = $this->get('airlines.task_manager');
+        $result = $manager->merge($task, $target);
+
+        if (!$result) {
+            return new Response(null, Response::HTTP_BAD_REQUEST);
+        }
+
+        return $this->createJsonResponse($result);
     }
 }

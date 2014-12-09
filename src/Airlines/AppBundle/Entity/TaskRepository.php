@@ -15,15 +15,15 @@ class TaskRepository extends EntityRepository
     /**
      * Fetches tasks by member and date
      *
-     * @param Member $member Member instance
-     * @param string $date   SQL-formatted date
+     * @param Member   $member
+     * @param DateTime $date
      */
-    public function findByMemberAndDate(Member $member, $date)
+    public function findByMemberAndDate(Member $member, \DateTime $date)
     {
         return $this->findBy(
             [
                 'member' => $member->getId(),
-                'date' => new \DateTime($date)
+                'date' => $date
             ]
         );
     }
