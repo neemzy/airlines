@@ -217,4 +217,43 @@ class Task
     {
         return $this->member;
     }
+
+
+
+    /**
+     * Checks whether this task is overconsumed
+     * It is the case as soon as its consumed time is over its initial estimate
+     *
+     * @return bool
+     */
+    public function isOverConsumed()
+    {
+        return $this->consumed > $this->estimate;
+    }
+
+
+
+    /**
+     * Checks whether this task was underestimated
+     * It is the case if the sum of its consumed and remaining time are over its initial estimate
+     *
+     * @return bool
+     */
+    public function wasUnderEstimated()
+    {
+        return $this->consumed + $this->remaining > $this->estimate;
+    }
+
+
+
+    /**
+     * Checks whether this task was overestimated
+     * It is the case if the sum of its consumed and remaining time are under its initial estimate
+     *
+     * @return bool
+     */
+    public function wasOverEstimated()
+    {
+        return $this->consumed + $this->remaining < $this->estimate;
+    }
 }

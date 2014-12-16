@@ -3,9 +3,10 @@
 namespace Airlines\AppBundle\Manager;
 
 use Doctrine\Common\Persistence\ObjectManager;
+use Doctrine\Common\Collections\Collection;
 use Symfony\Component\Validator\Validator;
-use Airlines\AppBundle\Entity\Task;
 use Symfony\Component\HttpFoundation\Request;
+use Airlines\AppBundle\Entity\Task;
 
 class TaskManager
 {
@@ -152,5 +153,65 @@ class TaskManager
         $this->manager->flush();
 
         return $target;
+    }
+
+
+
+    /**
+     * Calculates the total estimate for a task collection
+     *
+     * @param Collection $collection Task collection
+     *
+     * @return float
+     */
+    public function getTotalEstimate(Collection $collection)
+    {
+        $total = 0;
+
+        foreach ($collection as $task) {
+            $total += $task->getEstimate();
+        }
+
+        return $total;
+    }
+
+
+
+    /**
+     * Calculates the total consumed for a task collection
+     *
+     * @param Collection $collection Task collection
+     *
+     * @return float
+     */
+    public function getTotalConsumed(Collection $collection)
+    {
+        $total = 0;
+
+        foreach ($collection as $task) {
+            $total += $task->getConsumed();
+        }
+
+        return $total;
+    }
+
+
+
+    /**
+     * Calculates the total remaining for a task collection
+     *
+     * @param Collection $collection Task collection
+     *
+     * @return float
+     */
+    public function getTotalRemaining(Collection $collection)
+    {
+        $total = 0;
+
+        foreach ($collection as $task) {
+            $total += $task->getRemaining();
+        }
+
+        return $total;
     }
 }
