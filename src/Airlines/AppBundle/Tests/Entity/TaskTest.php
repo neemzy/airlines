@@ -7,11 +7,14 @@ use Airlines\AppBundle\Entity\Task;
 class TaskTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * Crafts tasks
+     * Provides tasks
+     *
+     * Each task is provided in an array alongside its overconsumption,
+     * underestimation and overestimation, boolean
      *
      * @return array
      */
-    private function getTasks()
+    public function taskProvider()
     {
         $task1 = new Task();
         $task1->setEstimate(2);
@@ -33,7 +36,12 @@ class TaskTest extends \PHPUnit_Framework_TestCase
         $task4->setConsumed(0.25);
         $task4->setRemaining(0.75);
 
-        return [$task1, $task2, $task3, $task4];
+        return [
+            [$task1, false, true, false],
+            [$task2, true, true, false],
+            [$task3, false, false, true],
+            [$task4, false, false, false]
+        ];
     }
 
 
@@ -42,15 +50,12 @@ class TaskTest extends \PHPUnit_Framework_TestCase
      * Checks overconsumption for a task
      *
      * @return void
+     *
+     * @dataProvider taskProvider
      */
-    public function testIsOverConsumed()
+    public function testIsOverConsumed($task, $overConsumed, $underEstimated, $overEstimated)
     {
-        $tasks = $this->getTasks();
-
-        $this->assertFalse($tasks[0]->isOverConsumed());
-        $this->assertTrue($tasks[1]->isOverConsumed());
-        $this->assertFalse($tasks[2]->isOverConsumed());
-        $this->assertFalse($tasks[3]->isOverConsumed());
+        $this->assertEquals($overConsumed, $task->isOverConsumed());
     }
 
 
@@ -59,15 +64,12 @@ class TaskTest extends \PHPUnit_Framework_TestCase
      * Checks underestimation for a task
      *
      * @return void
+     *
+     * @dataProvider taskProvider
      */
-    public function testWasUnderEstimated()
+    public function testWasUnderEstimated($task, $overConsumed, $underEstimated, $overEstimated)
     {
-        $tasks = $this->getTasks();
-
-        $this->assertTrue($tasks[0]->wasUnderEstimated());
-        $this->assertTrue($tasks[1]->wasUnderEstimated());
-        $this->assertFalse($tasks[2]->wasUnderEstimated());
-        $this->assertFalse($tasks[3]->wasUnderEstimated());
+        $this->assertEquals($underEstimated, $task->wasUnderEstimated());
     }
 
 
@@ -77,14 +79,11 @@ class TaskTest extends \PHPUnit_Framework_TestCase
      * Checks overestimation for a task
      *
      * @return void
+     *
+     * @dataProvider taskProvider
      */
-    public function testWasOverEstimated()
+    public function testWasOverEstimated($task, $overConsumed, $underEstimated, $overEstimated)
     {
-        $tasks = $this->getTasks();
-
-        $this->assertFalse($tasks[0]->wasOverEstimated());
-        $this->assertFalse($tasks[1]->wasOverEstimated());
-        $this->assertTrue($tasks[2]->wasOverEstimated());
-        $this->assertFalse($tasks[3]->wasOverEstimated());
+        $this->assertEquals($overEstimated, $task->wasOverEstimated());
     }
 }
