@@ -1,0 +1,4 @@
+# airlines-socket configuration
+parameters:
+    socket.host: '127.0.0.1'
+    socket.port: '47503'

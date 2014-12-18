@@ -22,7 +22,12 @@ class AirlinesAppExtension extends Extension
         $configuration = new Configuration();
         $config = $this->processConfiguration($configuration, $configs);
 
-        $loader = new Loader\XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
-        $loader->load('services.xml');
+        $fileLocator = new FileLocator(__DIR__.'/../Resources/config');
+
+        $xmlLoader = new Loader\XmlFileLoader($container, $fileLocator);
+        $xmlLoader->load('services.xml');
+
+        $yamlLoader = new Loader\YamlFileLoader($container, $fileLocator);
+        $yamlLoader->load('config.yml');
     }
 }

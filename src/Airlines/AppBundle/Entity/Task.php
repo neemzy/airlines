@@ -11,6 +11,7 @@ use JMS\Serializer\Annotation\Exclude;
  *
  * @ORM\Table()
  * @ORM\Entity(repositoryClass="Airlines\AppBundle\Entity\TaskRepository")
+ * @ORM\EntityListeners({"Airlines\AppBundle\EventListener\TaskListener"})
  */
 class Task
 {

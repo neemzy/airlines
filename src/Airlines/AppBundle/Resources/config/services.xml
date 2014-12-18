@@ -5,10 +5,35 @@
     xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
 
     <services>
+        <service id="airlines.socket_emitter"
+                 class="SocketIO\Emitter">
+            <argument type="collection">
+                <argument key="host">%socket.host%</argument>
+                <argument key="port">%socket.port%</argument>
+            </argument>
+        </service>
+
+        <service id="airlines.entity_listener_resolver"
+                 class="Airlines\AppBundle\EntityListenerResolver">
+            <argument type="service" id="service_container" />
+        </service>
+
         <service id="airlines.task_manager"
                  class="Airlines\AppBundle\Manager\TaskManager">
             <argument type="service" id="doctrine.orm.entity_manager" />
             <argument type="service" id="validator" />
+        </service>
+
+        <service id="airlines.task_emitter"
+                 class="Airlines\AppBundle\Emitter\TaskEmitter">
+            <argument type="service" id="airlines.socket_emitter" />
+        </service>
+
+        <service id="airlines.task_listener"
+                 class="Airlines\AppBundle\EventListener\TaskListener">
+            <tag name="doctrine.entity_listener" event="postPersist" />
+            <tag name="doctrine.entity_listener" event="postUpdate" />
+            <argument type="service" id="airlines.task_emitter" />
         </service>
     </services>
 </container>

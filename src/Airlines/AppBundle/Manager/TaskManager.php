@@ -24,7 +24,7 @@ class TaskManager
 
     /**
      * Constructor
-     * Binds Doctrine entity manager
+     * Binds dependencies
      *
      * @param ObjectManager $manager
      * @param Validator     $validator
