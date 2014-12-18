@@ -1,25 +1,26 @@
 # Airlines
 
-Airlines est un outil de gestion de tableau LEAN virtuel collaboratif, permettant d'assigner des membres à un tableau, où chacun gère ses tâches planifiées sur une semaine donnée.
+**Airlines** is a virtual team board manager, allowing every member to handle his affected tasks on a weekly basis.
 
 ## Use cases
 
-- L'utilisateur crée un tableau
-- L'utilisateur ajoute des collaborateurs au tableau
-- Les collaborateurs accèdent au tableau
-- Les collaborateurs renseignent les tâches qui leur sont affectées ainsi que leur charge, l'objectif étant d'obtenir un total de 5
+- User creates a board
+- User adds members to the board
+- Members connect to the board
+- Members fill up the board with tasks and their estimates, in order to get a total of 5 per week
 
 ## Installation
 
 TODO
 
-## Utilisation
+## Usage
 
 TODO
 
 ## Logs
 
-- Génération des entités Doctrine avec Symfony et des CRUDs associés
-- Installation de [JMSSerializerBundle](https://github.com/schmittjoh/JMSSerializerBundle)
-- Mise en place d'une API JSON RESTful pour la gestion des tâches
-- Mise en place d'une classe `Manager` pour refactoriser les opérations sur les tâches
+- Generated Doctrine entities and related CRUD interfaces with Symfony's console component
+- Installed [JMSSerializerBundle](https://github.com/schmittjoh/JMSSerializerBundle)
+- Set up a RESTful JSON API for task management through AJAX
+- Set up a `Manager` class to refactor task operations
+- Created companion project [airlines-socket](https://github.com/neemzy/airlines-socket) to handle realtime UI updates
