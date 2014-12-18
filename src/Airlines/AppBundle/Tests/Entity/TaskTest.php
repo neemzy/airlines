@@ -52,6 +52,7 @@ class TaskTest extends \PHPUnit_Framework_TestCase
      * @return void
      *
      * @dataProvider taskProvider
+     * @testdox Is considered overconsumed when its consumed time is above its initial estimate
      */
     public function testIsOverConsumed($task, $overConsumed, $underEstimated, $overEstimated)
     {
@@ -66,6 +67,7 @@ class TaskTest extends \PHPUnit_Framework_TestCase
      * @return void
      *
      * @dataProvider taskProvider
+     * @testdox Is considered underestimated when the sum of its consumed and remaining time is above its initial estimate
      */
     public function testWasUnderEstimated($task, $overConsumed, $underEstimated, $overEstimated)
     {
@@ -81,6 +83,7 @@ class TaskTest extends \PHPUnit_Framework_TestCase
      * @return void
      *
      * @dataProvider taskProvider
+     * @testdox Is considered overestimated when the sum of its consumed and remaining time is under its initial estimate
      */
     public function testWasOverEstimated($task, $overConsumed, $underEstimated, $overEstimated)
     {

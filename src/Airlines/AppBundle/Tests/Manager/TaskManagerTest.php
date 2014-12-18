@@ -58,6 +58,8 @@ class TaskManagerTest extends \PHPUnit_Framework_TestCase
      * Checks total estimate calculation for a task collection
      *
      * @return void
+     *
+     * @testdox Can fetch the total estimated time for a task collection
      */
     public function testGetTotalEstimate()
     {
@@ -73,6 +75,8 @@ class TaskManagerTest extends \PHPUnit_Framework_TestCase
      * Checks total consumed calculation for a task collection
      *
      * @return void
+     *
+     * @testdox Can fetch the total consumed time for a task collection
      */
     public function testGetTotalConsumed()
     {
@@ -88,6 +92,8 @@ class TaskManagerTest extends \PHPUnit_Framework_TestCase
      * Checks total remaining calculation for a task collection
      *
      * @return void
+     *
+     * @testdox Can fetch the total remaining time for a task collection
      */
     public function testGetTotalRemaining()
     {
