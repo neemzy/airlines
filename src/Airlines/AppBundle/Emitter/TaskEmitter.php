@@ -36,6 +36,6 @@ class TaskEmitter
      */
     public function emitEvent(Task $task)
     {
-        $this->emitter->emit('task-', [ 'id' => $task->getId() ]);
+        $this->emitter->emit('task', [ 'id' => $task->getId() ]);
     }
 }
