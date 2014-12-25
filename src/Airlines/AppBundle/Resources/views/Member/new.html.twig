@@ -3,7 +3,14 @@
 {% block body -%}
     <h1>Member creation</h1>
 
-    {{ form(form) }}
+    {{ form_start(form) }}
+        {{ form_errors(form) }}
+        {{ form_row(form.name) }}
+        {{ form_row(form.avatarFile) }}
+        {{ form_row(form.color) }}
+        {{ form_row(form.board) }}
+        {{ form_row(form.submit) }}
+    {{ form_end(form) }}
 
         <ul class="record_actions">
     <li>

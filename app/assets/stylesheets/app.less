@@ -1,9 +1,19 @@
+@import '../../../node_modules/bootstrap/less/bootstrap';
+@import '../../../node_modules/react-color-picker/index.css';
+@import 'theme/variables.less';
+@import 'theme/bootswatch.less';
 @import 'imports/mixins';
 @import 'modules/board';
 @import 'modules/member';
 @import 'modules/task';
-@import '../../../node_modules/normalize.css/normalize.css';
 
-body {
-    font-family: Verdana, sans-serif;
+.navbar {
+    border-radius: 0;
+}
+
+.airlines-icon {
+    .glyphicon();
+    .glyphicon-send();
+
+    margin-right: 0.5em;
 }

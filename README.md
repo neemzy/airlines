@@ -28,6 +28,8 @@ TODO
 - Installed [TinyRedisClient](https://github.com/ptrofimov/tinyredisclient) and [socket.io-php-emitter](https://github.com/rase-/socket.io-php-emitter)
 - Added bundle's own configuration file and made it accessible through the extension class
 - Made Socket.IO `Emitter` available as a service
-- Set up an `EventListener` class to trigger socket emitting towards the configured host and port
+- Set up a `TaskListener` class to trigger socket emitting towards the configured host and port
 - Set up a `ListenerResolver` class to keep using the `EventListener` as a service and gain control over its dependencies
 - Set up a `TaskEmitter` class as a separate service to do the job, as using the `TaskManager` created a circular dependency (since the latter gets injected with Doctrine's `EntityManager`)
+- Added avatar support for members by adding a `MemberListener` class handling image upload and deletion
+- Installed [Twitter Bootstrap](http://getbootstrap.com) and [react-colorpicker](https://github.com/stayradiated/react-colorpicker)

@@ -11,6 +11,17 @@
 </head>
 
 <body>
+    <nav class="navbar navbar-default">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="{{ path('home') }}">
+                    <span class="airlines-icon"></span> Airlines
+                </a>
+            </div>
+            {% include 'menu.html.twig' %}
+        </div>
+    </nav>
+
     {% block body '' %}
 
     {% block scripts %}

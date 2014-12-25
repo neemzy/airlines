@@ -1,0 +1,5 @@
+{% block _airlines_appbundle_member_color_widget %}
+    {#{% set attr = attr|merge({ class: (attr.class|default('') ~ ' color-picker')|trim }) %}
+    {{ block('form_widget_simple') }}#}
+    <div class="color-picker"></div>
+{% endblock %}

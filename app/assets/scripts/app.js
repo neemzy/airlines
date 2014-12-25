@@ -3,13 +3,14 @@
 
     $('html').classList.remove('no-js');
 
-    // React binding
+    // React bindings
     var React = require('react'),
         SampleList = React.createFactory(require('./jsx/sampleList')),
+        ColorPicker = React.createFactory(require('./jsx/colorPicker')),
+        contentElement = $('#content'),
+        pickerElement = $('.color-picker');
 
-        app = React.render(
-            SampleList(),
-            document.getElementById('content')
-        );
+    contentElement && React.render(SampleList(), contentElement);
+    pickerElement && React.render(ColorPicker(), pickerElement);
 })
 (document.querySelector.bind(document));

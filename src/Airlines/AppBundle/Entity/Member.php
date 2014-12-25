@@ -34,6 +34,15 @@ class Member
     /**
      * @var string
      *
+     * @ORM\Column(name="color", type="string", length=7)
+     * @Assert\NotBlank
+     * @Assert\Regex("/^#[0-9A-F]{6}$/")
+     */
+    private $color;
+
+    /**
+     * @var string
+     *
      * @ORM\Column(name="avatar", type="string", length=255, nullable=true)
      */
     private $avatar;
@@ -95,6 +104,29 @@ class Member
     public function getName()
     {
         return $this->name;
+    }
+
+    /**
+     * Set color
+     *
+     * @param string $color
+     * @return Member
+     */
+    public function setColor($color)
+    {
+        $this->color = $color;
+
+        return $this;
+    }
+
+    /**
+     * Get color
+     *
+     * @return string 
+     */
+    public function getColor()
+    {
+        return $this->color;
     }
     /**
      * Constructor

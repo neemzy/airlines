@@ -16,13 +16,20 @@ gulp.task('clean', function (callback) {
 
 
 gulp.task('stylesheets', function () {
-    gulp.src([src + 'stylesheets/app.less'])
+    gulp.src(src + 'stylesheets/app.less')
         .pipe(tasks.plumber())
         .pipe(tasks.less())
         .pipe(tasks.autoprefixer())
         .pipe(tasks.if(tasks.util.env.dist, tasks.csso()))
         .pipe(gulp.dest(dist))
         .pipe(tasks.livereload(server));
+});
+
+
+
+gulp.task('fonts', function () {
+    gulp.src('node_modules/bootstrap/dist/fonts/*')
+        .pipe(gulp.dest(dist + 'fonts/'));
 });
 
 
@@ -62,4 +69,4 @@ gulp.task('workflow', function () {
 
 
 
-gulp.task('default', ['clean', 'stylesheets', 'scripts', 'workflow']);
+gulp.task('default', ['clean', 'stylesheets', 'fonts', 'scripts', 'workflow']);
