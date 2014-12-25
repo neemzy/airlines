@@ -35,5 +35,14 @@
             <tag name="doctrine.entity_listener" event="postUpdate" />
             <argument type="service" id="airlines.task_emitter" />
         </service>
+
+        <service id="airlines.member_listener"
+                 class="Airlines\AppBundle\EventListener\MemberListener">
+            <tag name="doctrine.entity_listener" event="prePersist" />
+            <tag name="doctrine.entity_listener" event="preUpdate" />
+            <tag name="doctrine.entity_listener" event="postPersist" />
+            <tag name="doctrine.entity_listener" event="postUpdate" />
+            <tag name="doctrine.entity_listener" event="postRemove" />
+        </service>
     </services>
 </container>

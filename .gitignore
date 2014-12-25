@@ -10,3 +10,5 @@
 /node_modules/
 /bin/
 /composer.phar
+/web/uploads/avatars/*
+!web/uploads/avatars/.gitkeep
