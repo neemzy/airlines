@@ -25,7 +25,7 @@ TODO
 - Set up a `Manager` class to refactor task operations
 - Wrote unit tests for `Task` and `TaskManager` classes
 - Created companion project [airlines-socket](https://github.com/neemzy/airlines-socket) to handle realtime UI updates
-- Installed x and y
+- Installed [TinyRedisClient](https://github.com/ptrofimov/tinyredisclient) and [socket.io-php-emitter](https://github.com/rase-/socket.io-php-emitter)
 - Added bundle's own configuration file and made it accessible through the extension class
 - Made Socket.IO `Emitter` available as a service
 - Set up an `EventListener` class to trigger socket emitting towards the configured host and port
