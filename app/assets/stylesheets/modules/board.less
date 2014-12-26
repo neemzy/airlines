@@ -1,3 +1,5 @@
+@board-spacing: 10px;
+
 .board {
     display: table;
     width: 100%;
@@ -13,5 +15,11 @@
     &__foot-title,
     &__foot-day {
         .table-cell();
+
+        padding: @board-spacing;
+    }
+
+    &__head-title {
+        font-size: 2rem;
     }
 }

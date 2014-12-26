@@ -1,37 +1,22 @@
+@task-line-height: 3rem;
+
 .task {
-    display: inline-block;
+    display: flex;
+    position: relative;
+    float: left;
+    line-height: @task-line-height;
+    margin: @board-spacing;
     border: 1px solid black;
+    user-select: none;
 
     &__name {
         display: inline-block;
-        background-color: green;
+        position: relative;
+        z-index: 1;
+        padding: 0 @board-spacing;
     }
 
-    &__numbers {
-        display: inline-block;
-    }
-
-    &__estimate {
-
-    }
-
-    &__consumed, &__remaining {
-        display: inline-block;
-
-        &--under {
-            color: green;
-        }
-
-        &--over {
-            color: red;
-        }
-    }
-
-    &__consumed {
-
-    }
-
-    &__remaining {
-
+    .numbers {
+        display: inline-flex;
     }
 }

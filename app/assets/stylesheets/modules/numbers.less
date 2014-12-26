@@ -1,0 +1,38 @@
+.numbers {
+    display: flex;
+    vertical-align: top;
+    line-height: @task-line-height;
+    flex-wrap: wrap;
+
+    &__estimate,
+    &__consumed,
+    &__remaining {
+        flex-grow: 1;
+        margin: -1px;
+        padding: 0 0.5em;
+        border: 1px solid black;
+        text-align: right;
+    }
+
+    &__estimate {
+        flex-basis: 100%;
+        border-bottom: none;
+    }
+
+    &__consumed,
+    &__remaining {
+        flex-basis: 50%;
+
+        &--under {
+            color: green;
+        }
+
+        &--over {
+            color: red;
+        }
+    }
+
+    &__remaining {
+        border-left: none;
+    }
+}
