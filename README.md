@@ -1,6 +1,6 @@
 # Airlines
 
-**Airlines** is a virtual team board manager, allowing every member to handle his affected tasks on a weekly basis.
+**Airlines** is a virtual team board manager, allowing every member to handle his tasks on a weekly basis.
 
 ## Use cases
 
