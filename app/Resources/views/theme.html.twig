@@ -1,5 +1,30 @@
+{# Sets all HTML attributes with keys prefixed with 'data-' #}
+{% block data_widget_attributes %}
+    data-id="{{ id }}" data-name="{{ full_name }}"
+    {% if read_only %} data-readonly="readonly"{% endif %}
+    {% if disabled %} data-disabled="disabled"{% endif %}
+    {% if required %} data-required="required"{% endif %}
+    {% for attrname, attrvalue in attr %}
+        {{ " " }}
+        {% if attrname in ['placeholder', 'title'] %}
+            data-{{ attrname }}="{{ attrvalue|trans({}, translation_domain) }}"
+        {% elseif attrvalue is sameas(true) %}
+            data-{{ attrname }}="{{ attrname }}"
+        {% elseif attrvalue is not sameas(false) %}
+            data-{{ attrname }}="{{ attrvalue }}"
+        {% endif %}
+    {% endfor %}
+{% endblock %}
+
 {% block _airlines_appbundle_member_color_widget %}
-    {#{% set attr = attr|merge({ class: (attr.class|default('') ~ ' color-picker')|trim }) %}
-    {{ block('form_widget_simple') }}#}
-    <div class="color-picker"></div>
+    {# Bootstrap compliance #}
+    {% if type is not defined or 'file' != type %}
+        {% set attr = attr|merge({class: (attr.class|default('') ~ ' form-control')|trim}) %}
+    {% endif %}
+
+    {% if value is defined and attr.value is not defined %}
+        {% set attr = attr|merge({ value: value }) %}
+    {% endif %}
+
+    <div class="color-picker" {{ block('data_widget_attributes') }}></div>
 {% endblock %}
