@@ -1,3 +1,5 @@
+
+
 {# Sets all HTML attributes with keys prefixed with 'data-' #}
 {% block data_widget_attributes %}
     data-id="{{ id }}" data-name="{{ full_name }}"
@@ -14,6 +16,26 @@
             data-{{ attrname }}="{{ attrvalue }}"
         {% endif %}
     {% endfor %}
+{% endblock %}
+
+{% block form_start %}
+    {% set attr = attr|merge({class: (attr.class|default('') ~ ' form-horizontal')|trim}) %}
+    {% set method = method|upper %}
+    {% if method in ["GET", "POST"] %}
+        {% set form_method = method %}
+    {% else %}
+        {% set form_method = "POST" %}
+    {% endif %}
+    <form name="{{ form.vars.name }}" method="{{ form_method|lower }}" action="{{ action }}"{% for attrname, attrvalue in attr %} {{ attrname }}="{{ attrvalue }}"{% endfor %}{% if multipart %} enctype="multipart/form-data"{% endif %} novalidate>
+    {% if form_method != method %}
+        <input type="hidden" name="_method" value="{{ method }}" />
+    {% endif %}
+{% endblock %}
+
+{% block submit_widget %}
+    {% set attr = attr|merge({class: (attr.class|default('') ~ ' btn-primary')|trim}) %}
+    {% set type = type|default('submit') %}
+    {{ block('button_widget') }}
 {% endblock %}
 
 {% block _airlines_appbundle_member_color_widget %}

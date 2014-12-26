@@ -1,0 +1,38 @@
+.list-group-link {
+    display: block;
+    margin: -10px -15px; // cancel Bootstrap padding in parent element
+    padding: 10px;
+
+    &:hover {
+        text-decoration: none;
+    }
+
+    .list-group-item:nth-child(2) & {
+        background-color: @gray-lighter;
+    }
+
+    .avatar {
+        display: inline-block;
+        vertical-align: middle;
+    }
+
+    .color-stripe {
+        display: inline-block;
+        width: 5px;
+        height: 50px;
+        margin: -20px 5px; // double compensation
+    }
+
+    .hover {
+        position: absolute;
+        top: -99999px;
+
+        :hover > & {
+            position: static;
+        };
+
+        .glyphicon {
+            margin-right: 0.25em;
+        }
+    }
+}

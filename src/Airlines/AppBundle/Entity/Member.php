@@ -15,6 +15,9 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Member
 {
+    const DEFAULT_AVATAR_PATH = '../../default-avatar.jpg';
+    const WEB_UPLOAD_DIR = 'uploads/avatars';
+
     /**
      * @var integer
      *
@@ -28,6 +31,7 @@ class Member
      * @var string
      *
      * @ORM\Column(name="name", type="string", length=255)
+     * @Assert\NotBlank
      */
     private $name;
 
@@ -220,14 +224,15 @@ class Member
 
     /**
      * Gets avatar web path
+     * Drops in a default picture if needed
      *
      * @return string
      */
     public function getAvatarWebPath()
     {
-        return null === $this->avatar
-            ? null
-            : $this->getAvatarWebDir().'/'.$this->avatar;
+        $avatar = (null === $this->avatar) ? self::DEFAULT_AVATAR_PATH : $this->avatar;
+
+        return $this->getAvatarWebDir().'/'.$avatar;
     }
 
 
@@ -342,7 +347,7 @@ class Member
      */
     protected function getAvatarWebDir()
     {
-        return 'uploads/avatars';
+        return self::WEB_UPLOAD_DIR;
     }
 
 

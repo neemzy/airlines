@@ -16,4 +16,15 @@ class DefaultController extends Controller
     {
         return array();
     }
+
+
+
+    /**
+     * @Route("/styleguide", name="styleguide")
+     * @Template("styleguide.html.twig")
+     */
+    public function styleGuideAction()
+    {
+        return array();
+    }
 }

@@ -1,16 +1,6 @@
-<!DOCTYPE html>
-<html class="no-js">
+{% extends 'layout.html.twig' %}
 
-<head>
-    <meta charset="UTF-8" />
-    <title>{% block title %}Airlines{% endblock %}</title>
-    {% block stylesheets %}
-        <link rel="stylesheet" href="{{ asset('app.css') }}" />
-    {% endblock %}
-    <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
-</head>
-
-<body>
+{% block html %}
     <nav class="navbar navbar-default">
         <div class="container-fluid">
             <div class="navbar-header">
@@ -22,15 +12,5 @@
         </div>
     </nav>
 
-    {% block body '' %}
-
-    {% block scripts %}
-        <script src="{{ asset('app.js') }}"></script>
-    {% endblock %}
-
-    {% if 'dev' == app.environment %}
-        <script src="http://localhost:35729/livereload.js"></script>
-    {% endif %}
-</body>
-
-</html>
+    <div class="container">{% block body '' %}</div>
+{% endblock %}

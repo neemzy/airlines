@@ -1,46 +1,32 @@
-{% extends 'base.html.twig' %}
+{% extends 'layout.html.twig' %}
 
-{% block body %}
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('cover.css') }}" />
+{% endblock %}
 
-<h1>Airlines style guide</h1>
-
-<div class="board">
-    <header class="board__header">
-        <div class="board__head-title">Équipe 3 - semaine 50</div>
-        <div class="board__head-day">Lundi 8/12</div>
-        <div class="board__head-day">Mardi 9/12</div>
-        <div class="board__head-day">Mercredi 10/12</div>
-        <div class="board__head-day">Jeudi 11/12</div>
-        <div class="board__head-day">Vendredi 12/12</div>
-    </header>
-    <div class="member">
-        <div class="member__info">
-            <div class="member__identity">
-                <div class="member__avatar" style="background-image: url('https://pbs.twimg.com/profile_images/412193761507041280/1eeIlWpC.jpeg');"></div>
-                <div class="member__name">TPAN</div>
-                <div class="member__smiley" style="background-image: url('http://www.freesmileys.org/smileys/smiley-basic/cool.gif');"></div>
-            </div>
-            <div class="member__numbers">
-                <div class="member__estimate">Estimé : 5</div>
-                <div class="member__consumed">Consommé : 0.5</div>
-                <div class="member__remaining member__remaining--over">RAF : 4.75</div>
-            </div>
-        </div>
-        <div class="member__day">
-            <div class="task">
-                <div class="task__name">DEV<br />Retour lot 99</div>
-                <div class="task__numbers">
-                    <div class="task__estimate" title="Estimé">1</div>
-                    <div class="task__consumed" title="Consommé">0.5</div>
-                    <div class="task__remaining task__remaining--over" title="RAF">0.75</div>
+{% block html %}
+    <div class="home-bg"></div>
+    <div class="site-wrapper">
+        <div class="site-wrapper-inner">
+            <div class="cover-container">
+                <div class="masthead clearfix">
+                    <div class="inner">
+                        <h3 class="masthead-brand"><span class="airlines-icon"></span> Airlines</h3>
+                    </div>
+                </div>
+                <div class="inner cover">
+                    <h1 class="cover-heading">Take your team to the skies.</h1>
+                    <p class="lead">
+                        <a href="{{ path('board') }}" class="btn btn-lg btn-default">Get on board!</a>
+                    </p>
+                </div>
+                <div class="mastfoot">
+                    <div class="inner">
+                        <p>Made with &#9829; for AECF by <a href="http://neemzy.org" target="_blank" rel="author">neemzy</a></p>
+                    </div>
                 </div>
             </div>
         </div>
-        <div class="member__day"></div>
-        <div class="member__day"></div>
-        <div class="member__day"></div>
-        <div class="member__day"></div>
     </div>
-</div>
-
 {% endblock %}

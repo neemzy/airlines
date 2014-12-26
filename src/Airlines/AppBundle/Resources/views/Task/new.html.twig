@@ -1,15 +1,20 @@
 {% extends '::base.html.twig' %}
 
-{% block body -%}
+{% block body %}
     <h1>Task creation</h1>
 
-    {{ form(form) }}
+    {{ form_start(form) }}
+        {{ form_errors(edit_form) }}
+        {{ form_row(edit_form.name) }}
+        {{ form_row(edit_form.date) }}
+        {{ form_row(edit_form.estimate) }}
+        {{ form_row(edit_form.consumed) }}
+        {{ form_row(edit_form.remaining) }}
+        {{ form_row(edit_form.member) }}
 
-        <ul class="record_actions">
-    <li>
-        <a href="{{ path('task') }}">
-            Back to the list
-        </a>
-    </li>
-</ul>
+        <div class="form-btn-group">
+            {{ form_widget(form.submit) }}
+            <a class="btn" href="{{ path('task') }}">Back to the list</a>
+        </div>
+    {{ form_end(form) }}
 {% endblock %}

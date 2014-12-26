@@ -60,7 +60,7 @@ gulp.task('workflow', function () {
             gulp.watch(src + 'stylesheets/**/*.less', ['stylesheets']);
             gulp.watch(src + 'scripts/**/*', ['scripts']);
 
-            gulp.watch('app/Resources/views/**/*.twig', function () {
+            gulp.watch(['app/Resources/views/**/*.twig', 'src/Airlines/AppBundle/Resources/views/**/*.twig'], function () {
                 gulp.src('').pipe(tasks.livereload(server));
             });
         });

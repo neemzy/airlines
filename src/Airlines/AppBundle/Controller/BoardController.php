@@ -53,7 +53,7 @@ class BoardController extends Controller
             $em->persist($entity);
             $em->flush();
 
-            return $this->redirect($this->generateUrl('board_show', array('id' => $entity->getId())));
+            return $this->redirect($this->generateUrl('board'));
         }
 
         return array(
@@ -99,109 +99,6 @@ class BoardController extends Controller
         );
     }
 
-    /**
-     * Finds and displays a Board entity.
-     *
-     * @Route("/{id}", name="board_show")
-     * @Method("GET")
-     * @Template()
-     */
-    public function showAction($id)
-    {
-        $em = $this->getDoctrine()->getManager();
-
-        $entity = $em->getRepository('AirlinesAppBundle:Board')->find($id);
-
-        if (!$entity) {
-            throw $this->createNotFoundException('Unable to find Board entity.');
-        }
-
-        $deleteForm = $this->createDeleteForm($id);
-
-        return array(
-            'entity'      => $entity,
-            'delete_form' => $deleteForm->createView(),
-        );
-    }
-
-    /**
-     * Displays a form to edit an existing Board entity.
-     *
-     * @Route("/{id}/edit", name="board_edit")
-     * @Method("GET")
-     * @Template()
-     */
-    public function editAction($id)
-    {
-        $em = $this->getDoctrine()->getManager();
-
-        $entity = $em->getRepository('AirlinesAppBundle:Board')->find($id);
-
-        if (!$entity) {
-            throw $this->createNotFoundException('Unable to find Board entity.');
-        }
-
-        $editForm = $this->createEditForm($entity);
-        $deleteForm = $this->createDeleteForm($id);
-
-        return array(
-            'entity'      => $entity,
-            'edit_form'   => $editForm->createView(),
-            'delete_form' => $deleteForm->createView(),
-        );
-    }
-
-    /**
-    * Creates a form to edit a Board entity.
-    *
-    * @param Board $entity The entity
-    *
-    * @return \Symfony\Component\Form\Form The form
-    */
-    private function createEditForm(Board $entity)
-    {
-        $form = $this->createForm(new BoardType(), $entity, array(
-            'action' => $this->generateUrl('board_update', array('id' => $entity->getId())),
-            'method' => 'PUT',
-        ));
-
-        $form->add('submit', 'submit', array('label' => 'Update'));
-
-        return $form;
-    }
-    /**
-     * Edits an existing Board entity.
-     *
-     * @Route("/{id}", name="board_update")
-     * @Method("PUT")
-     * @Template("AirlinesAppBundle:Board:edit.html.twig")
-     */
-    public function updateAction(Request $request, $id)
-    {
-        $em = $this->getDoctrine()->getManager();
-
-        $entity = $em->getRepository('AirlinesAppBundle:Board')->find($id);
-
-        if (!$entity) {
-            throw $this->createNotFoundException('Unable to find Board entity.');
-        }
-
-        $deleteForm = $this->createDeleteForm($id);
-        $editForm = $this->createEditForm($entity);
-        $editForm->handleRequest($request);
-
-        if ($editForm->isValid()) {
-            $em->flush();
-
-            return $this->redirect($this->generateUrl('board_edit', array('id' => $id)));
-        }
-
-        return array(
-            'entity'      => $entity,
-            'edit_form'   => $editForm->createView(),
-            'delete_form' => $deleteForm->createView(),
-        );
-    }
     /**
      * Deletes a Board entity.
      *

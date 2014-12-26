@@ -1,0 +1,24 @@
+@avatar-large: 200px;
+@avatar-medium: 90px;
+@avatar-small: 30px;
+
+.avatar {
+    background-position: center center;
+    background-size: cover;
+    border-radius: 50%;
+
+    &--small {
+        width: @avatar-small;
+        height: @avatar-small;
+    }
+
+    &--medium {
+        width: @avatar-medium;
+        height: @avatar-medium;
+    }
+
+    &--large {
+        width: @avatar-large;
+        height: @avatar-large;
+    }
+}

@@ -1,41 +1,22 @@
 {% extends '::base.html.twig' %}
 
-{% block body -%}
+{% block body %}
     <h1>Member list</h1>
 
-    <table class="records_list">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Name</th>
-                <th>Actions</th>
-            </tr>
-        </thead>
-        <tbody>
+    <ul class="list-group">
         {% for entity in entities %}
-            <tr>
-                <td><a href="{{ path('member_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
-                <td>{{ entity.name }}</td>
-                <td>
-                <ul>
-                    <li>
-                        <a href="{{ path('member_show', { 'id': entity.id }) }}">show</a>
-                    </li>
-                    <li>
-                        <a href="{{ path('member_edit', { 'id': entity.id }) }}">edit</a>
-                    </li>
-                </ul>
-                </td>
-            </tr>
+            <li class="list-group-item">
+                <a class="list-group-link" href="{{ path('member_edit', { 'id': entity.id }) }}">
+                    <span class="avatar avatar--small" style="background-image: url('/{{ entity.getAvatarWebPath }}');"></span>
+                    <span class="color-stripe" style="background-color: {{ entity.getColor }};"></span>
+                    #{{ entity.id }} - {{ entity.name }}{{ entity.board ? ' - ' ~ entity.board : '' }}
+                    <span class="hover pull-right"><span class="glyphicon glyphicon-pencil"></span> Edit</span>
+                </a>
+            </li>
         {% endfor %}
-        </tbody>
-    </table>
-
-        <ul>
-        <li>
-            <a href="{{ path('member_new') }}">
-                Create a new entry
-            </a>
-        </li>
     </ul>
-    {% endblock %}
+
+    <div class="form-btn-group">
+        <a class="btn btn-primary" href="{{ path('member_new') }}">Create a new member</a>
+    </div>
+{% endblock %}

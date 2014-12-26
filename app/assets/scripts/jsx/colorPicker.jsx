@@ -39,10 +39,12 @@ module.exports = React.createClass({
     },
 
     render: function() {
+        var style = { backgroundColor: this.state.color };
+
         return (
             <div>
+                <input readOnly value={this.state.color} {...this.state.attrs} onChange={this.updateColor} style={style} />
                 <ReactColorPicker value={this.state.color} onDrag={this.updateColor} />
-                <input value={this.state.color} {...this.state.attrs} onChange={this.updateColor} />
             </div>
         );
     }

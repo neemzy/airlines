@@ -2,13 +2,23 @@
 @import 'theme/variables';
 @import 'theme/bootswatch';
 @import 'imports/mixins';
+@import 'modules/avatar';
 @import 'modules/board';
+@import 'modules/form-btn-group';
+@import 'modules/list-group-link';
 @import 'modules/member';
 @import 'modules/task';
 @import (inline) '../../../node_modules/react-color-picker/index.css';
 
+@text-color: @gray-base;
+@form-group-bottom: 30px;
+
 .navbar {
     border-radius: 0;
+}
+
+.form-group {
+    margin-bottom: @form-group-bottom;
 }
 
 .airlines-icon {
@@ -16,4 +26,37 @@
     .glyphicon-send();
 
     margin-right: 0.5em;
+}
+
+.color-picker .cp {
+    margin-top: @form-group-bottom;
+}
+
+.btn {
+    background-color: lighten(@gray-base, 85%);
+    color: inherit;
+
+    &-primary {
+        .btn-primary();
+    }
+
+    &-danger {
+        .btn-danger();
+    }
+}
+
+.home-bg {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background-image: url('http://www.zombie-guide.com/wp-content/uploads/Hong-Kong-International-Airport.jpg');
+    background-position: center center;
+    background-size: cover;
+    filter: brightness(35%) sepia(100%);
+}
+
+.cover-container {
+    position: relative;
 }
