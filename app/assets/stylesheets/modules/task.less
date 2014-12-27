@@ -1,4 +1,5 @@
 @task-line-height: 3rem;
+@task-delete-size: 20px;
 
 .task {
     display: flex;
@@ -12,8 +13,34 @@
     &__name {
         display: inline-block;
         position: relative;
-        z-index: 1;
         padding: 0 @board-spacing;
+    }
+
+    &__delete {
+        .glyphicon();
+        .glyphicon-remove();
+
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: @task-delete-size;
+        height: @task-delete-size;
+        line-height: @task-delete-size;
+        text-align: center;
+        color: @gray-dark;
+        opacity: 0;
+        transition: opacity .2s ease-in-out;
+
+        &:hover,
+        &:focus,
+        &:active {
+            text-decoration: none;
+            outline: none;
+        }
+    }
+
+    &:hover &__delete {
+        opacity: 1;
     }
 
     .numbers {
