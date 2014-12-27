@@ -32,4 +32,7 @@ TODO
 - Set up a `ListenerResolver` class to keep using the `EventListener` as a service and gain control over its dependencies
 - Set up a `TaskEmitter` class as a separate service to do the job, as using the `TaskManager` created a circular dependency (since the latter gets injected with Doctrine's `EntityManager`)
 - Added avatar support for members by adding a `MemberListener` class handling image upload and deletion
-- Installed [Twitter Bootstrap](http://getbootstrap.com) and [react-colorpicker](https://github.com/stayradiated/react-colorpicker)
+- Installed [Twitter Bootstrap](https://github.com/twbs/bootstrap) and [react-colorpicker](https://github.com/stayradiated/react-colorpicker)
+- Set up an `AbstractJsonController` and a `JsonMemberController` to be able to list members for a given board
+- Installed [reqwest](https://github.com/ded/reqwest) and [promise](https://github.com/then/promise)
+- Set up a `MemberManager` class to generate root API URLs for members in order to fetch their tasks

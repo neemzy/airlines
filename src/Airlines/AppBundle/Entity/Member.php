@@ -5,6 +5,7 @@ namespace Airlines\AppBundle\Entity;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\Validator\Constraints as Assert;
 use Doctrine\ORM\Mapping as ORM;
+use JMS\Serializer\Annotation as Serializer;
 
 /**
  * Member
@@ -55,6 +56,8 @@ class Member
      * @var string
      *
      * @see http://symfony.com/doc/current/cookbook/doctrine/file_uploads.html
+     *
+     * @Serializer\Exclude
      */
     private $avatarTemp;
 
@@ -62,17 +65,20 @@ class Member
      * @var UploadedFile
      *
      * @Assert\Image
+     * @Serializer\Exclude
      */
     private $avatarFile;
 
     /**
      * @ORM\ManyToOne(targetEntity="Board", inversedBy="members")
      * @ORM\JoinColumn(name="board_id", referencedColumnName="id")
+     * @Serializer\Exclude
      */
     private $board;
 
     /**
      * @ORM\OneToMany(targetEntity="Task", mappedBy="member")
+     * @Serializer\Exclude
      */
     private $tasks;
 

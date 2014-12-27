@@ -18,6 +18,11 @@
             <argument type="service" id="service_container" />
         </service>
 
+        <service id="airlines.member_manager"
+                 class="Airlines\AppBundle\Manager\MemberManager">
+            <argument type="service" id="router" />
+        </service>
+
         <service id="airlines.task_manager"
                  class="Airlines\AppBundle\Manager\TaskManager">
             <argument type="service" id="doctrine.orm.entity_manager" />

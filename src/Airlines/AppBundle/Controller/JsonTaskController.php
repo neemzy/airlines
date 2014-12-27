@@ -4,50 +4,20 @@ namespace Airlines\AppBundle\Controller;
 
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
-use Airlines\AppBundle\Entity\Task;
+use Airlines\AppBundle\Controller\AbstractJsonController;
 use Airlines\AppBundle\Entity\Member;
+use Airlines\AppBundle\Entity\Task;
 
 /**
  * JSON API Task management controller
  *
- * @Route("/api/tasks")
+ * @Route("/api/task")
  */
-class JsonTaskController extends Controller
+class JsonTaskController extends AbstractJsonController
 {
-    /**
-     * Returns a JSON response
-     *
-     * @param mixed $data Data to serialize
-     * @param int   $code HTTP response code
-     *
-     * @return Response
-     */
-    private function createJsonResponse($data, $code = Response::HTTP_OK)
-    {
-        $serializer = $this->get('jms_serializer');
-        $json = $serializer->serialize($data, 'json');
-
-        return new Response($json, $code, ['content-type' => 'application/json']);
-    }
-
-
-
-    /**
-     * Returns a "No Content" (204) response
-     *
-     * @return Response
-     */
-    private function createNoContentResponse()
-    {
-        return new Response(null, Response::HTTP_NO_CONTENT);
-    }
-
-
-
     /**
      * Fetches a task
      *
@@ -55,7 +25,7 @@ class JsonTaskController extends Controller
      *
      * @return Response
      *
-     * @Route("/{id}", name="tasks.get", requirements={"id": "\d+"})
+     * @Route("/{id}", name="task.get", requirements={"id": "\d+"})
      * @Method("GET")
      */
     public function getAction(Task $task)
@@ -74,7 +44,7 @@ class JsonTaskController extends Controller
      *
      * @return Response
      *
-     * @Route("/{id}/{date}", name="tasks.list", requirements={"id": "\d+", "date": "\d{4}-\d{2}-\d{2}"})
+     * @Route("/{id}/{date}", name="task.list", requirements={"id": "\d+", "date": "\d{4}-\d{2}-\d{2}"})
      * @Method("GET")
      */
     public function listAction(Member $member, \DateTime $date)
@@ -96,7 +66,7 @@ class JsonTaskController extends Controller
      *
      * @return Response
      *
-     * @Route("/{id}/{date}", name="tasks.create", requirements={"id": "\d+", "date": "\d{4}-\d{2}-\d{2}"})
+     * @Route("/{id}/{date}", name="task.create", requirements={"id": "\d+", "date": "\d{4}-\d{2}-\d{2}"})
      * @Method("POST")
      */
     public function postAction(Request $request, Member $member, \DateTime $date)
@@ -126,7 +96,7 @@ class JsonTaskController extends Controller
      *
      * @return Response
      *
-     * @Route("/{id}", name="tasks.update", requirements={"id": "\d+"})
+     * @Route("/{id}", name="task.update", requirements={"id": "\d+"})
      * @Method("PUT")
      */
     public function putAction(Request $request, Task $task)
@@ -154,7 +124,7 @@ class JsonTaskController extends Controller
      *
      * @return Response
      *
-     * @Route("/{id}", name="tasks.remove", requirements={"id": "\d+"})
+     * @Route("/{id}", name="task.remove", requirements={"id": "\d+"})
      * @Method("DELETE")
      */
     public function deleteAction(Task $task)
@@ -177,7 +147,7 @@ class JsonTaskController extends Controller
      *
      * @return Response
      *
-     * @Route("/split/{id}", name="tasks.split", requirements={"id": "\d+"})
+     * @Route("/split/{id}", name="task.split", requirements={"id": "\d+"})
      * @Method("POST")
      */
     public function splitAction(Task $task)
@@ -199,7 +169,7 @@ class JsonTaskController extends Controller
      *
      * @return Response
      *
-     * @Route("/merge/{id}/{target}", name="tasks.merge", requirements={"id": "\d+", "target": "\d+"})
+     * @Route("/merge/{id}/{target}", name="task.merge", requirements={"id": "\d+", "target": "\d+"})
      * @Method("POST")
      */
     public function mergeAction(Task $task, Task $target)

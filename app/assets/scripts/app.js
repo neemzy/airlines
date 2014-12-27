@@ -3,14 +3,32 @@
 
     $('html').classList.remove('no-js');
 
-    // React bindings
     var React = require('react'),
-        SampleList = React.createFactory(require('./jsx/sampleList')),
+        Board = React.createFactory(require('./jsx/board')),
         ColorPicker = React.createFactory(require('./jsx/colorPicker')),
-        contentElement = $('#content'),
+        boardElement = $('.board'),
         pickerElement = $('.color-picker');
 
-    contentElement && React.render(SampleList(), contentElement);
+    // Board rendering
+    if (boardElement) {
+        var params = {
+                week: null,
+                day1: null,
+                day2: null,
+                day3: null,
+                day4: null,
+                day5: null,
+                url: null
+            };
+
+        for (var key in params) {
+            params[key] = boardElement.getAttribute('data-' + key);
+        }
+
+        React.render(Board(params), boardElement);
+    }
+
+    // Colorpicker rendering
     pickerElement && React.render(ColorPicker(), pickerElement);
 })
 (document.querySelector.bind(document));
