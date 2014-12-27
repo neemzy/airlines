@@ -3,16 +3,21 @@
 {% block body %}
     <h1>Board list</h1>
 
-    <ul class="list-group">
-        {% for entity in entities %}
-            <li class="list-group-item">
-                <a class="list-group-link" href="{#{ path('member_edit', { 'id': entity.id }) }#}">
-                    #{{ entity.id }} - {{ entity.name }}
-                    <span class="hover pull-right"><span class="glyphicon glyphicon-send"></span> Go</span>
-                </a>
-            </li>
-        {% endfor %}
-    </ul>
+    {% if entities is defined and entities|length %}
+        <ul class="list-group">
+            {% for entity in entities %}
+                <li class="list-group-item">
+                    <a class="list-group-link" href="{#{ path('member_edit', { 'id': entity.id }) }#}">
+                        #{{ entity.id }} - {{ entity.name }}
+                        <span class="hover pull-right"><span class="glyphicon glyphicon-send"></span> Go</span>
+                    </a>
+                </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>Boards are tables with days of week as columns and members as lines, where the latter can add, edit, move around and delete tasks.<br />
+        Try creating one now by clicking the button below.</p>
+    {% endif %}
 
     <div class="form-btn-group">
         <a class="btn btn-primary" href="{{ path('board_new') }}">Create a new board</a>

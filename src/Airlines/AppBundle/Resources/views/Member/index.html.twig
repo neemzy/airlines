@@ -3,18 +3,23 @@
 {% block body %}
     <h1>Member list</h1>
 
-    <ul class="list-group">
-        {% for entity in entities %}
-            <li class="list-group-item">
-                <a class="list-group-link" href="{{ path('member_edit', { 'id': entity.id }) }}">
-                    <span class="avatar avatar--small" style="background-image: url('/{{ entity.getAvatarWebPath }}');"></span>
-                    <span class="color-stripe" style="background-color: {{ entity.getColor }};"></span>
-                    #{{ entity.id }} - {{ entity.name }}{{ entity.board ? ' - ' ~ entity.board : '' }}
-                    <span class="hover pull-right"><span class="glyphicon glyphicon-pencil"></span> Edit</span>
-                </a>
-            </li>
-        {% endfor %}
-    </ul>
+    {% if entities is defined and entities|length %}
+        <ul class="list-group">
+            {% for entity in entities %}
+                <li class="list-group-item">
+                    <a class="list-group-link" href="{{ path('member_edit', { 'id': entity.id }) }}">
+                        <span class="avatar avatar--small" style="background-image: url('/{{ entity.getAvatarWebPath }}');"></span>
+                        <span class="color-stripe" style="background-color: {{ entity.getColor }};"></span>
+                        #{{ entity.id }} - {{ entity.name }}{{ entity.board ? ' - ' ~ entity.board : '' }}
+                        <span class="hover pull-right"><span class="glyphicon glyphicon-pencil"></span> Edit</span>
+                    </a>
+                </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>Members are the people of your team. Link them to a board to allow them to manage tasks on it.<br />
+        Try creating one now by clicking the button below.</p>
+    {% endif %}
 
     <div class="form-btn-group">
         <a class="btn btn-primary" href="{{ path('member_new') }}">Create a new member</a>
