@@ -20,11 +20,11 @@ module.exports = React.createClass({
 
                     error: function(err) {
                         reject(err);
-                    }.bind(this),
+                    },
 
                     success: function(dates) {
                         resolve(dates);
-                    }.bind(this)
+                    }
                 });
             }.bind(this)
         );
@@ -40,11 +40,11 @@ module.exports = React.createClass({
 
                     error: function(err) {
                         reject(err);
-                    }.bind(this),
+                    },
 
                     success: function(members) {
                         resolve(members);
-                    }.bind(this)
+                    }
                 });
             }.bind(this)
         );
@@ -88,18 +88,11 @@ module.exports = React.createClass({
 
         this.state.members.forEach(
             function (member) {
-                var taskUrl = member.url + this.props.week;
-
                 members.push(
-                    <Member key={member.id}
-                            id={member.id}
-                            name={member.name}
-                            avatar={member.avatar}
-                            color={member.color}
-                            weekUrl={this.props.weekUrl}
-                            taskUrl={taskUrl} />
+                    <Member key={member.id} {...member} weekUrl={this.props.weekUrl} week={this.props.week} dates={this.state.dates} />
                 );
-            }.bind(this)
+            },
+            this
         );
 
         return (

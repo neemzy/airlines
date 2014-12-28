@@ -38,20 +38,92 @@ module.exports = React.createClass({
         return new Promise(
             function (resolve, reject) {
                 reqwest({
-                    url: this.props.taskUrl,
+                    url: this.props.taskUrl + this.props.week,
                     type: 'json',
                     method: 'GET',
 
                     error: function(err) {
                         reject(err);
-                    }.bind(this),
+                    },
 
                     success: function(tasks) {
                         resolve(tasks);
-                    }.bind(this)
+                    }
                 });
             }.bind(this)
         );
+    },
+
+    loadTasksAtDate: function(date) {
+        return new Promise(
+            function (resolve, reject) {
+                reqwest({
+                    url: this.props.taskUrl + date.toISOString().split('T').shift(), // FIXME: need better timezone handling
+                    type: 'json',
+                    method: 'GET',
+
+                    error: function(err) {
+                        reject(err);
+                    },
+
+                    success: function(tasks) {
+                        resolve(tasks);
+                    }
+                });
+            }.bind(this)
+        );
+    },
+
+    getDayIndex: function(date) {
+        return this.props.dates
+            .map(
+                function (date) {
+                    return date.toISOString();
+                }
+            )
+            .indexOf(date.toISOString());
+    },
+
+    reloadDay: function(date) {
+        var index = this.getDayIndex(date);
+
+        if (-1 == index) {
+            return;
+        }
+
+        this.loadTasksAtDate(date)
+            .then(
+                function (tasks) {
+                    this.updateNumbers(tasks);
+
+                    tasks.forEach(
+                        function (task) {
+                            task.date = task.date.split('T').shift(); // FIXME: need better timezone handling
+                        }
+                    );
+
+                    var days = this.state.tasks;
+                    days[index] = tasks;
+
+                    this.setState({ tasks: days });
+                }.bind(this)
+            );
+    },
+
+    updateNumbers: function(tasks) {
+        var estimate = 0,
+            consumed = 0,
+            remaining = 0;
+
+        tasks.forEach(
+            function (task) {
+                estimate += task.estimate;
+                consumed += task.consumed;
+                remaining += task.remaining;
+            }
+        );
+
+        this.setState({ estimate: estimate, consumed: consumed, remaining: remaining });
     },
 
     componentWillMount: function() {
@@ -61,11 +133,8 @@ module.exports = React.createClass({
                     this.loadTasks(dates)
                         .then(
                             function (tasks) {
-                                var days = [],
-                                    estimate = 0,
-                                    consumed = 0,
-                                    remaining = 0,
-                                    alreadyProcessedNumbers = false;
+                                this.updateNumbers(tasks);
+                                var days = [];
 
                                 dates.forEach(
                                     function (date) {
@@ -73,25 +142,19 @@ module.exports = React.createClass({
 
                                         tasks.forEach(
                                             function (task) {
-                                                // FIXME: need better timezone handling
-                                                if (task.date.split('T').shift() == date) {
-                                                    tasksForDay.push(task);
-                                                }
+                                                task.date = task.date.split('T').shift(); // FIXME: need better timezone handling
 
-                                                if (!alreadyProcessedNumbers) {
-                                                    estimate += task.estimate;
-                                                    consumed += task.consumed;
-                                                    remaining += task.remaining;
+                                                if (task.date == date) {
+                                                    tasksForDay.push(task);
                                                 }
                                             }
                                         );
 
                                         days.push(tasksForDay);
-                                        alreadyProcessedNumbers = true;
                                     }
                                 );
 
-                                this.setState({ tasks: days, estimate: estimate, consumed: consumed, remaining: remaining });
+                                this.setState({ tasks: days });
                             }.bind(this)
                         );
                 }.bind(this)
@@ -99,7 +162,7 @@ module.exports = React.createClass({
     },
 
     render: function() {
-        var avatarStyle = { backgroundImage: 'url(\'' + this.props.avatar + '\')' },
+        var avatarStyle = { backgroundImage: 'url(\'/' + this.props.avatar + '\')' },
             colorStyle = { backgroundColor: this.props.color },
             days = [],
             keyCounter = 0;
@@ -111,19 +174,12 @@ module.exports = React.createClass({
 
                 day.forEach(
                     function (task) {
+                        var reloadDay = function() {
+                            this.reloadDay(new Date(task.date));
+                        }.bind(this);
+
                         tasks.push(
-                            <Task key={task.id}
-                                  id={task.id}
-                                  name={task.name}
-                                  date={task.date}
-                                  color={this.props.color}
-                                  estimate={task.estimate}
-                                  consumed={task.consumed}
-                                  remaining={task.remaining}
-                                  overConsumed={task.overConsumed}
-                                  underEstimated={task.underEstimated}
-                                  overEstimated={task.overEstimated}
-                                  removeUrl={task.removeUrl} />
+                            <Task key={task.id} {...task} color={this.props.color} reloadDay={reloadDay} />
                         );
                     },
                     this

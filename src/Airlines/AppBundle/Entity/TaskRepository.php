@@ -14,10 +14,9 @@ class TaskRepository extends EntityRepository
 {
     /**
      * Fetches tasks by member and date(s)
-     * The second argument shall be an array of DateTime instances
      *
      * @param Member $member
-     * @param array  $dates
+     * @param array  $dates  Array of YYYY-MM-DD date strings
      */
     public function findByMemberAndDates(Member $member, array $dates)
     {

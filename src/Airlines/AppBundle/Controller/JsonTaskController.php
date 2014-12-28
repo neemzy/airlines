@@ -38,6 +38,7 @@ class JsonTaskController extends AbstractJsonController
         $manager = $this->get('airlines.task_manager');
         $content = json_decode($response->getContent());
         $content->removeUrl = $manager->generateRemoveUrl($task);
+        $content->splitUrl = $manager->generateSplitUrl($task);
         $response->setContent(json_encode($content));
 
         return $response;
@@ -75,7 +76,9 @@ class JsonTaskController extends AbstractJsonController
         $manager = $this->get('airlines.task_manager');
         $content = json_decode($response->getContent());
         foreach ($content as &$task) {
-            $task->removeUrl = $manager->generateRemoveUrl($em->getRepository('AirlinesAppBundle:Task')->find($task->id));
+            $instance = $em->getRepository('AirlinesAppBundle:Task')->find($task->id);
+            $task->removeUrl = $manager->generateRemoveUrl($instance);
+            $task->splitUrl = $manager->generateSplitUrl($instance);
         }
         $response->setContent(json_encode($content));
 
@@ -99,7 +102,7 @@ class JsonTaskController extends AbstractJsonController
     public function getByDayAction(Member $member, \DateTime $date)
     {
         $em = $this->getDoctrine()->getManager();
-        $tasks = $em->getRepository('AirlinesAppBundle:Task')->findByMemberAndDates($member, [$date]);
+        $tasks = $em->getRepository('AirlinesAppBundle:Task')->findByMemberAndDates($member, [$date->format('Y-m-d')]);
 
         $response = $this->createJsonResponse($tasks);
 
@@ -111,7 +114,9 @@ class JsonTaskController extends AbstractJsonController
         $manager = $this->get('airlines.task_manager');
         $content = json_decode($response->getContent());
         foreach ($content as &$task) {
-            $task->removeUrl = $manager->generateRemoveUrl($em->getRepository('AirlinesAppBundle:Task')->find($task->id));
+            $instance = $em->getRepository('AirlinesAppBundle:Task')->find($task->id);
+            $task->removeUrl = $manager->generateRemoveUrl($instance);
+            $task->splitUrl = $manager->generateSplitUrl($instance);
         }
         $response->setContent(json_encode($content));
 
@@ -156,6 +161,7 @@ class JsonTaskController extends AbstractJsonController
         $manager = $this->get('airlines.task_manager');
         $content = json_decode($response->getContent());
         $content->removeUrl = $manager->generateRemoveUrl($task);
+        $content->splitUrl = $manager->generateSplitUrl($task);
         $response->setContent(json_encode($content));
 
         return $response;
@@ -197,6 +203,7 @@ class JsonTaskController extends AbstractJsonController
         $manager = $this->get('airlines.task_manager');
         $content = json_decode($response->getContent());
         $content->removeUrl = $manager->generateRemoveUrl($task);
+        $content->splitUrl = $manager->generateSplitUrl($task);
         $response->setContent(json_encode($content));
 
         return $response;
@@ -278,6 +285,7 @@ class JsonTaskController extends AbstractJsonController
         $manager = $this->get('airlines.task_manager');
         $content = json_decode($response->getContent());
         $content->removeUrl = $manager->generateRemoveUrl($result);
+        $content->splitUrl = $manager->generateSplitUrl($result);
         $response->setContent(json_encode($content));
 
         return $response;

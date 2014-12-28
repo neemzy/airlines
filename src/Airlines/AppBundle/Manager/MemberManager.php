@@ -34,13 +34,13 @@ class MemberManager
 
 
     /**
-     * Generates root API URL for a Member
+     * Generates root Task API URL for a Member
      *
      * @param Member $member
      *
      * @return string
      */
-    public function generateApiUrl(Member $member)
+    public function generateRootTaskUrl(Member $member)
     {
         $week = '00';
 

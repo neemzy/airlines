@@ -236,4 +236,18 @@ class TaskManager
     {
         return $this->router->generate('task.remove', ['id' => $task->getId()]);
     }
+
+
+
+    /**
+     * Generates deletion API URL for a Task
+     *
+     * @param Task $task
+     *
+     * @return string
+     */
+    public function generateSplitUrl(Task $task)
+    {
+        return $this->router->generate('task.split', ['id' => $task->getId()]);
+    }
 }

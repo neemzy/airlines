@@ -40,7 +40,7 @@ class JsonMemberController extends AbstractJsonController
         $manager = $this->get('airlines.member_manager');
         $content = json_decode($response->getContent());
         foreach ($content as &$member) {
-            $member->url = $manager->generateApiUrl($em->getRepository('AirlinesAppBundle:Member')->find($member->id));
+            $member->taskUrl = $manager->generateRootTaskUrl($em->getRepository('AirlinesAppBundle:Member')->find($member->id));
         }
         $response->setContent(json_encode($content));
 

@@ -1,5 +1,6 @@
 @task-line-height: 3rem;
-@task-remove-size: 20px;
+@task-remove-width: 16px;
+@task-remove-height: @task-remove-width;
 
 .task {
     display: flex;
@@ -16,21 +17,29 @@
         padding: 0 @board-spacing;
     }
 
-    &__remove {
-        .glyphicon();
-        .glyphicon-remove();
-
+    &__action-group {
         position: absolute;
         top: 0;
         right: 0;
-        width: @task-remove-size;
-        height: @task-remove-size;
-        line-height: @task-remove-size;
+        opacity: 0;
+    }
+
+    &:hover &__action-group {
+        opacity: 1;
+    }
+
+    &__action {
+        .glyphicon();
+
+        float: left;
+        width: @task-remove-width;
+        height: @task-remove-height;
+        line-height: @task-remove-height;
+        font-size: 0.8em;
         text-align: center;
         color: @gray-dark;
-        opacity: 0;
         cursor: pointer;
-        transition: opacity .2s ease-in-out;
+        transition: opacity .15s ease-in-out;
 
         &:hover,
         &:focus,
@@ -38,10 +47,14 @@
             text-decoration: none;
             outline: none;
         }
-    }
 
-    &:hover &__remove {
-        opacity: 1;
+        &--remove {
+            .glyphicon-remove();
+        }
+
+        &--split {
+            .glyphicon-tags();
+        }
     }
 
     .numbers {

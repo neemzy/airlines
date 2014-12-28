@@ -3,14 +3,6 @@ var React = require('react'),
     Numbers = require('./numbers');
 
 module.exports = React.createClass({
-    getInitialState: function() {
-        return { removed: false };
-    },
-
-    erase: function() {
-        this.setState({ removed: true });
-    },
-
     remove: function() {
         if (!confirm('Are you sure ?')) {
             return;
@@ -26,29 +18,48 @@ module.exports = React.createClass({
             },
 
             success: function(response) {
-                this.erase();
+                this.props.reloadDay();
+            }.bind(this)
+        });
+    },
+
+    split: function() {
+        reqwest({
+            url: this.props.splitUrl,
+            type: 'json',
+            method: 'POST',
+
+            error: function(err) {
+                // TODO: error handling, if there's any need
+            },
+
+            success: function(response) {
+                this.props.reloadDay();
             }.bind(this)
         });
     },
 
     render: function() {
         var style = {},
-            nameStyle = { backgroundColor: this.props.color };
+            nameStyle = { backgroundColor: this.props.color },
+            keys = ['estimate', 'consumed', 'remaining', 'overConsumed', 'underEstimated', 'overEstimated'],
+            numbers = {};
 
-        if (this.state.removed) {
-            style.display = 'none';
-        }
+        keys.forEach(
+            function (key) {
+                numbers[key] = this.props[key];
+            },
+            this
+        );
 
         return (
             <div className="task" style={style}>
                 <div className="task__name" style={nameStyle}>{this.props.name}</div>
-                <Numbers estimate={this.props.estimate}
-                         consumed={this.props.consumed}
-                         remaining={this.props.remaining}
-                         overConsumed={this.props.overConsumed}
-                         underEstimated={this.props.underEstimated}
-                         overEstimated={this.props.overEstimated} />
-                <a className="task__remove" onClick={this.remove}></a>
+                <Numbers {...numbers} />
+                <div className="task__action-group">
+                    <a className="task__action task__action--split" onClick={this.split}></a>
+                    <a className="task__action task__action--remove" onClick={this.remove}></a>
+                </div>
             </div>
         );
     }
