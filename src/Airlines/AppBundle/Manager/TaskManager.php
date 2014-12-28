@@ -2,10 +2,11 @@
 
 namespace Airlines\AppBundle\Manager;
 
+use Symfony\Component\Routing\RouterInterface;
+use Symfony\Component\Validator\Validator\LegacyValidator as Validator;
+use Symfony\Component\HttpFoundation\Request;
 use Doctrine\Common\Persistence\ObjectManager;
 use Doctrine\Common\Collections\Collection;
-use Symfony\Component\Validator\Validator;
-use Symfony\Component\HttpFoundation\Request;
 use Airlines\AppBundle\Entity\Task;
 
 class TaskManager
@@ -20,21 +21,28 @@ class TaskManager
      */
     private $validator;
 
+    /**
+     * @var RouterInterface
+     */
+    private $router;
+
 
 
     /**
      * Constructor
      * Binds dependencies
      *
-     * @param ObjectManager $manager
-     * @param Validator     $validator
+     * @param ObjectManager   $manager
+     * @param Validator       $validator
+     * @param RouterInterface $router
      *
      * @return void
      */
-    public function __construct(ObjectManager $manager, Validator $validator)
+    public function __construct(ObjectManager $manager, Validator $validator, RouterInterface $router)
     {
         $this->manager = $manager;
         $this->validator = $validator;
+        $this->router = $router;
     }
 
 
@@ -213,5 +221,19 @@ class TaskManager
         }
 
         return $total;
+    }
+
+
+
+    /**
+     * Generates deletion API URL for a Task
+     *
+     * @param Task $task
+     *
+     * @return string
+     */
+    public function generateRemoveUrl(Task $task)
+    {
+        return $this->router->generate('task.remove', ['id' => $task->getId()]);
     }
 }

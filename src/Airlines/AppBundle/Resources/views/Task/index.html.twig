@@ -3,16 +3,22 @@
 {% block body %}
     <h1>Task list</h1>
 
-    <ul class="list-group">
-        {% for entity in entities %}
-            <li class="list-group-item">
-                <a class="list-group-link" href="{{ path('task_edit', { 'id': entity.id }) }}">
-                    #{{ entity.id }} - {{ entity.name }}{{ entity.member ? ' - ' ~ entity.member : '' }}
-                    <span class="hover pull-right"><span class="glyphicon glyphicon-pencil"></span> Edit</span>
-                </a>
-            </li>
-        {% endfor %}
-    </ul>
+    {% if entities is defined and entities|length %}
+        <ul class="list-group">
+            {% for entity in entities %}
+                <li class="list-group-item">
+                    <a class="list-group-link" href="{{ path('task_edit', { 'id': entity.id }) }}">
+                        #{{ entity.id }} - {{ entity.name }}{{ entity.member ? ' - ' ~ entity.member : '' }}
+                        <span class="hover pull-right"><span class="glyphicon glyphicon-pencil"></span> Edit</span>
+                    </a>
+                </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>Tasks are these coloured things on the board that mean there's work to do.<br />
+        Try creating one now by clicking the button below.</p>
+        <p>Note you can also create tasks directly from the board by splitting an existing one in two.</p>
+    {% endif %}
 
     <div class="form-btn-group">
         <a class="btn btn-primary" href="{{ path('task_new') }}">Create a new task</a>

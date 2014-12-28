@@ -3,6 +3,7 @@
 namespace Airlines\AppBundle\Controller;
 
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -140,5 +141,28 @@ class BoardController extends Controller
             ->add('submit', 'submit', array('label' => 'Delete'))
             ->getForm()
         ;
+    }
+
+
+
+    /**
+     * Displays a board for given week in given years
+     * Last two parameters are optional and default to current date
+     *
+     * @param Board $board Board instance
+     * @param int   $week  Week number
+     * @param int   $year  Year
+     *
+     * @return Response
+     *
+     * @Route("/{id}/{week}/{year}", name="board_show")
+     * @Template("board.html.twig")
+     */
+    public function showAction(Board $board, $week = null, $year = null)
+    {
+        is_null($week) && $week = date('W');
+        is_null($year) && $year = date('Y');
+
+        return compact('board', 'week', 'year');
     }
 }

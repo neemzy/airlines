@@ -6,7 +6,6 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Airlines\AppBundle\Entity\Member;
 use Airlines\AppBundle\Entity\Task;
 
@@ -29,7 +28,19 @@ class JsonTaskController extends AbstractJsonController
      */
     public function getAction(Task $task)
     {
-        return $this->createJsonResponse($task);
+        $response = $this->createJsonResponse($task);
+
+        // FIXME : this ugly solution is here because I have *no* fucking idea
+        // how to add a custom property to the JSON sput out by JMS's Serializer.
+        // Defining a handler allows you to send whatever the fuck you want *instead*,
+        // but *no* hints about how to keep everything working like default
+        // and just add a goddamn fucking field to it. You're welcome.
+        $manager = $this->get('airlines.task_manager');
+        $content = json_decode($response->getContent());
+        $content->removeUrl = $manager->generateRemoveUrl($task);
+        $response->setContent(json_encode($content));
+
+        return $response;
     }
 
 
@@ -54,7 +65,21 @@ class JsonTaskController extends AbstractJsonController
         $em = $this->getDoctrine()->getManager();
         $tasks = $em->getRepository('AirlinesAppBundle:Task')->findByMemberAndDates($member, $dates);
 
-        return $this->createJsonResponse($tasks);
+        $response = $this->createJsonResponse($tasks);
+
+        // FIXME : this ugly solution is here because I have *no* fucking idea
+        // how to add a custom property to the JSON sput out by JMS's Serializer.
+        // Defining a handler allows you to send whatever the fuck you want *instead*,
+        // but *no* hints about how to keep everything working like default
+        // and just add a goddamn fucking field to it. You're welcome.
+        $manager = $this->get('airlines.task_manager');
+        $content = json_decode($response->getContent());
+        foreach ($content as &$task) {
+            $task->removeUrl = $manager->generateRemoveUrl($em->getRepository('AirlinesAppBundle:Task')->find($task->id));
+        }
+        $response->setContent(json_encode($content));
+
+        return $response;
     }
 
 
@@ -76,7 +101,21 @@ class JsonTaskController extends AbstractJsonController
         $em = $this->getDoctrine()->getManager();
         $tasks = $em->getRepository('AirlinesAppBundle:Task')->findByMemberAndDates($member, [$date]);
 
-        return $this->createJsonResponse($tasks);
+        $response = $this->createJsonResponse($tasks);
+
+        // FIXME : this ugly solution is here because I have *no* fucking idea
+        // how to add a custom property to the JSON sput out by JMS's Serializer.
+        // Defining a handler allows you to send whatever the fuck you want *instead*,
+        // but *no* hints about how to keep everything working like default
+        // and just add a goddamn fucking field to it. You're welcome.
+        $manager = $this->get('airlines.task_manager');
+        $content = json_decode($response->getContent());
+        foreach ($content as &$task) {
+            $task->removeUrl = $manager->generateRemoveUrl($em->getRepository('AirlinesAppBundle:Task')->find($task->id));
+        }
+        $response->setContent(json_encode($content));
+
+        return $response;
     }
 
 
@@ -107,7 +146,19 @@ class JsonTaskController extends AbstractJsonController
             return $this->createJsonResponse($errors, Response::HTTP_BAD_REQUEST);
         }
 
-        return $this->createJsonResponse($task, Response::HTTP_CREATED);
+        $response = $this->createJsonResponse($task, Response::HTTP_CREATED);
+
+        // FIXME : this ugly solution is here because I have *no* fucking idea
+        // how to add a custom property to the JSON sput out by JMS's Serializer.
+        // Defining a handler allows you to send whatever the fuck you want *instead*,
+        // but *no* hints about how to keep everything working like default
+        // and just add a goddamn fucking field to it. You're welcome.
+        $manager = $this->get('airlines.task_manager');
+        $content = json_decode($response->getContent());
+        $content->removeUrl = $manager->generateRemoveUrl($task);
+        $response->setContent(json_encode($content));
+
+        return $response;
     }
 
 
@@ -136,7 +187,19 @@ class JsonTaskController extends AbstractJsonController
 
         // We use 200 OK instead of 204 No Content for a successful PUT,
         // because the latter prevents any content to be sent (which pretty much makes sense)
-        return $this->createJsonResponse($task);
+        $response = $this->createJsonResponse($task);
+
+        // FIXME : this ugly solution is here because I have *no* fucking idea
+        // how to add a custom property to the JSON sput out by JMS's Serializer.
+        // Defining a handler allows you to send whatever the fuck you want *instead*,
+        // but *no* hints about how to keep everything working like default
+        // and just add a goddamn fucking field to it. You're welcome.
+        $manager = $this->get('airlines.task_manager');
+        $content = json_decode($response->getContent());
+        $content->removeUrl = $manager->generateRemoveUrl($task);
+        $response->setContent(json_encode($content));
+
+        return $response;
     }
 
 
@@ -205,6 +268,18 @@ class JsonTaskController extends AbstractJsonController
             return new Response(null, Response::HTTP_BAD_REQUEST);
         }
 
-        return $this->createJsonResponse($result);
+        $response = $this->createJsonResponse($result);
+
+        // FIXME : this ugly solution is here because I have *no* fucking idea
+        // how to add a custom property to the JSON sput out by JMS's Serializer.
+        // Defining a handler allows you to send whatever the fuck you want *instead*,
+        // but *no* hints about how to keep everything working like default
+        // and just add a goddamn fucking field to it. You're welcome.
+        $manager = $this->get('airlines.task_manager');
+        $content = json_decode($response->getContent());
+        $content->removeUrl = $manager->generateRemoveUrl($result);
+        $response->setContent(json_encode($content));
+
+        return $response;
     }
 }

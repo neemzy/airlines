@@ -1,0 +1,14 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+<h1>{{ board.name }}</h1>
+
+<div
+    class="board"
+    data-week="{{ week }}"
+    data-weekUrl="{{ url('weekdays', { week: week, year: year }) }}"
+    data-memberUrl="{{ url('member.list', { id: board.id }) }}"
+></div>
+
+{% endblock %}

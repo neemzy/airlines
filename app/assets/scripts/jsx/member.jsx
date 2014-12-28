@@ -113,6 +113,7 @@ module.exports = React.createClass({
                     function (task) {
                         tasks.push(
                             <Task key={task.id}
+                                  id={task.id}
                                   name={task.name}
                                   date={task.date}
                                   color={this.props.color}
@@ -121,7 +122,8 @@ module.exports = React.createClass({
                                   remaining={task.remaining}
                                   overConsumed={task.overConsumed}
                                   underEstimated={task.underEstimated}
-                                  overEstimated={task.overEstimated} />
+                                  overEstimated={task.overEstimated}
+                                  removeUrl={task.removeUrl} />
                         );
                     },
                     this

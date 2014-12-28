@@ -7,7 +7,7 @@
         <ul class="list-group">
             {% for entity in entities %}
                 <li class="list-group-item">
-                    <a class="list-group-link" href="{#{ path('member_edit', { 'id': entity.id }) }#}">
+                    <a class="list-group-link" href="{{ path('board_show', { 'id': entity.id }) }}">
                         #{{ entity.id }} - {{ entity.name }}
                         <span class="hover pull-right"><span class="glyphicon glyphicon-send"></span> Go</span>
                     </a>

@@ -6,7 +6,6 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Airlines\AppBundle\Entity\Board;
 
 /**
@@ -40,11 +39,9 @@ class JsonMemberController extends AbstractJsonController
         // and just add a goddamn fucking field to it. You're welcome.
         $manager = $this->get('airlines.member_manager');
         $content = json_decode($response->getContent());
-
         foreach ($content as &$member) {
             $member->url = $manager->generateApiUrl($em->getRepository('AirlinesAppBundle:Member')->find($member->id));
         }
-
         $response->setContent(json_encode($content));
 
         return $response;

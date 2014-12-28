@@ -4,13 +4,13 @@
     <h1>Task creation</h1>
 
     {{ form_start(form) }}
-        {{ form_errors(edit_form) }}
-        {{ form_row(edit_form.name) }}
-        {{ form_row(edit_form.date) }}
-        {{ form_row(edit_form.estimate) }}
-        {{ form_row(edit_form.consumed) }}
-        {{ form_row(edit_form.remaining) }}
-        {{ form_row(edit_form.member) }}
+        {{ form_errors(form) }}
+        {{ form_row(form.name) }}
+        {{ form_row(form.date) }}
+        {{ form_row(form.estimate) }}
+        {{ form_row(form.consumed) }}
+        {{ form_row(form.remaining) }}
+        {{ form_row(form.member) }}
 
         <div class="form-btn-group">
             {{ form_widget(form.submit) }}

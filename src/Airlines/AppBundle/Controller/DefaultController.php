@@ -14,17 +14,6 @@ class DefaultController extends Controller
      */
     public function indexAction()
     {
-        return array();
-    }
-
-
-
-    /**
-     * @Route("/styleguide", name="styleguide")
-     * @Template("styleguide.html.twig")
-     */
-    public function styleGuideAction()
-    {
-        return array();
+        return [];
     }
 }

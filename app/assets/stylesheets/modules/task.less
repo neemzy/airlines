@@ -1,5 +1,5 @@
 @task-line-height: 3rem;
-@task-delete-size: 20px;
+@task-remove-size: 20px;
 
 .task {
     display: flex;
@@ -16,19 +16,20 @@
         padding: 0 @board-spacing;
     }
 
-    &__delete {
+    &__remove {
         .glyphicon();
         .glyphicon-remove();
 
         position: absolute;
         top: 0;
         right: 0;
-        width: @task-delete-size;
-        height: @task-delete-size;
-        line-height: @task-delete-size;
+        width: @task-remove-size;
+        height: @task-remove-size;
+        line-height: @task-remove-size;
         text-align: center;
         color: @gray-dark;
         opacity: 0;
+        cursor: pointer;
         transition: opacity .2s ease-in-out;
 
         &:hover,
@@ -39,7 +40,7 @@
         }
     }
 
-    &:hover &__delete {
+    &:hover &__remove {
         opacity: 1;
     }
 

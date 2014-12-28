@@ -14,7 +14,7 @@ class MemberManager
     /**
      * @var RouterInterface
      */
-    private $route;
+    private $router;
 
 
 
@@ -35,6 +35,8 @@ class MemberManager
 
     /**
      * Generates root API URL for a Member
+     *
+     * @param Member $member
      *
      * @return string
      */
