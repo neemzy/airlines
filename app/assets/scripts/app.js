@@ -13,12 +13,8 @@
     if (boardElement) {
         var params = {
                 week: null,
-                day1: null,
-                day2: null,
-                day3: null,
-                day4: null,
-                day5: null,
-                url: null
+                weekUrl: null,
+                memberUrl: null
             };
 
         for (var key in params) {

@@ -7,12 +7,8 @@
 <div
     class="board"
     data-week="52"
-    data-day1="2014-12-22"
-    data-day2="2014-12-23"
-    data-day3="2014-12-24"
-    data-day4="2014-12-25"
-    data-day5="2014-12-26"
-    data-url="{{ url('member.list', { id: 1 }) }}"
+    data-weekUrl="{{ url('weekdays', { week: 52, year: 'now'|date('Y') }) }}"
+    data-memberUrl="{{ url('member.list', { id: 1 }) }}"
 ></div>
 
 {% endblock %}

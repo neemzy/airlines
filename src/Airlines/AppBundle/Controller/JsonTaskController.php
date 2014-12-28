@@ -7,7 +7,6 @@ use Symfony\Component\HttpFoundation\Response;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
-use Airlines\AppBundle\Controller\AbstractJsonController;
 use Airlines\AppBundle\Entity\Member;
 use Airlines\AppBundle\Entity\Task;
 
