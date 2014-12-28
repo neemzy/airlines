@@ -49,6 +49,7 @@ class Member
      * @var string
      *
      * @ORM\Column(name="avatar", type="string", length=255, nullable=true)
+     * @Serializer\Exclude
      */
     private $avatar;
 
@@ -233,6 +234,9 @@ class Member
      * Drops in a default picture if needed
      *
      * @return string
+     *
+     * @Serializer\VirtualProperty
+     * @Serializer\SerializedName("avatar")
      */
     public function getAvatarWebPath()
     {

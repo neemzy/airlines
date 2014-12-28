@@ -37,6 +37,31 @@ class JsonTaskController extends AbstractJsonController
 
 
     /**
+     * Fetches all tasks for the given Member and week number
+     *
+     * @param Member $member
+     * @param int    $week
+     *
+     * @return Response
+     *
+     * @Route("/{id}/{week}", name="task.week", requirements={"id": "\d+", "week": "\d+"})
+     * @Method("GET")
+     */
+    public function getByWeekNumberAction(Member $member, $week)
+    {
+        $helper = $this->get('airlines.week_number_helper');
+        $dates = $helper->getWorkDaysForWeek($week);
+
+        $em = $this->getDoctrine()->getManager();
+        $tasks = $em->getRepository('AirlinesAppBundle:Task')->findByMemberAndDates($member, $dates);
+
+        return $this->createJsonResponse($tasks);
+    }
+
+
+
+
+    /**
      * Fetches all tasks for the given Member and date
      *
      * @param Member   $member
@@ -44,13 +69,13 @@ class JsonTaskController extends AbstractJsonController
      *
      * @return Response
      *
-     * @Route("/{id}/{date}", name="task.list", requirements={"id": "\d+", "date": "\d{4}-\d{2}-\d{2}"})
+     * @Route("/{id}/{date}", name="task.day", requirements={"id": "\d+", "date": "\d{4}-\d{2}-\d{2}"})
      * @Method("GET")
      */
-    public function listAction(Member $member, \DateTime $date)
+    public function getByDayAction(Member $member, \DateTime $date)
     {
         $em = $this->getDoctrine()->getManager();
-        $tasks = $em->getRepository('AirlinesAppBundle:Task')->findByMemberAndDate($member, $date);
+        $tasks = $em->getRepository('AirlinesAppBundle:Task')->findByMemberAndDates($member, [$date]);
 
         return $this->createJsonResponse($tasks);
     }

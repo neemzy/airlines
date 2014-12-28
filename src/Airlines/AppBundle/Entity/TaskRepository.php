@@ -13,18 +13,21 @@ use Doctrine\ORM\EntityRepository;
 class TaskRepository extends EntityRepository
 {
     /**
-     * Fetches tasks by member and date
+     * Fetches tasks by member and date(s)
+     * The second argument shall be an array of DateTime instances
      *
-     * @param Member   $member
-     * @param DateTime $date
+     * @param Member $member
+     * @param array  $dates
      */
-    public function findByMemberAndDate(Member $member, \DateTime $date)
+    public function findByMemberAndDates(Member $member, array $dates)
     {
-        return $this->findBy(
-            [
-                'member' => $member->getId(),
-                'date' => $date
-            ]
-        );
+        return $this->createQueryBuilder('t')
+                    ->where('t.date IN(:dates)')
+                    ->andWhere('t.member = :member')
+                    ->setParameter('dates', $dates)
+                    ->setParameter('member', $member->getId())
+                    ->orderBy('t.id', 'ASC')
+                    ->getQuery()
+                    ->getResult();
     }
 }

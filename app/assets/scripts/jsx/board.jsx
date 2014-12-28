@@ -41,20 +41,16 @@ module.exports = React.createClass({
     },
 
     loadTasks: function(members) {
-        var promises = {},
-            nbDays = this.getDateList().length;
+        // We will return members as the first item in our task promise array,
+        // in order to grant ourselves access to it in the second callback
+        var promises = [members];
 
-        for (var i = 1; i <= nbDays; i++) {
-            var date = this.props['day' + i];
-            promises[date] = {};
-
-            for (var key in members) {
-                var url = members[key].url + date;
-
-                promises[date][members[key].id] = new Promise(
+        for (var key in members) {
+            promises.push(
+                new Promise(
                     function (resolve, reject) {
                         reqwest({
-                            url: url,
+                            url: members[key].url + this.props.week,
                             type: 'json',
                             method: 'GET',
 
@@ -67,11 +63,11 @@ module.exports = React.createClass({
                             }.bind(this)
                         });
                     }.bind(this)
-                );
-            }
+                )
+            );
         }
 
-        return promises;
+        return Promise.all(promises);
     },
 
     componentWillMount: function() {
@@ -83,8 +79,16 @@ module.exports = React.createClass({
             )
             .then(
                 function (tasks) {
-                    console.dir(tasks);
-                }
+                    members = tasks.shift(); // see above
+
+                    members.forEach(
+                        function (member) {
+                            member.tasks = tasks.shift();
+                        }
+                    );
+
+                    this.setState({ members: members });
+                }.bind(this)
             );
     },
 
@@ -103,34 +107,55 @@ module.exports = React.createClass({
             }
         );
 
-        /*var members = (
-            <Member
-             name="TPAN"
-             color="rebeccapurple"
-             avatar="https://pbs.twimg.com/profile_images/412193761507041280/1eeIlWpC.jpeg"
-             estimate="5"
-             consumed="1"
-             remaining="4.5">
-                <Task
-                 name="DEV\nRetour lot 98"
-                 date="2014-12-22"
-                 estimate="1"
-                 consumed="1"
-                 remaining="0.5" />
-                <Task
-                 name="DEV\nRetour lot 99"
-                 date="2014-12-22"
-                 estimate="1"
-                 consumed="1"
-                 remaining="0.5" />
-                <Task
-                 name="DEV\nRetour lot 100"
-                 date="2014-12-23"
-                 estimate="1"
-                 consumed="1"
-                 remaining="0.5" />
-            </Member>
-        );*/
+        this.state.members.forEach(
+            function (member) {
+                var days = [];
+
+                dates.forEach(
+                    function (date) {
+                        date = date.toISOString().split('T').shift(); // FIXME: need better timezone handling
+
+                        var tasks = [],
+                            key = date + member.id;
+
+                        member.tasks.forEach(
+                            function (task) {
+                                task.date = task.date.split('T').shift(); // FIXME: need better timezone handling
+
+                                if (date == task.date) {
+                                    tasks.push(
+                                        <Task key={task.id}
+                                              name={task.name}
+                                              date={task.date}
+                                              color={member.color}
+                                              estimate={task.estimate}
+                                              consumed={task.consumed}
+                                              remaining={task.remaining}
+                                              overConsumed={task.overConsumed}
+                                              underEstimated={task.underEstimated}
+                                              overEstimated={task.overEstimated} />
+                                    );
+                                }
+                            }
+                        );
+
+                        days.push(
+                            <div key={key} className="member__day">{tasks}</div>
+                        );
+                    }
+                );
+
+                members.push(
+                    <Member key={member.id}
+                            name={member.name}
+                            avatar={member.avatar}
+                            color={member.color}
+                            estimate="0"
+                            consumed="0"
+                            remaining="0">{days}</Member>
+                );
+            }
+        );
 
         return (
             <div className="board">

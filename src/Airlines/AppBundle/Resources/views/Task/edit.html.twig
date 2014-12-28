@@ -14,7 +14,7 @@
 
         <div class="form-btn-group">
             {{ form_widget(edit_form.submit) }}
-            <a class="btn" href="{{ path('board') }}">Back to the list</a>
+            <a class="btn" href="{{ path('task') }}">Back to the list</a>
             <label class="btn btn-danger" for="form_submit" onclick="return confirm('Are you sure ?');">Delete</label>
         </div>
     {{ form_end(edit_form) }}

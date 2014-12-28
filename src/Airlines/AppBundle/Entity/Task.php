@@ -4,7 +4,7 @@ namespace Airlines\AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
-use JMS\Serializer\Annotation\Exclude;
+use JMS\Serializer\Annotation as Serializer;
 
 /**
  * Task
@@ -66,7 +66,7 @@ class Task
     /**
      * @ORM\ManyToOne(targetEntity="Member", inversedBy="tasks")
      * @ORM\JoinColumn(name="member_id", referencedColumnName="id")
-     * @Exclude
+     * @Serializer\Exclude
      */
     private $member;
 
@@ -226,6 +226,9 @@ class Task
      * It is the case as soon as its consumed time is over its initial estimate
      *
      * @return bool
+     *
+     * @Serializer\VirtualProperty
+     * @Serializer\SerializedName("overConsumed")
      */
     public function isOverConsumed()
     {
@@ -239,6 +242,9 @@ class Task
      * It is the case if the sum of its consumed and remaining time are over its initial estimate
      *
      * @return bool
+     *
+     * @Serializer\VirtualProperty
+     * @Serializer\SerializedName("underEstimated")
      */
     public function wasUnderEstimated()
     {
@@ -252,6 +258,9 @@ class Task
      * It is the case if the sum of its consumed and remaining time are under its initial estimate
      *
      * @return bool
+     *
+     * @Serializer\VirtualProperty
+     * @Serializer\SerializedName("overEstimated")
      */
     public function wasOverEstimated()
     {

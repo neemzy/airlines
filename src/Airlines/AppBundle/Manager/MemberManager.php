@@ -40,16 +40,16 @@ class MemberManager
      */
     public function generateApiUrl(Member $member)
     {
-        $date = '1970-01-01';
+        $week = '00';
 
         $url = $this->router->generate(
-            'task.list',
+            'task.week',
             [
                 'id' => $member->getId(),
-                'date' => $date
+                'week' => $week
             ]
         );
 
-        return str_replace($date, '', $url);
+        return str_replace($week, '', $url);
     }
 }
