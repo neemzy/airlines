@@ -1,6 +1,7 @@
 var React = require('react'),
     Promise = require('promise'),
     reqwest = require('reqwest'),
+    DateHelper = require('../imports/dateHelper'),
     Task = require('./task'),
     Numbers = require('./numbers');
 
@@ -56,10 +57,12 @@ module.exports = React.createClass({
      * @return Promise
      */
     loadTasksAtDate: function(date) {
+        var dateHelper = new DateHelper();
+
         return new Promise(
             function (resolve, reject) {
                 reqwest({
-                    url: this.props.taskUrl + date.toISOString().split('T').shift(), // FIXME: need better timezone handling
+                    url: this.props.taskUrl + dateHelper.convert(date),
                     type: 'json',
                     method: 'GET',
 
@@ -104,7 +107,8 @@ module.exports = React.createClass({
      * @return void
      */
     reloadDay: function(date) {
-        var index = this.getDayIndex(date);
+        var dateHelper = new DateHelper(),
+            index = this.getDayIndex(date);
 
         if (-1 == index) {
             return;
@@ -117,7 +121,7 @@ module.exports = React.createClass({
 
                     tasks.forEach(
                         function (task) {
-                            task.date = task.date.split('T').shift(); // FIXME: need better timezone handling
+                            task.date = dateHelper.convert(task.date);
                         }
                     );
 
@@ -163,6 +167,8 @@ module.exports = React.createClass({
      * @return void
      */
     componentWillMount: function() {
+        var dateHelper = new DateHelper();
+
         this.loadTasks()
             .then(
                 function (tasks) {
@@ -171,14 +177,11 @@ module.exports = React.createClass({
 
                     this.props.dates.forEach(
                         function (date) {
-                            date = date.toISOString().split('T').shift(); // FIXME: need better timezone handling
                             var tasksForDay = [];
 
                             tasks.forEach(
                                 function (task) {
-                                    task.date = task.date.split('T').shift(); // FIXME: need better timezone handling
-
-                                    if (task.date == date) {
+                                    if (dateHelper.compare(task.date, date)) {
                                         tasksForDay.push(task);
                                     }
                                 }

@@ -8,6 +8,9 @@
   },
   "author": "neemzy",
   "homepage": "https://github.com/neemzy/airlines",
+  "scripts": {
+    "test": "cd app/assets/scripts && jasmine"
+  },
   "devDependencies": {
     "gulp": "~3.8.10",
     "gulp-browserify": "~0.5.0",
