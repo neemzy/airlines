@@ -3,7 +3,7 @@
 <ul class="nav navbar-nav">
     {% for route in routes %}
         {% set path = path(route) %}
-        <li{% if path == app.request.pathinfo %} class="active"{% endif %}>
+        <li{% if path in app.request.pathinfo %} class="active"{% endif %}>
             <a href="{{ path }}">{{ route|title }}s</a>
         </li>
     {% endfor %}
