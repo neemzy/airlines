@@ -17,7 +17,7 @@
             }
 
             reqwest({
-                url: this.props.removeUrl,
+                url: this.props.restUrl,
                 type: 'json',
                 method: 'DELETE',
 
@@ -57,6 +57,36 @@
 
 
         /**
+         * Updates one of this Task's fields
+         *
+         * @param string field
+         * @param mixed  value
+         *
+         * @return void
+         */
+        update: function(field, value) {
+            var data = {};
+            data[field] = value;
+
+            reqwest({
+                url: this.props.restUrl,
+                type: 'json',
+                method: 'PUT',
+                data: data,
+
+                error: function(err) {
+                    // TODO: error handling, if there's any need
+                },
+
+                success: function(response) {
+                    this.props.reloadDay();
+                }.bind(this)
+            });
+         },
+
+
+
+        /**
          * Rendering React hook
          * Passes props through to the Numbers and attaches action handlers
          *
@@ -78,7 +108,7 @@
             return (
                 <div className="task" style={style}>
                     <div className="task__name" style={nameStyle}>{this.props.name}</div>
-                    <Numbers {...numbers} />
+                    <Numbers {...numbers} handleInput={this.update} />
                     <div className="task__action-group">
                         <a className="task__action task__action--split" onClick={this.split}></a>
                         <a className="task__action task__action--remove" onClick={this.remove}></a>

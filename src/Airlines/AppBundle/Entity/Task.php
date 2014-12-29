@@ -42,24 +42,21 @@ class Task
     /**
      * @var string
      *
-     * @ORM\Column(name="estimate", type="decimal", precision=4, scale=3)
-     * @Assert\Range(min=0, max=5)
+     * @ORM\Column(name="estimate", type="decimal", precision=5, scale=3)
      */
     private $estimate;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="consumed", type="decimal", precision=4, scale=3)
-     * @Assert\Range(min=0, max=5)
+     * @ORM\Column(name="consumed", type="decimal", precision=5, scale=3)
      */
     private $consumed;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="remaining", type="decimal", precision=4, scale=3)
-     * @Assert\Range(min=0, max=5)
+     * @ORM\Column(name="remaining", type="decimal", precision=5, scale=3)
      */
     private $remaining;
 

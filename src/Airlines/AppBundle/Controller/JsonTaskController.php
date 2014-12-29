@@ -37,7 +37,7 @@ class JsonTaskController extends AbstractJsonController
         // and just add a goddamn fucking field to it. You're welcome.
         $manager = $this->get('airlines.task_manager');
         $content = json_decode($response->getContent());
-        $content->removeUrl = $manager->generateRemoveUrl($task);
+        $content->restUrl = $manager->generateRestUrl($task);
         $content->splitUrl = $manager->generateSplitUrl($task);
         $response->setContent(json_encode($content));
 
@@ -77,7 +77,7 @@ class JsonTaskController extends AbstractJsonController
         $content = json_decode($response->getContent());
         foreach ($content as &$task) {
             $instance = $em->getRepository('AirlinesAppBundle:Task')->find($task->id);
-            $task->removeUrl = $manager->generateRemoveUrl($instance);
+            $task->restUrl = $manager->generateRestUrl($instance);
             $task->splitUrl = $manager->generateSplitUrl($instance);
         }
         $response->setContent(json_encode($content));
@@ -115,7 +115,7 @@ class JsonTaskController extends AbstractJsonController
         $content = json_decode($response->getContent());
         foreach ($content as &$task) {
             $instance = $em->getRepository('AirlinesAppBundle:Task')->find($task->id);
-            $task->removeUrl = $manager->generateRemoveUrl($instance);
+            $task->restUrl = $manager->generateRestUrl($instance);
             $task->splitUrl = $manager->generateSplitUrl($instance);
         }
         $response->setContent(json_encode($content));
@@ -160,7 +160,7 @@ class JsonTaskController extends AbstractJsonController
         // and just add a goddamn fucking field to it. You're welcome.
         $manager = $this->get('airlines.task_manager');
         $content = json_decode($response->getContent());
-        $content->removeUrl = $manager->generateRemoveUrl($task);
+        $content->restUrl = $manager->generateRestUrl($task);
         $content->splitUrl = $manager->generateSplitUrl($task);
         $response->setContent(json_encode($content));
 
@@ -202,7 +202,7 @@ class JsonTaskController extends AbstractJsonController
         // and just add a goddamn fucking field to it. You're welcome.
         $manager = $this->get('airlines.task_manager');
         $content = json_decode($response->getContent());
-        $content->removeUrl = $manager->generateRemoveUrl($task);
+        $content->restUrl = $manager->generateRestUrl($task);
         $content->splitUrl = $manager->generateSplitUrl($task);
         $response->setContent(json_encode($content));
 
@@ -284,7 +284,7 @@ class JsonTaskController extends AbstractJsonController
         // and just add a goddamn fucking field to it. You're welcome.
         $manager = $this->get('airlines.task_manager');
         $content = json_decode($response->getContent());
-        $content->removeUrl = $manager->generateRemoveUrl($result);
+        $content->restUrl = $manager->generateRestUrl($result);
         $content->splitUrl = $manager->generateSplitUrl($result);
         $response->setContent(json_encode($content));
 

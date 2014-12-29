@@ -226,21 +226,21 @@ class TaskManager
 
 
     /**
-     * Generates deletion API URL for a Task
+     * Generates REST API URL for a Task
      *
      * @param Task $task
      *
      * @return string
      */
-    public function generateRemoveUrl(Task $task)
+    public function generateRestUrl(Task $task)
     {
-        return $this->router->generate('task.remove', ['id' => $task->getId()]);
+        return $this->router->generate('task.get', ['id' => $task->getId()]);
     }
 
 
 
     /**
-     * Generates deletion API URL for a Task
+     * Generates split API URL for a Task
      *
      * @param Task $task
      *
