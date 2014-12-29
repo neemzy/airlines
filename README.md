@@ -36,3 +36,6 @@ TODO
 - Set up an `AbstractJsonController` and a `JsonMemberController` to be able to list members for a given board
 - Installed [reqwest](https://github.com/ded/reqwest) and [promise](https://github.com/then/promise)
 - Set up a `MemberManager` class to generate root API URLs for members in order to fetch their tasks
+- Wrote React components
+- Installed [jasmine](https://github.com/jasmine/jasmine) and configured `npm test` script to run it in the right directory
+- Set up `DateHelper` JS class to deal with date formats

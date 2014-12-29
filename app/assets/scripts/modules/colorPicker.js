@@ -1,79 +1,21 @@
-var React = require('react'),
-    ReactColorPicker = require('react-color-picker');
+(function () {
+    'use strict';
 
-module.exports = React.createClass({
-    /**
-     * Initial state React hook
-     *
-     * @return object
-     */
-    getInitialState: function() {
-        return {
-            color: '#FFFFFF',
-            attrs: {}
-        };
-    },
-
-
+    var React = require('react'),
+        colorPickerComponent = React.createFactory(require('../components/colorPicker'));
 
     /**
-     * Updates the selected color
-     * Makes the value uppercase
+     * Constructor
+     * Renders the React component
      *
      * @return void
      */
-    updateColor: function(color) {
-        this.setState({ color: color.toUpperCase() });
-    },
+    var ColorPicker = module.exports = function(colorPickerElement) {
+        if (null == colorPickerElement) {
+            return;
+        }
 
-
-
-    /**
-     * Post-mount React hook
-     * Attaches data-* HTML attributes to the inner input
-     *
-     * @return void
-     */
-    componentDidMount: function() {
-        var parentNode = this.getDOMNode().parentNode,
-            attrs = this.state.attrs;
-
-        [].slice.call(parentNode.attributes).forEach(function (attr) {
-            if (attr.name.match(/^data-/)) {
-                var realName = attr.name.substr(5);
-
-                if ('value' == realName) {
-                    this.updateColor(attr.value);
-                } else {
-                    if ('class' == realName) {
-                        realName = 'className';
-                    }
-
-                    attrs[realName] = attr.value;
-                }
-
-                parentNode.removeAttribute(attr.name);
-            }
-        }, this);
-
-        this.setState({ attrs: attrs });
-    },
-
-
-
-    /**
-     * Rendering React hook
-     *
-     * @return void
-     */
-    render: function() {
-        var style = { backgroundColor: this.state.color };
-
-        return (
-            <div>
-                <input readOnly value={this.state.color} {...this.state.attrs} onChange={this.updateColor} style={style} />
-                <ReactColorPicker value={this.state.color} onDrag={this.updateColor} />
-            </div>
-        );
-    }
-});
+        React.render(colorPickerComponent(), colorPickerElement)
+    };
+})
+();
