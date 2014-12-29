@@ -14,7 +14,7 @@ class WeekNumberHelper
      */
     public function getWorkDaysForWeek($week, $year = null)
     {
-        is_null($year) && $year = date('Y');
+        is_null($year) && $year = date('o');
         $dates = [];
 
         for ($i = 1; $i <= 5; $i++) {

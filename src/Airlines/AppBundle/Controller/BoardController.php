@@ -161,7 +161,7 @@ class BoardController extends Controller
     public function showAction(Board $board, $week = null, $year = null)
     {
         is_null($week) && $week = date('W');
-        is_null($year) && $year = date('Y');
+        is_null($year) && $year = date('o');
 
         return compact('board', 'week', 'year');
     }
