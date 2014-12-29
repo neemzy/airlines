@@ -4,8 +4,8 @@
     $('html').classList.remove('no-js');
 
     var React = require('react'),
-        Board = React.createFactory(require('./jsx/board')),
-        ColorPicker = React.createFactory(require('./jsx/colorPicker')),
+        Board = React.createFactory(require('./modules/board')),
+        ColorPicker = React.createFactory(require('./modules/colorPicker')),
         boardElement = $('.board'),
         pickerElement = $('.color-picker');
 
