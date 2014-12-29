@@ -1,6 +1,12 @@
 var React = require('react/addons');
 
 module.exports = React.createClass({
+    /**
+     * Rendering React hook
+     * Sets the right classes for each value
+     *
+     * @return void
+     */
     render: function() {
         var cx = React.addons.classSet,
 

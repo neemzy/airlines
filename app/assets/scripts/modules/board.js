@@ -6,10 +6,22 @@ var React = require('react'),
     Numbers = require('./numbers');
 
 module.exports = React.createClass({
+    /**
+     * Initial state React hook
+     *
+     * @return object
+     */
     getInitialState: function() {
         return { dates: [], members: [] };
     },
 
+
+
+    /**
+     * Loads the working days' dates for the current week
+     *
+     * @return Promise
+     */
     loadDates: function() {
         return new Promise(
             function (resolve, reject) {
@@ -30,6 +42,13 @@ module.exports = React.createClass({
         );
     },
 
+
+
+    /**
+     * Loads all Members from the database for this Board
+     *
+     * @return Promise
+     */
     loadMembers: function() {
         return new Promise(
             function (resolve, reject) {
@@ -50,6 +69,14 @@ module.exports = React.createClass({
         );
     },
 
+
+
+    /**
+     * Pre-mount React hook
+     * Triggers dates and Members loading
+     *
+     * @return void
+     */
     componentWillMount: function() {
         this.loadDates()
             .then(
@@ -72,6 +99,14 @@ module.exports = React.createClass({
             );
     },
 
+
+
+    /**
+     * Rendering React hook
+     * Builds the Board's header and the Members' containing rows
+     *
+     * @return void
+     */
     render: function() {
         var members = [],
             days = [];
@@ -89,7 +124,7 @@ module.exports = React.createClass({
         this.state.members.forEach(
             function (member) {
                 members.push(
-                    <Member key={member.id} {...member} weekUrl={this.props.weekUrl} week={this.props.week} dates={this.state.dates} />
+                    <Member key={member.id} {...member} week={this.props.week} dates={this.state.dates} />
                 );
             },
             this

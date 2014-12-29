@@ -3,6 +3,11 @@ var React = require('react'),
     Numbers = require('./numbers');
 
 module.exports = React.createClass({
+    /**
+     * Removes this Task from the database and triggers reloading for the member and day it belongs to
+     *
+     * @return void
+     */
     remove: function() {
         if (!confirm('Are you sure ?')) {
             return;
@@ -23,6 +28,13 @@ module.exports = React.createClass({
         });
     },
 
+
+
+    /**
+     * Splits this Task in two and triggers reloading for the member and day it belongs to
+     *
+     * @return void
+     */
     split: function() {
         reqwest({
             url: this.props.splitUrl,
@@ -39,6 +51,14 @@ module.exports = React.createClass({
         });
     },
 
+
+
+    /**
+     * Rendering React hook
+     * Passes props through to the Numbers and attaches action handlers
+     *
+     * @return void
+     */
     render: function() {
         var style = {},
             nameStyle = { backgroundColor: this.props.color },

@@ -5,6 +5,11 @@ var React = require('react'),
     Numbers = require('./numbers');
 
 module.exports = React.createClass({
+    /**
+     * Initial state React hook
+     *
+     * @return object
+     */
     getInitialState: function() {
         return {
             estimate: 0,
@@ -14,26 +19,13 @@ module.exports = React.createClass({
         };
     },
 
-    loadDates: function() {
-        return new Promise(
-            function (resolve, reject) {
-                reqwest({
-                    url: this.props.weekUrl,
-                    type: 'json',
-                    method: 'GET',
 
-                    error: function(err) {
-                        reject(err);
-                    }.bind(this),
 
-                    success: function(dates) {
-                        resolve(dates);
-                    }.bind(this)
-                });
-            }.bind(this)
-        );
-    },
-
+    /**
+     * Loads all Tasks from the database for this Member and the parent Board's current week
+     *
+     * @return Promise
+     */
     loadTasks: function() {
         return new Promise(
             function (resolve, reject) {
@@ -54,6 +46,15 @@ module.exports = React.createClass({
         );
     },
 
+
+
+    /**
+     * Loads Tasks from the database for this Member and the given day
+     *
+     * @param Date date
+     *
+     * @return Promise
+     */
     loadTasksAtDate: function(date) {
         return new Promise(
             function (resolve, reject) {
@@ -74,6 +75,15 @@ module.exports = React.createClass({
         );
     },
 
+
+
+    /**
+     * Retrieves the given day's index in the parent Board's current week
+     *
+     * @param Date date
+     *
+     * @return int
+     */
     getDayIndex: function(date) {
         return this.props.dates
             .map(
@@ -84,6 +94,15 @@ module.exports = React.createClass({
             .indexOf(date.toISOString());
     },
 
+
+
+    /**
+     * Reloads the given day's Tasks for this Member
+     *
+     * @param Date date
+     *
+     * @return void
+     */
     reloadDay: function(date) {
         var index = this.getDayIndex(date);
 
@@ -110,6 +129,15 @@ module.exports = React.createClass({
             );
     },
 
+
+
+    /**
+     * Updates this Member's Numbers from an unordered, just-fetched Task list
+     *
+     * @param Array tasks
+     *
+     * @return void
+     */
     updateNumbers: function(tasks) {
         var estimate = 0,
             consumed = 0,
@@ -126,41 +154,53 @@ module.exports = React.createClass({
         this.setState({ estimate: estimate, consumed: consumed, remaining: remaining });
     },
 
+
+
+    /**
+     * Pre-mount React hook
+     * Loads the tasks and sorts them by day for easier rendering
+     *
+     * @return void
+     */
     componentWillMount: function() {
-        this.loadDates()
+        this.loadTasks()
             .then(
-                function (dates) {
-                    this.loadTasks(dates)
-                        .then(
-                            function (tasks) {
-                                this.updateNumbers(tasks);
-                                var days = [];
+                function (tasks) {
+                    this.updateNumbers(tasks);
+                    var days = [];
 
-                                dates.forEach(
-                                    function (date) {
-                                        var tasksForDay = [];
+                    this.props.dates.forEach(
+                        function (date) {
+                            date = date.toISOString().split('T').shift(); // FIXME: need better timezone handling
+                            var tasksForDay = [];
 
-                                        tasks.forEach(
-                                            function (task) {
-                                                task.date = task.date.split('T').shift(); // FIXME: need better timezone handling
+                            tasks.forEach(
+                                function (task) {
+                                    task.date = task.date.split('T').shift(); // FIXME: need better timezone handling
 
-                                                if (task.date == date) {
-                                                    tasksForDay.push(task);
-                                                }
-                                            }
-                                        );
-
-                                        days.push(tasksForDay);
+                                    if (task.date == date) {
+                                        tasksForDay.push(task);
                                     }
-                                );
+                                }
+                            );
 
-                                this.setState({ tasks: days });
-                            }.bind(this)
-                        );
+                            days.push(tasksForDay);
+                        }
+                    );
+
+                    this.setState({ tasks: days });
                 }.bind(this)
             );
     },
 
+
+
+    /**
+     * Rendering React hook
+     * Builds the whole Member's week row
+     *
+     * @return void
+     */
     render: function() {
         var avatarStyle = { backgroundImage: 'url(\'/' + this.props.avatar + '\')' },
             colorStyle = { backgroundColor: this.props.color },
