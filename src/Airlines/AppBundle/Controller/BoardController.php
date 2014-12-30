@@ -163,6 +163,11 @@ class BoardController extends Controller
         is_null($week) && $week = date('W');
         is_null($year) && $year = date('o');
 
-        return compact('board', 'week', 'year');
+        $week = str_pad($week, 2, '0', STR_PAD_LEFT);
+
+        return array_merge(
+            compact('board', 'week', 'year'),
+            $this->get('airlines.week_number_helper')->getPrevNextWeekYear($week, $year)
+        );
     }
 }

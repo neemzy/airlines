@@ -17,6 +17,9 @@
 
         var params = {
                 week: null,
+                year: null,
+                prevUrl: null,
+                nextUrl: null,
                 weekUrl: null,
                 memberUrl: null
             };

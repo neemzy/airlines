@@ -136,7 +136,11 @@
             return (
                 <div className="board">
                     <header className="board__header">
-                        <div className="board__head-title">S{this.props.week}</div>
+                        <div className="board__head-title">
+                            <a href={this.props.prevUrl} className="board__week-link board__week-link--previous"></a>
+                            S{this.props.week} {this.props.year}
+                            <a href={this.props.nextUrl} className="board__week-link board__week-link--next"></a>
+                        </div>
                         {days}
                     </header>
                     {members}

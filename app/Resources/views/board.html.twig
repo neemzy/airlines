@@ -9,6 +9,9 @@
 <div
     class="board"
     data-week="{{ week }}"
+    data-year="{{ year }}"
+    data-prevUrl="{{ url('board_show', { id: board.id, week: prevWeek, year: prevYear }) }}"
+    data-nextUrl="{{ url('board_show', { id: board.id, week: nextWeek, year: nextYear }) }}"
     data-weekUrl="{{ url('weekdays', { week: week, year: year }) }}"
     data-memberUrl="{{ url('member.list', { id: board.id }) }}"
 ></div>

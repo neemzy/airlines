@@ -23,4 +23,32 @@ class WeekNumberHelper
 
         return $dates;
     }
+
+
+
+    /**
+     * Determines previous and next week/year couples
+     *
+     * @param int $week
+     * @param int $year
+     *
+     * @return array
+     */
+    public function getPrevNextWeekYear($week, $year)
+    {
+        $prevWeek = $week - 1;
+        $prevYear = $year;
+        $nextWeek = $week + 1;
+        $nextYear = $year;
+
+        if ($prevWeek < 1) {
+            $prevWeek = 52;
+            $prevYear--;
+        } else if ($nextWeek > 52) {
+            $nextWeek = 1;
+            $nextYear++;
+        }
+
+        return compact('prevWeek', 'prevYear', 'nextWeek', 'nextYear');
+    }
 }

@@ -1,4 +1,5 @@
 @board-spacing: 10px;
+@board-head-height: 30px;
 
 .board {
     display: table;
@@ -19,6 +20,31 @@
     }
 
     &__head-title {
+        height: @board-head-height;
+        line-height: @board-head-height;
         font-size: 2rem;
+    }
+
+    &__week-link {
+        .glyphicon();
+
+        height: @board-head-height;
+        line-height: @board-head-height;
+
+        &:hover {
+            text-decoration: none;
+        }
+
+        &--previous {
+            .glyphicon-chevron-left();
+
+            float: left;
+        }
+
+        &--next {
+            .glyphicon-chevron-right();
+
+            float: right;
+        }
     }
 }
