@@ -2,20 +2,40 @@
 
 **Airlines** is a virtual team board manager, allowing every member to handle his tasks on a weekly basis.
 
-## Use cases
-
-- User creates a board
-- User adds members to the board
-- Members connect to the board
-- Members fill up the board with tasks and their estimates, in order to get a total of 5 per week
-
-## Installation
-
-TODO
-
 ## Usage
 
-TODO
+### Installation
+
+*Note : using NPM is optional, but not doing so will prevent you from working on the app's front-end.*
+
+- Make sure you have [Composer](https://getcomposer.org/download/) and [Node.js / NPM](https://docs.npmjs.com/getting-started/installing-node) installed
+- Install [gulp](http://gulpjs.com/) globally : `npm install -g gulp`
+- Run `composer install` to install back-end dependencies
+- Run `npm install` to install front-end dependencies
+
+### Development
+
+Run `gulp` to recompile development assets, start the livereload server and have your browser opened at the app's root. This default to Firefox opening at `localhost:8002` but can easily be modified in `gulpfile.js` (please don't commit changes to this file).
+
+#### About your web server
+
+- As for every Symfony project, a `.htaccess` file is provided out of the box to handle URL rewriting for Apache
+- If you use Nginx or any other web server software, [RTFM]()
+- If your PHP version is >= 5.4, you can use PHP's built-in development web server by running :
+
+```
+cd web
+ln -s app_dev.php index.php
+php -S localhost:8002
+```
+
+### Deployment
+
+Run `gulp --dist` to compile production-ready assets.
+
+#### A note on assets
+
+Compiled assets are currently versioned as the project isn't linked to any specific deployment process/tool. A better way to handle this would be to `.gitignore` these files and make the command above part of your deployment workflow. In the meantime, please make sure to run it before committing changes to assets in order to minimize the resulting diff.
 
 ## Logs
 
