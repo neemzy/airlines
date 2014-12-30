@@ -9,7 +9,7 @@
   "author": "neemzy",
   "homepage": "https://github.com/neemzy/airlines",
   "scripts": {
-    "test": "cd app/assets/scripts && jasmine"
+    "test": "cd app/Resources/assets/scripts && jasmine"
   },
   "devDependencies": {
     "gulp": "~3.8.10",

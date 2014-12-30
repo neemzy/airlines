@@ -3,7 +3,7 @@ var gulp = require('gulp'),
     rimraf = require('rimraf'),
     server = require('tiny-lr')(),
     openConfig = require('./open.json'),
-    src = 'app/assets/',
+    src = 'app/Resources/assets/',
     dist = 'web/';
 
 
