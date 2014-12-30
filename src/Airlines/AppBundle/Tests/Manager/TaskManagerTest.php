@@ -22,7 +22,11 @@ class TaskManagerTest extends \PHPUnit_Framework_TestCase
                           ->disableOriginalConstructor()
                           ->getMock();
 
-        return new TaskManager($manager, $validator);
+        $router = $this->getMockBuilder('Symfony\Component\Routing\Router')
+                       ->disableOriginalConstructor()
+                       ->getMock();
+
+        return new TaskManager($manager, $validator, $router);
     }
 
 
