@@ -2,7 +2,6 @@
 
 namespace Airlines\AppBundle\Controller;
 
-use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -16,7 +15,7 @@ use Airlines\AppBundle\Entity\Board;
 class JsonMemberController extends AbstractJsonController
 {
     /**
-     * Fetches all members for the given Board
+     * Fetches all Members for the given Board
      *
      * @param Board $board
      *

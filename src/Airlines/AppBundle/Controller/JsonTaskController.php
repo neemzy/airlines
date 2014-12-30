@@ -17,7 +17,7 @@ use Airlines\AppBundle\Entity\Task;
 class JsonTaskController extends AbstractJsonController
 {
     /**
-     * Fetches a task
+     * Fetches a Task
      *
      * @param Task $task
      *
@@ -48,7 +48,7 @@ class JsonTaskController extends AbstractJsonController
 
 
     /**
-     * Fetches all tasks for the given Member and week number
+     * Fetches all Tasks for the given Member and week number
      *
      * @param Member $member
      * @param int    $week
@@ -89,7 +89,7 @@ class JsonTaskController extends AbstractJsonController
 
 
     /**
-     * Fetches all tasks for the given Member and date
+     * Fetches all Tasks for the given Member and date
      *
      * @param Member   $member
      * @param DateTime $date
@@ -126,8 +126,8 @@ class JsonTaskController extends AbstractJsonController
 
 
     /**
-     * Creates a new task for the given Member and date
-     * The newly created task will be returned as JSON
+     * Creates a new Task for the given Member and date
+     * The newly created Task will be returned as JSON
      *
      * @param Member   $member
      * @param DateTime $date
@@ -170,8 +170,8 @@ class JsonTaskController extends AbstractJsonController
 
 
     /**
-     * Updates a task
-     * The updated task will be returned as JSON
+     * Updates a Task
+     * The updated Task will be returned as JSON
      *
      * @param Task $task
      *
@@ -212,7 +212,7 @@ class JsonTaskController extends AbstractJsonController
 
 
     /**
-     * Deletes a task
+     * Deletes a Task
      *
      * @param Task $task
      *
@@ -233,8 +233,8 @@ class JsonTaskController extends AbstractJsonController
 
 
     /**
-     * Splits a task in two
-     * The new task will be created for the same member and date as the original one,
+     * Splits a Task in two
+     * The new Task will be created for the same member and date as the original one,
      * so we just have to fetch tasks according to these parameters again to update the view
      *
      * @param Task $task
@@ -255,11 +255,11 @@ class JsonTaskController extends AbstractJsonController
 
 
     /**
-     * Merges a task into another
-     * The resulting task will be returned as JSON (the merged one can be removed from the view)
+     * Merges a Task into another
+     * The resulting Task will be returned as JSON (the merged one can be removed from the view)
      *
-     * @param Task $task   Merged task
-     * @param Task $target Target task (in which the other one will be merged)
+     * @param Task $task   Merged Task
+     * @param Task $target Target Task (in which the other one will be merged)
      *
      * @return Response
      *
