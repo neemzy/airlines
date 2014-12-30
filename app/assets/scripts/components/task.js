@@ -57,17 +57,13 @@
 
 
         /**
-         * Updates one of this Task's fields
+         * Updates this Task's fields
          *
-         * @param string field
-         * @param mixed  value
+         * @param object data Key-value pairs
          *
          * @return void
          */
-        update: function(field, value) {
-            var data = {};
-            data[field] = value;
-
+        update: function(data) {
             reqwest({
                 url: this.props.restUrl,
                 type: 'json',

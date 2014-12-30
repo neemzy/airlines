@@ -6,6 +6,24 @@
 
     module.exports = React.createClass({
         /**
+         * Generic input handling method
+         * Calls update method on parent Task
+         *
+         * @param string key   Key of parameter to update
+         * @param string value New value
+         *
+         * @return void
+         */
+        handleInput: function(key, value) {
+            var data = {};
+            data[key] = value;
+
+            this.props.handleInput(data);
+        },
+
+
+
+        /**
          * Rendering React hook
          * Sets the right classes for each value and binds edition callbacks
          *
@@ -17,15 +35,15 @@
                 remaining = this.props.remaining.toFixed(3),
 
                 handleEstimateInput = function(value) {
-                    this.props.handleInput('estimate', value);
+                    this.handleInput('estimate', value);
                 }.bind(this),
 
                 handleConsumedInput = function(value) {
-                    this.props.handleInput('consumed', value);
+                    this.handleInput('consumed', value);
                 }.bind(this),
 
                 handleRemainingInput = function(value) {
-                    this.props.handleInput('remaining', value);
+                    this.handleInput('remaining', value);
                 }.bind(this),
 
                 cx = React.addons.classSet,
