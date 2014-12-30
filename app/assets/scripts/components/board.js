@@ -6,7 +6,8 @@
         reqwest = require('reqwest'),
         Member = require('./member'),
         Task = require('./task'),
-        Numbers = require('./numbers');
+        Numbers = require('./numbers'),
+        Editable = require('./editable');
 
     module.exports = React.createClass({
         /**
@@ -75,6 +76,32 @@
 
 
         /**
+         * Updates this Board's name
+         *
+         * @param string name New name
+         *
+         * @return void
+         */
+        updateName: function(name) {
+            reqwest({
+                url: this.props.boardUrl,
+                type: 'json',
+                method: 'PUT',
+                data: { name: name },
+
+                error: function(err) {
+                    // TODO: error handling, if there's any need
+                },
+
+                success: function() {
+                    // Nothing more to do
+                }
+            });
+        },
+
+
+
+        /**
          * Pre-mount React hook
          * Triggers dates and Members loading
          *
@@ -133,17 +160,26 @@
                 this
             );
 
+            var handleNameInput = function(name) {
+                this.updateName(name);
+            }.bind(this);
+
             return (
-                <div className="board">
-                    <header className="board__header">
-                        <div className="board__head-title">
-                            <a href={this.props.prevUrl} className="board__week-link board__week-link--previous"></a>
-                            S{this.props.week} {this.props.year}
-                            <a href={this.props.nextUrl} className="board__week-link board__week-link--next"></a>
-                        </div>
-                        {days}
-                    </header>
-                    {members}
+                <div>
+                    <h1 className="board-title">
+                        <Editable handleInput={handleNameInput}>{this.props.name}</Editable>
+                    </h1>
+                    <div className="board">
+                        <header className="board__header">
+                            <div className="board__head-title">
+                                <a href={this.props.prevUrl} className="board__week-link board__week-link--previous"></a>
+                                S{this.props.week} {this.props.year}
+                                <a href={this.props.nextUrl} className="board__week-link board__week-link--next"></a>
+                            </div>
+                            {days}
+                        </header>
+                        {members}
+                    </div>
                 </div>
             );
         }

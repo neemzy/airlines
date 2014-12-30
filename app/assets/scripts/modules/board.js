@@ -16,10 +16,12 @@
         }
 
         var params = {
+                name: null,
                 week: null,
                 year: null,
                 prevUrl: null,
                 nextUrl: null,
+                boardUrl: null,
                 weekUrl: null,
                 memberUrl: null
             };
