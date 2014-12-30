@@ -4,6 +4,8 @@
 
 ## Usage
 
+All commands shall be ran at the application's root unless otherwise specified.
+
 ### Installation
 
 *Note : using NPM is optional, but not doing so will prevent you from working on the app's front-end.*
@@ -15,25 +17,20 @@
 
 ### Development
 
-Run `gulp` to recompile development assets, start the livereload server and have your browser opened at the app's root. This default to Firefox opening at `localhost:8002` but can easily be modified in `gulpfile.js` (please don't commit changes to this file).
+- Run `cp open.json.dist open.json` and edit the latter to define the app's root URL
+- Run `gulp` to recompile development assets, start the livereload server and have your browser opened at the URL defined above
 
-#### About your web server
+*Note : You can also force the use of a specific browser by adding an `app` parameter to `open.json` (see [gulp-open](https://www.npmjs.com/package/gulp-open)'s documentation about that).*
 
-- As for every Symfony project, a `.htaccess` file is provided out of the box to handle URL rewriting for Apache
-- If you use Nginx or any other web server software, [RTFM]()
-- If your PHP version is >= 5.4, you can use PHP's built-in development web server by running :
-
-```
-cd web
-ln -s app_dev.php index.php
-php -S localhost:8002
-```
+If you are unfamiliar with running Symfony applications, you may want to [RTFM](http://symfony.com/doc/current/cookbook/configuration/web_server_configuration.html).  
+**TL;DR:** if your PHP is >= 5.4, run `php app/console server:start` to run the app on `localhost:8000`.  
+Otherwise, upgrade it.
 
 ### Deployment
 
 Run `gulp --dist` to compile production-ready assets.
 
-#### A note on assets
+#### A word on assets
 
 Compiled assets are currently versioned as the project isn't linked to any specific deployment process/tool. A better way to handle this would be to `.gitignore` these files and make the command above part of your deployment workflow. In the meantime, please make sure to run it before committing changes to assets in order to minimize the resulting diff.
 

@@ -2,6 +2,7 @@ var gulp = require('gulp'),
     tasks = require('gulp-load-plugins')(),
     rimraf = require('rimraf'),
     server = require('tiny-lr')(),
+    openConfig = require('./open.json'),
     src = 'app/assets/',
     dist = 'web/';
 
@@ -54,7 +55,7 @@ gulp.task('scripts', function () {
 gulp.task('workflow', function () {
     if (!tasks.util.env.dist) {
         gulp.src('gulpfile.js')
-            .pipe(tasks.open('', { url: 'http://localhost:8002/', app: 'firefox' }));
+            .pipe(tasks.open('', openConfig));
 
         server.listen(35729, function (err) {
             gulp.watch(src + 'stylesheets/**/*.less', ['stylesheets']);

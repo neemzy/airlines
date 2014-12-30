@@ -12,5 +12,5 @@
 /composer.phar
 /web/uploads/avatars/*
 !web/uploads/avatars/.gitkeep
-web/index.php
+/open.json
 
