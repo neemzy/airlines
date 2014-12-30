@@ -3,7 +3,7 @@
 namespace Airlines\AppBundle\Manager;
 
 use Symfony\Component\Routing\RouterInterface;
-use Symfony\Component\Validator\Validator\LegacyValidator as Validator;
+use Symfony\Component\Validator\ValidatorInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Doctrine\Common\Persistence\ObjectManager;
 use Doctrine\Common\Collections\Collection;
@@ -17,7 +17,7 @@ class TaskManager
     private $manager;
 
     /**
-     * @var Validator
+     * @var ValidatorInterface
      */
     private $validator;
 
@@ -32,13 +32,13 @@ class TaskManager
      * Constructor
      * Binds dependencies
      *
-     * @param ObjectManager   $manager
-     * @param Validator       $validator
-     * @param RouterInterface $router
+     * @param ObjectManager      $manager
+     * @param ValidatorInterface $validator
+     * @param RouterInterface    $router
      *
      * @return void
      */
-    public function __construct(ObjectManager $manager, Validator $validator, RouterInterface $router)
+    public function __construct(ObjectManager $manager, ValidatorInterface $validator, RouterInterface $router)
     {
         $this->manager = $manager;
         $this->validator = $validator;
