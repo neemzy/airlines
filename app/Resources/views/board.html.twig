@@ -1,5 +1,7 @@
 {% extends 'base.html.twig' %}
 
+{% block containerClass %}{{ parent() ~ ' main-container--board' }}{% endblock %}
+
 {% block body %}
 
 <h1>{{ board.name }}</h1>
