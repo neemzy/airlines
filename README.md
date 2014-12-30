@@ -63,3 +63,4 @@ Compiled assets are currently versioned as the project isn't linked to any speci
 - Wrote React components
 - Installed [jasmine](https://github.com/jasmine/jasmine) and configured `npm test` script to run it in the right directory
 - Set up a `DateHelper` JS class to deal with date formats
+- Installed [react-dnd](https://github.com/gaearon/react-dnd)
