@@ -4,6 +4,7 @@
 @import 'imports/mixins';
 @import 'modules/avatar';
 @import 'modules/board';
+@import 'modules/editable';
 @import 'modules/form-btn-group';
 @import 'modules/list-group-link';
 @import 'modules/member';
@@ -13,13 +14,6 @@
 
 @text-color: @gray-base;
 @form-group-bottom: 30px;
-
-[contenteditable] {
-    &:active,
-    &:focus {
-        outline: none;
-    }
-}
 
 .navbar {
     border-radius: 0;

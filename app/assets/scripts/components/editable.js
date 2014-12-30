@@ -18,7 +18,7 @@
                 function () {
                     this.props.handleInput(this.getDOMNode().innerHTML);
                 }.bind(this),
-                500
+                1000
             );
         },
 
@@ -33,6 +33,9 @@
             var props = JSON.parse(JSON.stringify(this.props));
             delete props.children;
             delete props.handleInput;
+
+            props.className = props.className || {};
+            props.className += ' editable';
 
             return (
                 <div {...props} contentEditable onInput={this.handleInput}>{this.props.children}</div>
