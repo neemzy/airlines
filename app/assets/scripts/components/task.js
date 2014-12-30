@@ -78,7 +78,7 @@
                     this.props.reloadDay();
                 }.bind(this)
             });
-         },
+        },
 
 
 
