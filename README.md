@@ -26,6 +26,13 @@ If you are unfamiliar with running Symfony applications, you may want to [RTFM](
 **TL;DR:** if your PHP is >= 5.4, run `php app/console server:start` to run the app on `localhost:8000`.  
 Otherwise, upgrade it.
 
+#### Unit tests
+
+- Run PHP tests with `phpunit` (the `--testdox` option can be used for a more behavior-driven results display)
+- Run JS tests with `npm test`
+
+The latter will require you to run `npm install -g jasmine` if not already done.
+
 ### Deployment
 
 Run `gulp --dist` to compile production-ready assets.
