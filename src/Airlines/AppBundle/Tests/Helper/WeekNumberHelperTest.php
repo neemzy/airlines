@@ -7,7 +7,11 @@ use Airlines\AppBundle\Helper\WeekNumberHelper;
 class WeekNumberHelperTest extends \PHPUnit_Framework_TestCase
 {
     /**
+     * Checks working days dates per week number calculation
      *
+     * @return void
+     *
+     * @testdox Can fetch working days dates for given week and year
      */
     public function testGetWorkDaysForWeek()
     {

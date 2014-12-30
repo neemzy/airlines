@@ -8,9 +8,7 @@ class TaskTest extends \PHPUnit_Framework_TestCase
 {
     /**
      * Provides tasks
-     *
-     * Each task is provided in an array alongside its overconsumption,
-     * underestimation and overestimation, boolean
+     * Each task is provided in an array alongside its overconsumption, underestimation and overestimation booleans
      *
      * @return array
      */
@@ -49,6 +47,11 @@ class TaskTest extends \PHPUnit_Framework_TestCase
     /**
      * Checks overconsumption for a task
      *
+     * @param Task $task
+     * @param bool $overConsumed
+     * @param bool $underEstimated
+     * @param bool $overEstimated
+     *
      * @return void
      *
      * @dataProvider taskProvider
@@ -63,6 +66,11 @@ class TaskTest extends \PHPUnit_Framework_TestCase
 
     /**
      * Checks underestimation for a task
+     *
+     * @param Task $task
+     * @param bool $overConsumed
+     * @param bool $underEstimated
+     * @param bool $overEstimated
      *
      * @return void
      *
@@ -79,6 +87,11 @@ class TaskTest extends \PHPUnit_Framework_TestCase
 
     /**
      * Checks overestimation for a task
+     *
+     * @param Task $task
+     * @param bool $overConsumed
+     * @param bool $underEstimated
+     * @param bool $overEstimated
      *
      * @return void
      *
