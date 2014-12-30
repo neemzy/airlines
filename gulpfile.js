@@ -8,65 +8,88 @@ var gulp = require('gulp'),
 
 
 
-gulp.task('clean', function (callback) {
-    rimraf.sync(dist + 'app.css');
-    rimraf.sync(dist + 'app.js');
-    callback();
-});
+gulp.task(
+    'clean',
+    function (callback) {
+        rimraf.sync(dist + 'app.css');
+        rimraf.sync(dist + 'app.js');
+        callback();
+    }
+);
 
 
 
-gulp.task('stylesheets', function () {
-    gulp.src(src + 'stylesheets/app.less')
-        .pipe(tasks.plumber())
-        .pipe(tasks.less())
-        .pipe(tasks.autoprefixer())
-        .pipe(tasks.if(tasks.util.env.dist, tasks.csso()))
-        .pipe(gulp.dest(dist))
-        .pipe(tasks.livereload(server));
-});
+gulp.task(
+    'stylesheets',
+    function () {
+        gulp.src(src + 'stylesheets/app.less')
+            .pipe(tasks.plumber())
+            .pipe(tasks.less())
+            .pipe(tasks.autoprefixer())
+            .pipe(tasks.if(tasks.util.env.dist, tasks.csso()))
+            .pipe(gulp.dest(dist))
+            .pipe(tasks.livereload(server));
+    }
+);
 
 
 
-gulp.task('fonts', function () {
-    gulp.src('node_modules/bootstrap/dist/fonts/*')
-        .pipe(gulp.dest(dist + 'fonts/'));
-});
+gulp.task(
+    'fonts',
+    function () {
+        gulp.src('node_modules/bootstrap/dist/fonts/*')
+            .pipe(gulp.dest(dist + 'fonts/'));
+    }
+);
 
 
 
-gulp.task('scripts', function () {
-    gulp.src(src + 'scripts/app.js', { read: false })
-        .pipe(tasks.plumber())
-        .pipe(tasks.jshint())
-        .pipe(tasks.jshint.reporter('default'))
-        .pipe(tasks.browserify({
-            insertGlobals : false,
-            transform: ['reactify'],
-            extensions: ['.jsx']
-        }))
-        .pipe(tasks.if(tasks.util.env.dist, tasks.uglify()))
-        .pipe(gulp.dest(dist))
-        .pipe(tasks.livereload(server));
-});
+gulp.task(
+    'scripts',
+    function () {
+        gulp.src(src + 'scripts/app.js', { read: false })
+            .pipe(tasks.plumber())
+            .pipe(tasks.jshint())
+            .pipe(tasks.jshint.reporter('default'))
+            .pipe(tasks.browserify({
+                insertGlobals : false,
+                transform: ['reactify'],
+                extensions: ['.jsx']
+            }))
+            .pipe(tasks.if(tasks.util.env.dist, tasks.uglify()))
+            .pipe(gulp.dest(dist))
+            .pipe(tasks.livereload(server));
+    }
+);
 
 
 
-gulp.task('workflow', function () {
-    if (!tasks.util.env.dist) {
+gulp.task(
+    'workflow',
+    function () {
+        if (tasks.util.env.dist) {
+            return;
+        }
+
         gulp.src('gulpfile.js')
             .pipe(tasks.open('', openConfig));
 
-        server.listen(35729, function (err) {
-            gulp.watch(src + 'stylesheets/**/*.less', ['stylesheets']);
-            gulp.watch(src + 'scripts/**/*', ['scripts']);
+        server.listen(
+            35729,
+            function (err) {
+                gulp.watch(src + 'stylesheets/**/*.less', ['stylesheets']);
+                gulp.watch(src + 'scripts/**/*', ['scripts']);
 
-            gulp.watch(['app/Resources/views/**/*.twig', 'src/Airlines/AppBundle/Resources/views/**/*.twig'], function () {
-                gulp.src('').pipe(tasks.livereload(server));
-            });
-        });
+                gulp.watch(
+                    ['app/Resources/views/**/*.twig', 'src/Airlines/AppBundle/Resources/views/**/*.twig'],
+                    function () {
+                        gulp.src('').pipe(tasks.livereload(server));
+                    }
+                );
+            }
+        );
     }
-});
+);
 
 
 
