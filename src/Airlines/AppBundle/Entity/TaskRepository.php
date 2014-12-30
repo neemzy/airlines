@@ -13,7 +13,7 @@ use Doctrine\ORM\EntityRepository;
 class TaskRepository extends EntityRepository
 {
     /**
-     * Fetches tasks by member and date(s)
+     * Fetches Tasks by Member and date(s)
      *
      * @param Member $member
      * @param array  $dates  Array of YYYY-MM-DD date strings

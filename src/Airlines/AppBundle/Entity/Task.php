@@ -219,7 +219,7 @@ class Task
 
 
     /**
-     * Checks whether this task is overconsumed
+     * Checks whether this Task is overconsumed
      * It is the case as soon as its consumed time is over its initial estimate
      *
      * @return bool
@@ -235,7 +235,7 @@ class Task
 
 
     /**
-     * Checks whether this task was underestimated
+     * Checks whether this Task was underestimated
      * It is the case if the sum of its consumed and remaining time are over its initial estimate
      *
      * @return bool
@@ -251,7 +251,7 @@ class Task
 
 
     /**
-     * Checks whether this task was overestimated
+     * Checks whether this Task was overestimated
      * It is the case if the sum of its consumed and remaining time are under its initial estimate
      *
      * @return bool

@@ -48,7 +48,7 @@ class TaskManager
 
 
     /**
-     * Hydrates a task from a request's data
+     * Hydrates a Task from a request's data
      *
      * @param Task    $task
      * @param Request $request
@@ -89,7 +89,7 @@ class TaskManager
 
 
     /**
-     * Fool-proofs a task and persists it if it is valid
+     * Fool-proofs a Task and persists it if it is valid
      *
      * @param Task $task
      *
@@ -110,7 +110,7 @@ class TaskManager
 
 
     /**
-     * Splits a task in two
+     * Splits a Task in two
      *
      * @param Task $task
      *
@@ -142,9 +142,9 @@ class TaskManager
 
 
     /**
-     * Merges a task into another
+     * Merges a Task into another
      *
-     * @return Task|bool Resulting task or false in case of failure
+     * @return Task|bool Resulting Task or false in case of failure
      */
     public function merge(Task $task, Task $target)
     {
@@ -166,7 +166,7 @@ class TaskManager
 
 
     /**
-     * Calculates the total estimate for a task collection
+     * Calculates the total estimate for a Task collection
      *
      * @param Collection $collection Task collection
      *
@@ -186,7 +186,7 @@ class TaskManager
 
 
     /**
-     * Calculates the total consumed for a task collection
+     * Calculates the total consumed for a Task collection
      *
      * @param Collection $collection Task collection
      *
@@ -206,7 +206,7 @@ class TaskManager
 
 
     /**
-     * Calculates the total remaining for a task collection
+     * Calculates the total remaining for a Task collection
      *
      * @param Collection $collection Task collection
      *

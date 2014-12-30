@@ -18,7 +18,7 @@ class TaskListener
 
     /**
      * Constructor
-     * Binds the task emitter
+     * Binds the Task emitter
      *
      * @return void
      */
@@ -30,7 +30,7 @@ class TaskListener
 
 
     /**
-     * Emits a Socket.IO event to notify a task creation or update
+     * Emits a Socket.IO event to notify a Task creation or update
      *
      * @return void
      *
