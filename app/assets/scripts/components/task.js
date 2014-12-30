@@ -3,7 +3,8 @@
 
     var React = require('react'),
         reqwest = require('reqwest'),
-        Numbers = require('./numbers');
+        Numbers = require('./numbers'),
+        Editable = require('./editable');
 
     module.exports = React.createClass({
         /**
@@ -101,9 +102,15 @@
                 this
             );
 
+            var handleNameInput = function(name) {
+                this.update({ name : name });
+            }.bind(this);
+
             return (
                 <div className="task" style={style}>
-                    <div className="task__name" style={nameStyle}>{this.props.name}</div>
+                    <div className="task__name" style={nameStyle}>
+                        <Editable handleInput={handleNameInput}>{this.props.name}</Editable>
+                    </div>
                     <Numbers {...numbers} handleInput={this.update} />
                     <div className="task__action-group">
                         <a className="task__action task__action--split" onClick={this.split}></a>

@@ -58,7 +58,12 @@ class TaskManager
     public function hydrateFromRequest(Task $task, Request $request)
     {
         if ($request->request->has('name')) {
-            $task->setName($request->get('name'));
+            // Strip HTML out, but preserve newlines
+            $name = $request->get('name');
+            $name = preg_replace('/<br([\s\/]*)>/', PHP_EOL, $name);
+            $name = strip_tags($name);
+
+            $task->setName($name);
         }
 
         if ($request->request->has('date')) {
