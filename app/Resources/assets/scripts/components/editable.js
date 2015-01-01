@@ -34,7 +34,7 @@
             delete props.children;
             delete props.handleInput;
 
-            props.className = props.className || {};
+            props.className = props.className || '';
             props.className += ' editable';
 
             return (
