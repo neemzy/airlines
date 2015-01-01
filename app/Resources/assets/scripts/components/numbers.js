@@ -46,18 +46,16 @@
                     this.handleInput('remaining', value);
                 }.bind(this),
 
-                cx = React.addons.classSet,
-
-                estimateClass = cx({
+                estimateClass = React.addons.classSet({
                     'numbers__estimate': true
                 }),
 
-                consumedClass = cx({
+                consumedClass = React.addons.classSet({
                     'numbers__consumed': true,
                     'numbers__consumed--over': this.props.overConsumed
                 }),
 
-                remainingClass = cx({
+                remainingClass = React.addons.classSet({
                     'numbers__remaining': true,
                     'numbers__remaining--over': this.props.underEstimated && 0 < this.props.remaining,
                     'numbers__remaining--under': this.props.overEstimated
