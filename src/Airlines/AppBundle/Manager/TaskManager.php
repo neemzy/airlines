@@ -84,7 +84,7 @@ class TaskManager
         }
 
         if ($request->request->has('member')) {
-            $member = $this->manager->getRepository('AirlinesAppBundle:Task')->find($id);
+            $member = $this->manager->getRepository('AirlinesAppBundle:Member')->find($request->get('member'));
             $task->setMember($member);
         }
 
