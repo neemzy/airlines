@@ -23,6 +23,10 @@
             date = date.toISOString();
         }
 
+        if ('string' != typeof date) {
+            return this.convert(new Date());
+        }
+
         return date.split('T').shift(); // handle ISO strings
     };
 
