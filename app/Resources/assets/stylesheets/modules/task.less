@@ -11,10 +11,15 @@
     border: 1px solid black;
     cursor: grab;
 
+    &--dragged {
+        opacity: 0.5;
+    }
+
     &__name {
         display: inline-block;
         position: relative;
-        padding: 0 @board-spacing;
+        line-height: normal;
+        padding: @board-spacing;
         white-space: pre;
     }
 

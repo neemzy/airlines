@@ -1,12 +1,21 @@
 (function () {
     'use strict';
 
-    var React = require('react'),
+    var React = require('react/addons'),
         reqwest = require('reqwest'),
+        DragDropMixin = require('react-dnd').DragDropMixin,
+        ItemTypes = require('../imports/itemTypes'),
+        DateHelper = require('../imports/dateHelper'),
         Numbers = require('./numbers'),
         Editable = require('./editable');
 
     module.exports = React.createClass({
+        mixins: [
+            DragDropMixin
+        ],
+
+
+
         /**
          * Removes this Task from the database and triggers reloading for the member and day it belongs to
          *
@@ -61,10 +70,11 @@
          * Updates this Task's fields
          *
          * @param object data Key-value pairs
+         * @param function callback AJAX success callback
          *
          * @return void
          */
-        update: function(data) {
+        update: function(data, callback) {
             reqwest({
                 url: this.props.restUrl,
                 type: 'json',
@@ -75,10 +85,54 @@
                     // TODO: error handling, if there's any need
                 },
 
-                success: function(response) {
+                success: function() {
+                    ('function' === typeof callback) && callback();
                     this.props.reloadDay();
                 }.bind(this)
             });
+        },
+
+
+
+        /**
+         * Moves this Task to the given member and date
+         *
+         * @param int      member   Member id
+         * @param string   date     New date
+         * @param function callback AJAX success callback
+         *
+         * @return void
+         */
+        move: function(member, date, callback) {
+            var dateHelper = new DateHelper();
+
+            if (!dateHelper.compare(this.props.date, date) || (this.props.member != member)) {
+                this.update({ member: member, date: date }, callback);
+            }
+        },
+
+
+
+        /**
+         * Drag'n'drop mixin configuration callback
+         *
+         * @return void
+         */
+        configureDragDrop: function(registerType) {
+            var dateHelper = new DateHelper();
+
+            registerType(
+                ItemTypes.TASK,
+                {
+                    dragSource: {
+                        beginDrag: function() {
+                            return {
+                                item: this
+                            };
+                        }
+                    }
+                }
+            );
         },
 
 
@@ -93,7 +147,16 @@
             var style = {},
                 nameStyle = { backgroundColor: this.props.color },
                 numbers = {},
-                keys = ['estimate', 'consumed', 'remaining', 'overConsumed', 'underEstimated', 'overEstimated'];
+                keys = ['estimate', 'consumed', 'remaining', 'overConsumed', 'underEstimated', 'overEstimated'],
+
+                classes = React.addons.classSet({
+                    'task': true,
+                    'task--dragged': this.getDragState(ItemTypes.TASK).isDragging
+                }),
+
+                handleNameInput = function(name) {
+                    this.update({ name : name });
+                }.bind(this);
 
             keys.forEach(
                 function (key) {
@@ -102,12 +165,8 @@
                 this
             );
 
-            var handleNameInput = function(name) {
-                this.update({ name : name });
-            }.bind(this);
-
             return (
-                <div className="task" style={style}>
+                <div className={classes} style={style} {...this.dragSourceFor(ItemTypes.TASK)}>
                     <div className="task__name" style={nameStyle}>
                         <Editable handleInput={handleNameInput}>{this.props.name}</Editable>
                     </div>

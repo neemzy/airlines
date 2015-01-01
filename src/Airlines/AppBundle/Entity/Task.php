@@ -263,4 +263,20 @@ class Task
     {
         return $this->consumed + $this->remaining < $this->estimate;
     }
+
+
+
+    /**
+     * Retrieves owner Member's id
+     * Used for serialization to JSON
+     *
+     * @return bool
+     *
+     * @Serializer\VirtualProperty
+     * @Serializer\SerializedName("member")
+     */
+    public function getMemberId()
+    {
+        return $this->member->getId();
+    }
 }

@@ -1,14 +1,22 @@
 (function () {
     'use strict';
 
-    var React = require('react'),
+    var React = require('react/addons'),
         Promise = require('promise'),
         reqwest = require('reqwest'),
+        DragDropMixin = require('react-dnd').DragDropMixin,
+        ItemTypes = require('../imports/itemTypes'),
         DateHelper = require('../imports/dateHelper'),
         Task = require('./task'),
         Numbers = require('./numbers');
 
     module.exports = React.createClass({
+        mixins: [
+            DragDropMixin
+        ],
+
+
+
         /**
          * Initial state React hook
          *
@@ -166,6 +174,37 @@
 
 
         /**
+         * Drag'n'drop mixin configuration callback
+         *
+         * @return void
+         */
+        configureDragDrop: function(registerType) {
+            var dateHelper = new DateHelper();
+
+            registerType(
+                ItemTypes.TASK,
+                {
+                    dropTarget: {
+                        acceptDrop: function(task, event, isHandled) {
+                            var index = Array.prototype.indexOf.call(event.target.parentNode.childNodes, event.target),
+                                date = dateHelper.convert(this.props.dates[index - 1]); // index 0 is the Member's info
+
+                            task.move(
+                                this.props.id,
+                                date,
+                                function () {
+                                    this.reloadDay(date);
+                                }.bind(this)
+                            );
+                        }
+                    }
+                }
+            );
+        },
+
+
+
+        /**
          * Pre-mount React hook
          * Loads the tasks and sorts them by day for easier rendering
          *
@@ -234,8 +273,15 @@
                         this
                     );
 
+                    var classes = React.addons.classSet({
+                        'member__day': true,
+                        'member__day--hovered': this.getDropState(ItemTypes.TASK).isHovering
+                    });
+
                     days.push(
-                        <div key={key} className="member__day">{tasks}</div>
+                        <div key={key} className={classes} {...this.dropTargetFor(ItemTypes.TASK)}>
+                            {tasks}
+                        </div>
                     );
                 },
                 this
