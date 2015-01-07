@@ -27,10 +27,10 @@ class Task
     /**
      * @var string
      *
-     * @ORM\Column(name="name", type="string", length=255)
+     * @ORM\Column(name="name", type="text", length=255)
      * @Assert\NotBlank
      */
-    private $name;
+    private $name; // TODO: find a better way to display a textarea in the form than altering the database column type
 
     /**
      * @var string
