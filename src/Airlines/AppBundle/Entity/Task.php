@@ -219,54 +219,6 @@ class Task
 
 
     /**
-     * Checks whether this Task is overconsumed
-     * It is the case as soon as its consumed time is over its initial estimate
-     *
-     * @return bool
-     *
-     * @Serializer\VirtualProperty
-     * @Serializer\SerializedName("overConsumed")
-     */
-    public function isOverConsumed()
-    {
-        return $this->consumed > $this->estimate;
-    }
-
-
-
-    /**
-     * Checks whether this Task was underestimated
-     * It is the case if the sum of its consumed and remaining time are over its initial estimate
-     *
-     * @return bool
-     *
-     * @Serializer\VirtualProperty
-     * @Serializer\SerializedName("underEstimated")
-     */
-    public function wasUnderEstimated()
-    {
-        return $this->consumed + $this->remaining > $this->estimate;
-    }
-
-
-
-    /**
-     * Checks whether this Task was overestimated
-     * It is the case if the sum of its consumed and remaining time are under its initial estimate
-     *
-     * @return bool
-     *
-     * @Serializer\VirtualProperty
-     * @Serializer\SerializedName("overEstimated")
-     */
-    public function wasOverEstimated()
-    {
-        return $this->consumed + $this->remaining < $this->estimate;
-    }
-
-
-
-    /**
      * Retrieves owner Member's id
      * Used for serialization to JSON
      *
