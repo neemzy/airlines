@@ -1,20 +1,11 @@
 .member {
     .table-row();
 
-    &__info,
-    &__day {
-        .table-cell();
-    }
-
     &__info {
+        .table-cell();
+
         vertical-align: top;
         padding: @board-spacing;
-    }
-
-    &__day {
-        &--hovered {
-            background-color: @gray-light;
-        }
     }
 
     &__identity {

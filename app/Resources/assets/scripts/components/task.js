@@ -36,7 +36,7 @@
                 },
 
                 success: function(response) {
-                    this.props.reloadDay();
+                    this.props.handleUpdate();
                 }.bind(this)
             });
         },
@@ -59,7 +59,7 @@
                 },
 
                 success: function(response) {
-                    this.props.reloadDay();
+                    this.props.handleUpdate();
                 }.bind(this)
             });
         },
@@ -87,7 +87,7 @@
 
                 success: function() {
                     ('function' === typeof callback) && callback();
-                    this.props.reloadDay();
+                    this.props.handleUpdate();
                 }.bind(this)
             });
         },
