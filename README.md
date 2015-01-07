@@ -15,6 +15,8 @@ All commands shall be ran at the application's root unless otherwise specified.
 - Run `composer install` to install back-end dependencies
 - Run `npm install` to install front-end dependencies
 
+*Note : answer no when Symfony asks you whether to use an Assetic controller.*
+
 ### Development
 
 - Run `cp open.json.dist open.json` and edit the latter to define the app's root URL
