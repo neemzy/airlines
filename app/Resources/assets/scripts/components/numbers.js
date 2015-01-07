@@ -33,22 +33,14 @@
             var estimate = this.props.estimate.toFixed(3),
                 consumed = this.props.consumed.toFixed(3),
                 remaining = this.props.remaining.toFixed(3),
-
-                handleEstimateInput = function(value) {
-                    this.handleInput('estimate', value);
-                }.bind(this),
-
-                handleConsumedInput = function(value) {
-                    this.handleInput('consumed', value);
-                }.bind(this),
-
-                handleRemainingInput = function(value) {
-                    this.handleInput('remaining', value);
-                }.bind(this),
-
+                isEditable = undefined !== this.props.handleInput,
                 isOverConsumed = consumed > estimate,
                 wasUnderEstimated = consumed + remaining > estimate,
                 wasOverEstimated = consumed + remaining < estimate,
+                handleEstimateInput,
+                handleConsumedInput,
+                handleRemainingInput,
+                content,
 
                 estimateClass = React.addons.classSet({
                     'numbers__estimate': true
@@ -65,11 +57,33 @@
                     'is-under': wasOverEstimated
                 });
 
-            return (
+            if (isEditable) {
+                handleEstimateInput = function(value) {
+                    this.handleInput('estimate', value);
+                }.bind(this);
+
+                handleConsumedInput = function(value) {
+                    this.handleInput('consumed', value);
+                }.bind(this);
+
+                handleRemainingInput = function(value) {
+                    this.handleInput('remaining', value);
+                }.bind(this);
+
+                return (
+                    <div className="numbers">
+                        <Editable className={estimateClass} title="Estimate" handleInput={handleEstimateInput}>{estimate}</Editable>
+                        <Editable className={consumedClass} title="Consumed" handleInput={handleConsumedInput}>{consumed}</Editable>
+                        <Editable className={remainingClass} title="Remaining" handleInput={handleRemainingInput}>{remaining}</Editable>
+                    </div>
+                );
+            }
+
+            return(
                 <div className="numbers">
-                    <Editable className={estimateClass} title="Estimate" handleInput={handleEstimateInput}>{estimate}</Editable>
-                    <Editable className={consumedClass} title="Consumed" handleInput={handleConsumedInput}>{consumed}</Editable>
-                    <Editable className={remainingClass} title="Remaining" handleInput={handleRemainingInput}>{remaining}</Editable>
+                    <div className={estimateClass} title="Estimate">{estimate}</div>
+                    <div className={consumedClass} title="Consumed">{consumed}</div>
+                    <div className={remainingClass} title="Remaining">{remaining}</div>
                 </div>
             );
         }
