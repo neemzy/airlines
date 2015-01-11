@@ -79,7 +79,7 @@
                 );
             }
 
-            return(
+            return (
                 <div className="numbers">
                     <div className={estimateClass} title="Estimate">{estimate}</div>
                     <div className={consumedClass} title="Consumed">{consumed}</div>

@@ -31,6 +31,7 @@
          */
         render: function() {
             var props = JSON.parse(JSON.stringify(this.props));
+
             delete props.children;
             delete props.handleInput;
 
