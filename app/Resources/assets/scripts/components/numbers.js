@@ -72,18 +72,36 @@
 
                 return (
                     <div className="numbers">
-                        <Editable className={estimateClass} title="Estimate" handleInput={handleEstimateInput}>{estimate}</Editable>
-                        <Editable className={consumedClass} title="Consumed" handleInput={handleConsumedInput}>{consumed}</Editable>
-                        <Editable className={remainingClass} title="Remaining" handleInput={handleRemainingInput}>{remaining}</Editable>
+                        <div className={estimateClass}>
+                            <label>Estimé</label>
+                            <Editable title="Estimate" handleInput={handleEstimateInput}>{estimate}</Editable>
+                        </div>
+                        <div className={consumedClass}>
+                            <label>Consommé</label>
+                            <Editable title="Consumed" handleInput={handleConsumedInput}>{consumed}</Editable>
+                        </div>
+                        <div className={remainingClass}>
+                            <label>Kirestafèr</label>
+                            <Editable title="Remaining" handleInput={handleRemainingInput}>{remaining}</Editable>
+                        </div>
                     </div>
                 );
             }
 
             return(
                 <div className="numbers">
-                    <div className={estimateClass} title="Estimate">{estimate}</div>
-                    <div className={consumedClass} title="Consumed">{consumed}</div>
-                    <div className={remainingClass} title="Remaining">{remaining}</div>
+                    <div className={estimateClass} title="Estimate">
+                        <label>Estimé</label>
+                        <span>{estimate}</span>
+                    </div>
+                    <div className={consumedClass} title="Consumed">
+                        <label>Consommé</label>
+                        <span>{consumed}</span>
+                    </div>
+                    <div className={remainingClass} title="Remaining">
+                        <label>Kirestafèr</label>
+                        <span>{remaining}</span>
+                    </div>
                 </div>
             );
         }
