@@ -2,21 +2,43 @@
 
 namespace Airlines\AppBundle\Tests\Manager;
 
-use Doctrine\Common\Collections\ArrayCollection;
+use Airlines\AppBundle\Entity\Member;
 use Airlines\AppBundle\Entity\Task;
 use Airlines\AppBundle\Manager\TaskManager;
 
 class TaskManagerTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * Crafts a task manager with mocked dependencies
+     * Checks task hydration from request
      *
-     * @return TaskManager
+     * @return void
+     *
+     * @testdox Can hydrate a task from a request
      */
-    private function getTaskManager()
+    public function testHydrateFromRequest()
     {
-        $manager = $this->getMockBuilder('Doctrine\Common\Persistence\ObjectManager')
-                        ->getMock();
+        $memberName = 'John Doe';
+        $member = new Member();
+        $member->setName($memberName);
+
+        $repository = $this->getMockBuilder('Airlines\AppBundle\Entity\MemberRepository')
+                           ->disableOriginalConstructor()
+                           ->setMethods(['find'])
+                           ->getMock();
+
+        $repository->expects($this->once())
+                   ->method('find')
+                   ->will($this->returnValue($member));
+
+        $em = $this->getMockBuilder('Doctrine\ORM\EntityManager')
+                   ->disableOriginalConstructor()
+                   ->setMethods(['getRepository'])
+                   ->getMock();
+
+        $em->expects($this->once())
+           ->method('getRepository')
+           ->with('AirlinesAppBundle:Member')
+           ->will($this->returnValue($repository));
 
         $validator = $this->getMockBuilder('Symfony\Component\Validator\Validator')
                           ->disableOriginalConstructor()
@@ -26,84 +48,49 @@ class TaskManagerTest extends \PHPUnit_Framework_TestCase
                        ->disableOriginalConstructor()
                        ->getMock();
 
-        return new TaskManager($manager, $validator, $router);
-    }
+        $manager = new TaskManager($em, $validator, $router);
 
+        $filebag = $this->getMockBuilder('Symfony\Component\HttpFoundation\FileBag')
+                        ->setMethods(['has', 'get'])
+                        ->getMock();
 
+        $filebag->expects($this->any())
+                ->method('has')
+                ->will($this->returnValue(true));
 
-    /**
-     * Crafts a task collection
-     *
-     * @return ArrayCollection
-     */
-    public function getTaskCollection()
-    {
-        $task1 = new Task();
-        $task1->setEstimate(1.125);
-        $task1->setConsumed(0.125);
-        $task1->setRemaining(1);
+        $request = $this->getMockBuilder('Symfony\Component\HttpFoundation\Request')
+                        ->getMock();
 
-        $task2 = new Task();
-        $task2->setEstimate(2.125);
-        $task2->setConsumed(0.625);
-        $task2->setRemaining(1.5);
+        $request->request = $filebag;
 
-        $task3 = new Task();
-        $task3->setEstimate(3);
-        $task3->setConsumed(0);
-        $task3->setRemaining(3);
+        $name = 'Some task name';
+        $date = '2015-01-07'; // Je suis Charlie
+        $estimate = 2;
+        $consumed = 1;
+        $remaining = 1.5;
 
-        return new ArrayCollection([$task1, $task2, $task3]);
-    }
+        $request->expects($this->any())
+                ->method('get')
+                ->will(
+                    $this->returnValueMap(
+                        [
+                            ['name', null, false, $name],
+                            ['date', null, false, $date],
+                            ['estimate', null, false, $estimate],
+                            ['consumed', null, false, $consumed],
+                            ['remaining', null, false, $remaining],
+                            ['member', null, false, null]
+                        ]
+                    )
+                );
 
+        $task = $manager->hydrateFromRequest(new Task(), $request);
 
-
-    /**
-     * Checks total estimate calculation for a task collection
-     *
-     * @return void
-     *
-     * @testdox Can fetch the total estimated time for a task collection
-     */
-    public function testGetTotalEstimate()
-    {
-        $manager = $this->getTaskManager();
-        $collection = $this->getTaskCollection();
-
-        $this->assertEquals(6.25, $manager->getTotalEstimate($collection));
-    }
-
-
-
-    /**
-     * Checks total consumed calculation for a task collection
-     *
-     * @return void
-     *
-     * @testdox Can fetch the total consumed time for a task collection
-     */
-    public function testGetTotalConsumed()
-    {
-        $manager = $this->getTaskManager();
-        $collection = $this->getTaskCollection();
-
-        $this->assertEquals(0.75, $manager->getTotalConsumed($collection));
-    }
-
-
-
-    /**
-     * Checks total remaining calculation for a task collection
-     *
-     * @return void
-     *
-     * @testdox Can fetch the total remaining time for a task collection
-     */
-    public function testGetTotalRemaining()
-    {
-        $manager = $this->getTaskManager();
-        $collection = $this->getTaskCollection();
-
-        $this->assertEquals(5.5, $manager->getTotalRemaining($collection));
+        $this->assertEquals($name, $task->getName());
+        $this->assertEquals($date, $task->getDate()->format('Y-m-d'));
+        $this->assertEquals($estimate, $task->getEstimate());
+        $this->assertEquals($consumed, $task->getConsumed());
+        $this->assertEquals($remaining, $task->getRemaining());
+        $this->assertEquals($memberName, $task->getMember()->getName());
     }
 }
