@@ -149,6 +149,9 @@ class TaskManager
     /**
      * Merges a Task into another
      *
+     * @param Task $task   Task to merge (will be removed)
+     * @param Task $target Merge target (will be updated)
+     *
      * @return Task|bool Resulting Task or false in case of failure
      */
     public function merge(Task $task, Task $target)
