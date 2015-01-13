@@ -171,66 +171,6 @@ class TaskManager
 
 
     /**
-     * Calculates the total estimate for a Task collection
-     *
-     * @param Collection $collection Task collection
-     *
-     * @return float
-     */
-    public function getTotalEstimate(Collection $collection)
-    {
-        $total = 0;
-
-        foreach ($collection as $task) {
-            $total += $task->getEstimate();
-        }
-
-        return $total;
-    }
-
-
-
-    /**
-     * Calculates the total consumed for a Task collection
-     *
-     * @param Collection $collection Task collection
-     *
-     * @return float
-     */
-    public function getTotalConsumed(Collection $collection)
-    {
-        $total = 0;
-
-        foreach ($collection as $task) {
-            $total += $task->getConsumed();
-        }
-
-        return $total;
-    }
-
-
-
-    /**
-     * Calculates the total remaining for a Task collection
-     *
-     * @param Collection $collection Task collection
-     *
-     * @return float
-     */
-    public function getTotalRemaining(Collection $collection)
-    {
-        $total = 0;
-
-        foreach ($collection as $task) {
-            $total += $task->getRemaining();
-        }
-
-        return $total;
-    }
-
-
-
-    /**
      * Generates REST API URL for a Task
      *
      * @param Task $task
