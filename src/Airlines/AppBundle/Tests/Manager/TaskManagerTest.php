@@ -93,4 +93,54 @@ class TaskManagerTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($remaining, $task->getRemaining());
         $this->assertEquals($memberName, $task->getMember()->getName());
     }
+
+
+
+    /**
+     * Checks task splitting
+     *
+     * @return void
+     *
+     * @testdox Can split a task in two
+     */
+    public function testSplit()
+    {
+        $em = $this->getMockBuilder('Doctrine\ORM\EntityManager')
+                   ->disableOriginalConstructor()
+                   ->setMethods(['persist', 'flush'])
+                   ->getMock();
+
+        $em->expects($this->exactly(2))
+           ->method('persist');
+
+        $em->expects($this->once())
+           ->method('flush');
+
+        $validator = $this->getMockBuilder('Symfony\Component\Validator\Validator')
+                          ->disableOriginalConstructor()
+                          ->getMock();
+
+        $router = $this->getMockBuilder('Symfony\Component\Routing\Router')
+                       ->disableOriginalConstructor()
+                       ->getMock();
+
+        $manager = new TaskManager($em, $validator, $router);
+
+        $name = 'Some other task name';
+        $estimate = 2;
+        $consumed = 1;
+        $remaining = 1.5;
+
+        $task = new Task();
+        $task->setName($name);
+        $task->setEstimate($estimate);
+        $task->setConsumed($consumed);
+        $task->setRemaining($remaining);
+
+        $manager->split($task);
+
+        $this->assertEquals($estimate / 2, $task->getEstimate());
+        $this->assertEquals($consumed / 2, $task->getConsumed());
+        $this->assertEquals($remaining / 2, $task->getRemaining());
+    }
 }
