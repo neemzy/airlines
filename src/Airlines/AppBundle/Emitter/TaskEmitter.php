@@ -22,7 +22,7 @@ class TaskEmitter
      *
      * @return void
      */
-    public function __construct(Emitter $emitter)
+    public function __construct(Emitter $emitter = null)
     {
         $this->emitter = $emitter;
     }
@@ -36,6 +36,10 @@ class TaskEmitter
      */
     public function emitEvent(Task $task)
     {
+        if (is_null($this->emitter)) {
+            return;
+        }
+
         $this->emitter->emit('task', [ 'id' => $task->getId() ]);
     }
 }

@@ -6,15 +6,16 @@
 
     <services>
         <service id="airlines.week_number_helper"
-                 class="Airlines\AppBundle\Helper\WeekNumberHelper">
-        </service>
+                 class="Airlines\AppBundle\Helper\WeekNumberHelper" />
+
+        <service id="airlines.socket_emitter_factory"
+                 class="Airlines\AppBundle\Factory\SocketEmitterFactory" />
 
         <service id="airlines.socket_emitter"
                  class="SocketIO\Emitter">
-            <argument type="collection">
-                <argument key="host">%socket.host%</argument>
-                <argument key="port">%socket.port%</argument>
-            </argument>
+            <factory service="airlines.socket_emitter_factory" method="createSocketEmitter" />
+            <argument>%socket.host%</argument>
+            <argument>%socket.port%</argument>
         </service>
 
         <service id="airlines.entity_listener_resolver"
