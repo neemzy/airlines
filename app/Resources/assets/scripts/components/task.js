@@ -146,8 +146,6 @@
         render: function() {
             var style = {},
                 nameStyle = { backgroundColor: this.props.color },
-                numbers = {},
-                keys = ['estimate', 'consumed', 'remaining', 'overConsumed', 'underEstimated', 'overEstimated'],
 
                 classes = React.addons.classSet({
                     'task': true,
@@ -158,19 +156,12 @@
                     this.update({ name : name });
                 }.bind(this);
 
-            keys.forEach(
-                function (key) {
-                    numbers[key] = this.props[key];
-                },
-                this
-            );
-
             return (
                 <div className={classes} style={style} {...this.dragSourceFor(ItemTypes.TASK)}>
                     <div className="task__name" style={nameStyle}>
                         <Editable handleInput={handleNameInput}>{this.props.name}</Editable>
                     </div>
-                    <Numbers {...numbers} handleInput={this.update} />
+                    <Numbers estimate={this.props.estimate} consumed={this.props.consumed} remaining={this.props.remaining} handleInput={this.update} />
                     <div className="task__action-group">
                         <a className="task__action task__action--split" onClick={this.split}></a>
                         <a className="task__action task__action--remove" onClick={this.remove}></a>
