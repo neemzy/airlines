@@ -105,6 +105,8 @@
         /**
          * Drag'n'drop mixin configuration callback
          *
+         * @param function registerType Item type registration closure
+         *
          * @return void
          */
         configureDragDrop: function(registerType) {
@@ -112,9 +114,7 @@
                 ItemTypes.TASK,
                 {
                     dropTarget: {
-                        acceptDrop: function(task, event, isHandled) {
-                            var index = Array.prototype.indexOf.call(event.target.parentNode.childNodes, event.target);
-
+                        acceptDrop: function(task) {
                             task.move(
                                 this.props.member,
                                 this.props.date,

@@ -114,7 +114,34 @@
 
 
         /**
+         * Merges a Task into this one
+         *
+         * @param int task Task id
+         *
+         * @return void
+         */
+        merge: function(task) {
+            reqwest({
+                url: this.props.mergeUrl + task,
+                type: 'json',
+                method: 'POST',
+
+                error: function(err) {
+                    // TODO: error handling, if there's any need
+                },
+
+                success: function(response) {
+                    this.props.handleUpdate();
+                }.bind(this)
+            });
+        },
+
+
+
+        /**
          * Drag'n'drop mixin configuration callback
+         *
+         * @param function registerType Item type registration closure
          *
          * @return void
          */
@@ -130,7 +157,14 @@
                                 item: this
                             };
                         }
+                    },
+
+                    dropTarget: {
+                        acceptDrop: function(task) {
+                            this.merge(task.props.id);
+                        }
                     }
+
                 }
             );
         },
@@ -149,7 +183,8 @@
 
                 classes = React.addons.classSet({
                     'task': true,
-                    'task--dragged': this.getDragState(ItemTypes.TASK).isDragging
+                    'task--dragged': this.getDragState(ItemTypes.TASK).isDragging,
+                    'task--hovered': this.getDropState(ItemTypes.TASK).isHovering
                 }),
 
                 handleNameInput = function(name) {
@@ -157,7 +192,7 @@
                 }.bind(this);
 
             return (
-                <div className={classes} style={style} {...this.dragSourceFor(ItemTypes.TASK)}>
+                <div className={classes} style={style} {...this.dragSourceFor(ItemTypes.TASK)} {...this.dropTargetFor(ItemTypes.TASK)}>
                     <div className="task__name" style={nameStyle}>
                         <Editable handleInput={handleNameInput}>{this.props.name}</Editable>
                     </div>

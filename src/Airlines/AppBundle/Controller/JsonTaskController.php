@@ -39,6 +39,7 @@ class JsonTaskController extends AbstractJsonController
         $content = json_decode($response->getContent());
         $content->restUrl = $manager->generateRestUrl($task);
         $content->splitUrl = $manager->generateSplitUrl($task);
+        $content->mergeUrl = $manager->generateMergeUrl($task);
         $response->setContent(json_encode($content));
 
         return $response;
@@ -79,6 +80,7 @@ class JsonTaskController extends AbstractJsonController
             $instance = $em->getRepository('AirlinesAppBundle:Task')->find($task->id);
             $task->restUrl = $manager->generateRestUrl($instance);
             $task->splitUrl = $manager->generateSplitUrl($instance);
+            $task->mergeUrl = $manager->generateMergeUrl($instance);
         }
         $response->setContent(json_encode($content));
 
@@ -117,6 +119,7 @@ class JsonTaskController extends AbstractJsonController
             $instance = $em->getRepository('AirlinesAppBundle:Task')->find($task->id);
             $task->restUrl = $manager->generateRestUrl($instance);
             $task->splitUrl = $manager->generateSplitUrl($instance);
+            $task->mergeUrl = $manager->generateMergeUrl($instance);
         }
         $response->setContent(json_encode($content));
 
@@ -162,6 +165,7 @@ class JsonTaskController extends AbstractJsonController
         $content = json_decode($response->getContent());
         $content->restUrl = $manager->generateRestUrl($task);
         $content->splitUrl = $manager->generateSplitUrl($task);
+        $content->mergeUrl = $manager->generateMergeUrl($task);
         $response->setContent(json_encode($content));
 
         return $response;
@@ -204,6 +208,7 @@ class JsonTaskController extends AbstractJsonController
         $content = json_decode($response->getContent());
         $content->restUrl = $manager->generateRestUrl($task);
         $content->splitUrl = $manager->generateSplitUrl($task);
+        $content->mergeUrl = $manager->generateMergeUrl($task);
         $response->setContent(json_encode($content));
 
         return $response;
@@ -286,6 +291,7 @@ class JsonTaskController extends AbstractJsonController
         $content = json_decode($response->getContent());
         $content->restUrl = $manager->generateRestUrl($result);
         $content->splitUrl = $manager->generateSplitUrl($result);
+        $content->mergeUrl = $manager->generateMergeUrl($result);
         $response->setContent(json_encode($content));
 
         return $response;
