@@ -198,4 +198,18 @@ class TaskManager
     {
         return $this->router->generate('task.split', ['id' => $task->getId()]);
     }
+
+
+
+    /**
+     * Generates merge API URL for a Task
+     *
+     * @param Task $task
+     *
+     * @return string
+     */
+    public function generateMergeUrl(Task $task)
+    {
+        return rtrim($this->router->generate('task.merge', ['id' => $task->getId(), 'target' => 0]), '0');
+    }
 }
