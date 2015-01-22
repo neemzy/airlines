@@ -69,7 +69,7 @@
         /**
          * Updates this Task's fields
          *
-         * @param object data Key-value pairs
+         * @param object   data     Key-value pairs
          * @param function callback AJAX success callback
          *
          * @return void
