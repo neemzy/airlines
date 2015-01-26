@@ -198,8 +198,8 @@
                     </div>
                     <Numbers estimate={this.props.estimate} consumed={this.props.consumed} remaining={this.props.remaining} handleInput={this.update} />
                     <div className="task__action-group">
-                        <a className="task__action task__action--split" onClick={this.split}></a>
-                        <a className="task__action task__action--remove" onClick={this.remove}></a>
+                        <a className="task__action task__action--split" title="Split" onClick={this.split}></a>
+                        <a className="task__action task__action--remove" title="Delete" onClick={this.remove}></a>
                     </div>
                 </div>
             );
