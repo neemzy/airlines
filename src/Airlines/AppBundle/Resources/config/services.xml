@@ -1,59 +1,65 @@
 <?xml version="1.0" ?>
-
 <container xmlns="http://symfony.com/schema/dic/services"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
 
     <services>
-        <service id="airlines.week_number_helper"
-                 class="Airlines\AppBundle\Helper\WeekNumberHelper" />
-
-        <service id="airlines.socket_emitter_factory"
-                 class="Airlines\AppBundle\Factory\SocketEmitterFactory" />
-
+        <!-- external -->
         <service id="airlines.socket_emitter"
                  class="SocketIO\Emitter">
-            <factory service="airlines.socket_emitter_factory" method="createSocketEmitter" />
+            <factory service="airlines.factory.socket_emitter" method="createSocketEmitter" />
             <argument>%socket.host%</argument>
             <argument>%socket.port%</argument>
         </service>
 
+        <!-- root -->
         <service id="airlines.entity_listener_resolver"
                  class="Airlines\AppBundle\EntityListenerResolver">
             <argument type="service" id="service_container" />
         </service>
 
-        <service id="airlines.member_manager"
-                 class="Airlines\AppBundle\Manager\MemberManager">
-            <argument type="service" id="router" />
-        </service>
-
-        <service id="airlines.task_manager"
-                 class="Airlines\AppBundle\Manager\TaskManager">
-            <argument type="service" id="doctrine.orm.entity_manager" />
-            <argument type="service" id="validator" />
-            <argument type="service" id="router" />
-        </service>
-
-        <service id="airlines.task_emitter"
+        <!-- Emitter -->
+        <service id="airlines.emitter.task"
                  class="Airlines\AppBundle\Emitter\TaskEmitter">
             <argument type="service" id="airlines.socket_emitter" />
         </service>
 
-        <service id="airlines.task_listener"
-                 class="Airlines\AppBundle\EventListener\TaskListener">
-            <tag name="doctrine.entity_listener" event="postPersist" />
-            <tag name="doctrine.entity_listener" event="postUpdate" />
-            <argument type="service" id="airlines.task_emitter" />
-        </service>
-
-        <service id="airlines.member_listener"
+        <!-- EventListener -->
+        <service id="airlines.event_listener.member"
                  class="Airlines\AppBundle\EventListener\MemberListener">
             <tag name="doctrine.entity_listener" event="prePersist" />
             <tag name="doctrine.entity_listener" event="preUpdate" />
             <tag name="doctrine.entity_listener" event="postPersist" />
             <tag name="doctrine.entity_listener" event="postUpdate" />
             <tag name="doctrine.entity_listener" event="postRemove" />
+        </service>
+
+        <service id="airlines.event_listener.task"
+                 class="Airlines\AppBundle\EventListener\TaskListener">
+            <tag name="doctrine.entity_listener" event="postPersist" />
+            <tag name="doctrine.entity_listener" event="postUpdate" />
+            <argument type="service" id="airlines.emitter.task" />
+        </service>
+
+        <!-- Factory -->
+        <service id="airlines.factory.socket_emitter"
+                 class="Airlines\AppBundle\Factory\SocketEmitterFactory" />
+
+        <!-- Helper -->
+        <service id="airlines.helper.week_number"
+                 class="Airlines\AppBundle\Helper\WeekNumberHelper" />
+
+        <!-- Manager -->
+        <service id="airlines.manager.member"
+                 class="Airlines\AppBundle\Manager\MemberManager">
+            <argument type="service" id="router" />
+        </service>
+
+        <service id="airlines.manager.task"
+                 class="Airlines\AppBundle\Manager\TaskManager">
+            <argument type="service" id="doctrine.orm.entity_manager" />
+            <argument type="service" id="validator" />
+            <argument type="service" id="router" />
         </service>
     </services>
 </container>

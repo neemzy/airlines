@@ -61,7 +61,7 @@ class JsonTaskController extends AbstractJsonController
      */
     public function getByWeekNumberAction(Member $member, $week)
     {
-        $helper = $this->get('airlines.week_number_helper');
+        $helper = $this->get('airlines.helper.week_number');
         $dates = $helper->getWorkDaysForWeek($week);
 
         $em = $this->getDoctrine()->getManager();
@@ -142,7 +142,7 @@ class JsonTaskController extends AbstractJsonController
      */
     public function postAction(Request $request, Member $member, \DateTime $date)
     {
-        $manager = $this->get('airlines.task_manager');
+        $manager = $this->get('airlines.manager.task');
 
         $task = $manager->hydrateFromRequest(new Task(), $request);
         $task->setDate($date);
@@ -186,7 +186,7 @@ class JsonTaskController extends AbstractJsonController
      */
     public function putAction(Request $request, Task $task)
     {
-        $manager = $this->get('airlines.task_manager');
+        $manager = $this->get('airlines.manager.task');
 
         $task = $manager->hydrateFromRequest($task, $request);
         $errors = $manager->validateAndPersist($task);
@@ -251,7 +251,7 @@ class JsonTaskController extends AbstractJsonController
      */
     public function splitAction(Task $task)
     {
-        $manager = $this->get('airlines.task_manager');
+        $manager = $this->get('airlines.manager.task');
         $manager->split($task);
 
         return $this->createNoContentResponse();
@@ -273,7 +273,7 @@ class JsonTaskController extends AbstractJsonController
      */
     public function mergeAction(Task $task, Task $target)
     {
-        $manager = $this->get('airlines.task_manager');
+        $manager = $this->get('airlines.manager.task');
         $result = $manager->merge($task, $target);
 
         if (!$result) {

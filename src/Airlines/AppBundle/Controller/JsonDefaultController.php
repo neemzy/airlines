@@ -25,7 +25,7 @@ class JsonDefaultController extends AbstractJsonController
      */
     public function weekDaysAction($week, $year = null)
     {
-        $helper = $this->get('airlines.week_number_helper');
+        $helper = $this->get('airlines.helper.week_number');
 
         return $this->createJsonResponse($helper->getWorkDaysForWeek($week, $year));
     }

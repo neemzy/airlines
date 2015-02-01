@@ -167,7 +167,7 @@ class BoardController extends Controller
 
         return array_merge(
             compact('board', 'week', 'year'),
-            $this->get('airlines.week_number_helper')->getPrevNextWeekYear($week, $year)
+            $this->get('airlines.helper.week_number')->getPrevNextWeekYear($week, $year)
         );
     }
 }
