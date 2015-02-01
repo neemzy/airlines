@@ -47,12 +47,16 @@ gulp.task(
 gulp.task(
     'scripts',
     function () {
+        // Define environment for React according to build mode
+        tasks.env({ vars: { NODE_ENV: tasks.util.env.dist ? 'production' : 'development' } });
+
         gulp.src(src + 'scripts/app.js', { read: false })
             .pipe(tasks.plumber())
             .pipe(tasks.jshint())
             .pipe(tasks.jshint.reporter('default'))
             .pipe(tasks.browserify({
-                insertGlobals : false,
+                debug: tasks.util.env.dist,
+                insertGlobals: false,
                 transform: ['reactify'],
                 extensions: ['.jsx']
             }))
