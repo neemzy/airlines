@@ -16,7 +16,7 @@ class TaskEmitter
 
     /**
      * Constructor
-     * Binds socket emitter
+     * Binds the socket emitter instance
      *
      * @param Emitter $emitter
      *
