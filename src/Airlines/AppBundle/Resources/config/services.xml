@@ -34,11 +34,23 @@
             <tag name="doctrine.entity_listener" event="postRemove" />
         </service>
 
+        <service id="airlines.event_listener.member_serialization"
+                 class="Airlines\AppBundle\EventListener\MemberSerializationListener">
+            <tag name="jms_serializer.event_subscriber" />
+            <argument type="service" id="airlines.manager.member" />
+        </service>
+
         <service id="airlines.event_listener.task"
                  class="Airlines\AppBundle\EventListener\TaskListener">
             <tag name="doctrine.entity_listener" event="postPersist" />
             <tag name="doctrine.entity_listener" event="postUpdate" />
             <argument type="service" id="airlines.emitter.task" />
+        </service>
+
+        <service id="airlines.event_listener.task_serialization"
+                 class="Airlines\AppBundle\EventListener\TaskSerializationListener">
+            <tag name="jms_serializer.event_subscriber" />
+            <argument type="service" id="airlines.manager.task" />
         </service>
 
         <!-- Factory -->

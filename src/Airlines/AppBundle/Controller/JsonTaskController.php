@@ -28,21 +28,7 @@ class JsonTaskController extends AbstractJsonController
      */
     public function getAction(Task $task)
     {
-        $response = $this->createJsonResponse($task);
-
-        // FIXME : this ugly solution is here because I have *no* fucking idea
-        // how to add a custom property to the JSON sput out by JMS's Serializer.
-        // Defining a handler allows you to send whatever the fuck you want *instead*,
-        // but *no* hints about how to keep everything working like default
-        // and just add a goddamn fucking field to it. You're welcome.
-        $manager = $this->get('airlines.task_manager');
-        $content = json_decode($response->getContent());
-        $content->restUrl = $manager->generateRestUrl($task);
-        $content->splitUrl = $manager->generateSplitUrl($task);
-        $content->mergeUrl = $manager->generateMergeUrl($task);
-        $response->setContent(json_encode($content));
-
-        return $response;
+        return $this->createJsonResponse($task);
     }
 
 
@@ -61,30 +47,17 @@ class JsonTaskController extends AbstractJsonController
      */
     public function getByWeekNumberAction(Member $member, $week)
     {
-        $helper = $this->get('airlines.helper.week_number');
-        $dates = $helper->getWorkDaysForWeek($week);
+        $dates = $this
+            ->get('airlines.helper.week_number')
+            ->getWorkDaysForWeek($week);
 
-        $em = $this->getDoctrine()->getManager();
-        $tasks = $em->getRepository('AirlinesAppBundle:Task')->findByMemberAndDates($member, $dates);
+        $tasks = $this
+            ->getDoctrine()
+            ->getManager()
+            ->getRepository('AirlinesAppBundle:Task')
+            ->findByMemberAndDates($member, $dates);
 
-        $response = $this->createJsonResponse($tasks);
-
-        // FIXME : this ugly solution is here because I have *no* fucking idea
-        // how to add a custom property to the JSON sput out by JMS's Serializer.
-        // Defining a handler allows you to send whatever the fuck you want *instead*,
-        // but *no* hints about how to keep everything working like default
-        // and just add a goddamn fucking field to it. You're welcome.
-        $manager = $this->get('airlines.task_manager');
-        $content = json_decode($response->getContent());
-        foreach ($content as &$task) {
-            $instance = $em->getRepository('AirlinesAppBundle:Task')->find($task->id);
-            $task->restUrl = $manager->generateRestUrl($instance);
-            $task->splitUrl = $manager->generateSplitUrl($instance);
-            $task->mergeUrl = $manager->generateMergeUrl($instance);
-        }
-        $response->setContent(json_encode($content));
-
-        return $response;
+        return $this->createJsonResponse($tasks);
     }
 
 
@@ -103,27 +76,13 @@ class JsonTaskController extends AbstractJsonController
      */
     public function getByDayAction(Member $member, \DateTime $date)
     {
-        $em = $this->getDoctrine()->getManager();
-        $tasks = $em->getRepository('AirlinesAppBundle:Task')->findByMemberAndDates($member, [$date->format('Y-m-d')]);
+        $tasks = $this
+            ->getDoctrine()
+            ->getManager()
+            ->getRepository('AirlinesAppBundle:Task')
+            ->findByMemberAndDates($member, [$date->format('Y-m-d')]);
 
-        $response = $this->createJsonResponse($tasks);
-
-        // FIXME : this ugly solution is here because I have *no* fucking idea
-        // how to add a custom property to the JSON sput out by JMS's Serializer.
-        // Defining a handler allows you to send whatever the fuck you want *instead*,
-        // but *no* hints about how to keep everything working like default
-        // and just add a goddamn fucking field to it. You're welcome.
-        $manager = $this->get('airlines.task_manager');
-        $content = json_decode($response->getContent());
-        foreach ($content as &$task) {
-            $instance = $em->getRepository('AirlinesAppBundle:Task')->find($task->id);
-            $task->restUrl = $manager->generateRestUrl($instance);
-            $task->splitUrl = $manager->generateSplitUrl($instance);
-            $task->mergeUrl = $manager->generateMergeUrl($instance);
-        }
-        $response->setContent(json_encode($content));
-
-        return $response;
+        return $this->createJsonResponse($tasks);
     }
 
 
@@ -154,21 +113,7 @@ class JsonTaskController extends AbstractJsonController
             return $this->createJsonResponse($errors, Response::HTTP_BAD_REQUEST);
         }
 
-        $response = $this->createJsonResponse($task, Response::HTTP_CREATED);
-
-        // FIXME : this ugly solution is here because I have *no* fucking idea
-        // how to add a custom property to the JSON sput out by JMS's Serializer.
-        // Defining a handler allows you to send whatever the fuck you want *instead*,
-        // but *no* hints about how to keep everything working like default
-        // and just add a goddamn fucking field to it. You're welcome.
-        $manager = $this->get('airlines.task_manager');
-        $content = json_decode($response->getContent());
-        $content->restUrl = $manager->generateRestUrl($task);
-        $content->splitUrl = $manager->generateSplitUrl($task);
-        $content->mergeUrl = $manager->generateMergeUrl($task);
-        $response->setContent(json_encode($content));
-
-        return $response;
+        return $this->createJsonResponse($task, Response::HTTP_CREATED);
     }
 
 
@@ -197,21 +142,7 @@ class JsonTaskController extends AbstractJsonController
 
         // We use 200 OK instead of 204 No Content for a successful PUT,
         // because the latter prevents any content to be sent (which pretty much makes sense)
-        $response = $this->createJsonResponse($task);
-
-        // FIXME : this ugly solution is here because I have *no* fucking idea
-        // how to add a custom property to the JSON sput out by JMS's Serializer.
-        // Defining a handler allows you to send whatever the fuck you want *instead*,
-        // but *no* hints about how to keep everything working like default
-        // and just add a goddamn fucking field to it. You're welcome.
-        $manager = $this->get('airlines.task_manager');
-        $content = json_decode($response->getContent());
-        $content->restUrl = $manager->generateRestUrl($task);
-        $content->splitUrl = $manager->generateSplitUrl($task);
-        $content->mergeUrl = $manager->generateMergeUrl($task);
-        $response->setContent(json_encode($content));
-
-        return $response;
+        return $this->createJsonResponse($task);
     }
 
 
@@ -251,8 +182,9 @@ class JsonTaskController extends AbstractJsonController
      */
     public function splitAction(Task $task)
     {
-        $manager = $this->get('airlines.manager.task');
-        $manager->split($task);
+        $this
+            ->get('airlines.manager.task')
+            ->split($task);
 
         return $this->createNoContentResponse();
     }
@@ -273,27 +205,14 @@ class JsonTaskController extends AbstractJsonController
      */
     public function mergeAction(Task $task, Task $target)
     {
-        $manager = $this->get('airlines.manager.task');
-        $result = $manager->merge($task, $target);
+        $result = $this
+            ->get('airlines.manager.task')
+            ->merge($task, $target);
 
         if (!$result) {
             return new Response(null, Response::HTTP_BAD_REQUEST);
         }
 
-        $response = $this->createJsonResponse($result);
-
-        // FIXME : this ugly solution is here because I have *no* fucking idea
-        // how to add a custom property to the JSON sput out by JMS's Serializer.
-        // Defining a handler allows you to send whatever the fuck you want *instead*,
-        // but *no* hints about how to keep everything working like default
-        // and just add a goddamn fucking field to it. You're welcome.
-        $manager = $this->get('airlines.task_manager');
-        $content = json_decode($response->getContent());
-        $content->restUrl = $manager->generateRestUrl($result);
-        $content->splitUrl = $manager->generateSplitUrl($result);
-        $content->mergeUrl = $manager->generateMergeUrl($result);
-        $response->setContent(json_encode($content));
-
-        return $response;
+        return $this->createJsonResponse($result);
     }
 }
