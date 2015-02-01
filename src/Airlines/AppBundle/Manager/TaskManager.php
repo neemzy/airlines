@@ -119,7 +119,7 @@ class TaskManager
      *
      * @param Task $task
      *
-     * @return void
+     * @return Task Newly created Task
      */
     public function split(Task $task)
     {
@@ -142,6 +142,8 @@ class TaskManager
         $this->manager->persist($task);
         $this->manager->persist($split);
         $this->manager->flush();
+
+        return $split;
     }
 
 

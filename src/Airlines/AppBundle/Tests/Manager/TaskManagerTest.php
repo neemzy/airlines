@@ -137,11 +137,14 @@ class TaskManagerTest extends \PHPUnit_Framework_TestCase
         $task->setConsumed($consumed);
         $task->setRemaining($remaining);
 
-        $manager->split($task);
+        $split = $manager->split($task);
 
         $this->assertEquals($estimate / 2, $task->getEstimate());
         $this->assertEquals($consumed / 2, $task->getConsumed());
         $this->assertEquals($remaining / 2, $task->getRemaining());
+        $this->assertEquals($estimate / 2, $split->getEstimate());
+        $this->assertEquals($consumed / 2, $split->getConsumed());
+        $this->assertEquals($remaining / 2, $split->getRemaining());
     }
 
 
