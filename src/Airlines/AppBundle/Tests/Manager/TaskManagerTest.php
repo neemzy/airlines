@@ -21,45 +21,54 @@ class TaskManagerTest extends \PHPUnit_Framework_TestCase
         $member = new Member();
         $member->setName($memberName);
 
-        $repository = $this->getMockBuilder('Airlines\AppBundle\Entity\MemberRepository')
-                           ->disableOriginalConstructor()
-                           ->setMethods(['find'])
-                           ->getMock();
+        $repository = $this
+            ->getMockBuilder('Airlines\AppBundle\Entity\MemberRepository')
+            ->disableOriginalConstructor()
+            ->setMethods(['find'])
+            ->getMock();
 
-        $repository->expects($this->once())
-                   ->method('find')
-                   ->will($this->returnValue($member));
+        $repository
+            ->expects($this->once())
+            ->method('find')
+            ->will($this->returnValue($member));
 
-        $em = $this->getMockBuilder('Doctrine\ORM\EntityManager')
-                   ->disableOriginalConstructor()
-                   ->setMethods(['getRepository'])
-                   ->getMock();
+        $em = $this
+            ->getMockBuilder('Doctrine\ORM\EntityManager')
+            ->disableOriginalConstructor()
+            ->setMethods(['getRepository'])
+            ->getMock();
 
-        $em->expects($this->once())
-           ->method('getRepository')
-           ->with('AirlinesAppBundle:Member')
-           ->will($this->returnValue($repository));
+        $em
+            ->expects($this->once())
+            ->method('getRepository')
+            ->with('AirlinesAppBundle:Member')
+            ->will($this->returnValue($repository));
 
-        $validator = $this->getMockBuilder('Symfony\Component\Validator\Validator')
-                          ->disableOriginalConstructor()
-                          ->getMock();
+        $validator = $this
+            ->getMockBuilder('Symfony\Component\Validator\Validator')
+            ->disableOriginalConstructor()
+            ->getMock();
 
-        $router = $this->getMockBuilder('Symfony\Component\Routing\Router')
-                       ->disableOriginalConstructor()
-                       ->getMock();
+        $router = $this
+            ->getMockBuilder('Symfony\Component\Routing\Router')
+            ->disableOriginalConstructor()
+            ->getMock();
 
         $manager = new TaskManager($em, $validator, $router);
 
-        $filebag = $this->getMockBuilder('Symfony\Component\HttpFoundation\FileBag')
-                        ->setMethods(['has', 'get'])
-                        ->getMock();
+        $filebag = $this
+            ->getMockBuilder('Symfony\Component\HttpFoundation\FileBag')
+            ->setMethods(['has', 'get'])
+            ->getMock();
 
-        $filebag->expects($this->any())
-                ->method('has')
-                ->will($this->returnValue(true));
+        $filebag
+            ->expects($this->any())
+            ->method('has')
+            ->will($this->returnValue(true));
 
-        $request = $this->getMockBuilder('Symfony\Component\HttpFoundation\Request')
-                        ->getMock();
+        $request = $this
+            ->getMockBuilder('Symfony\Component\HttpFoundation\Request')
+            ->getMock();
 
         $request->request = $filebag;
 
@@ -69,20 +78,21 @@ class TaskManagerTest extends \PHPUnit_Framework_TestCase
         $consumed = 1;
         $remaining = 1.5;
 
-        $request->expects($this->any())
-                ->method('get')
-                ->will(
-                    $this->returnValueMap(
-                        [
-                            ['name', null, false, $name],
-                            ['date', null, false, $date],
-                            ['estimate', null, false, $estimate],
-                            ['consumed', null, false, $consumed],
-                            ['remaining', null, false, $remaining],
-                            ['member', null, false, null]
-                        ]
-                    )
-                );
+        $request
+            ->expects($this->any())
+            ->method('get')
+            ->will(
+                $this->returnValueMap(
+                    [
+                        ['name', null, false, $name],
+                        ['date', null, false, $date],
+                        ['estimate', null, false, $estimate],
+                        ['consumed', null, false, $consumed],
+                        ['remaining', null, false, $remaining],
+                        ['member', null, false, null]
+                    ]
+                )
+            );
 
         $task = $manager->hydrateFromRequest(new Task(), $request);
 
@@ -105,24 +115,29 @@ class TaskManagerTest extends \PHPUnit_Framework_TestCase
      */
     public function testSplit()
     {
-        $em = $this->getMockBuilder('Doctrine\ORM\EntityManager')
-                   ->disableOriginalConstructor()
-                   ->setMethods(['persist', 'flush'])
-                   ->getMock();
+        $em = $this
+            ->getMockBuilder('Doctrine\ORM\EntityManager')
+            ->disableOriginalConstructor()
+            ->setMethods(['persist', 'flush'])
+            ->getMock();
 
-        $em->expects($this->exactly(2))
-           ->method('persist');
+        $em
+            ->expects($this->exactly(2))
+            ->method('persist');
 
-        $em->expects($this->once())
-           ->method('flush');
+        $em
+            ->expects($this->once())
+            ->method('flush');
 
-        $validator = $this->getMockBuilder('Symfony\Component\Validator\Validator')
-                          ->disableOriginalConstructor()
-                          ->getMock();
+        $validator = $this
+            ->getMockBuilder('Symfony\Component\Validator\Validator')
+            ->disableOriginalConstructor()
+            ->getMock();
 
-        $router = $this->getMockBuilder('Symfony\Component\Routing\Router')
-                       ->disableOriginalConstructor()
-                       ->getMock();
+        $router = $this
+            ->getMockBuilder('Symfony\Component\Routing\Router')
+            ->disableOriginalConstructor()
+            ->getMock();
 
         $manager = new TaskManager($em, $validator, $router);
 
@@ -158,27 +173,33 @@ class TaskManagerTest extends \PHPUnit_Framework_TestCase
      */
     public function testMerge()
     {
-        $em = $this->getMockBuilder('Doctrine\ORM\EntityManager')
-                   ->disableOriginalConstructor()
-                   ->setMethods(['persist', 'remove', 'flush'])
-                   ->getMock();
+        $em = $this
+            ->getMockBuilder('Doctrine\ORM\EntityManager')
+            ->disableOriginalConstructor()
+            ->setMethods(['persist', 'remove', 'flush'])
+            ->getMock();
 
-        $em->expects($this->once())
-           ->method('persist');
+        $em
+            ->expects($this->once())
+            ->method('persist');
 
-        $em->expects($this->once())
-           ->method('remove');
+        $em
+            ->expects($this->once())
+            ->method('remove');
 
-        $em->expects($this->once())
-           ->method('flush');
+        $em
+            ->expects($this->once())
+            ->method('flush');
 
-        $validator = $this->getMockBuilder('Symfony\Component\Validator\Validator')
-                          ->disableOriginalConstructor()
-                          ->getMock();
+        $validator = $this
+            ->getMockBuilder('Symfony\Component\Validator\Validator')
+            ->disableOriginalConstructor()
+            ->getMock();
 
-        $router = $this->getMockBuilder('Symfony\Component\Routing\Router')
-                       ->disableOriginalConstructor()
-                       ->getMock();
+        $router = $this
+            ->getMockBuilder('Symfony\Component\Routing\Router')
+            ->disableOriginalConstructor()
+            ->getMock();
 
         $manager = new TaskManager($em, $validator, $router);
 
@@ -190,25 +211,30 @@ class TaskManagerTest extends \PHPUnit_Framework_TestCase
         $consumed2 = 2;
         $remaining2 = 0.5;
 
-        $task1 = $this->getMockBuilder('Airlines\AppBundle\Entity\Task')
-                      ->setMethods(['getId', 'getName', 'getEstimate', 'getConsumed', 'getRemaining'])
-                      ->getMock();
+        $task1 = $this
+            ->getMockBuilder('Airlines\AppBundle\Entity\Task')
+            ->setMethods(['getId', 'getName', 'getEstimate', 'getConsumed', 'getRemaining'])
+            ->getMock();
 
-        $task1->expects($this->once())
-              ->method('getId')
-              ->will($this->returnValue(1));
+        $task1
+            ->expects($this->once())
+            ->method('getId')
+            ->will($this->returnValue(1));
 
-        $task1->expects($this->once())
-              ->method('getEstimate')
-              ->will($this->returnValue($estimate1));
+        $task1
+            ->expects($this->once())
+            ->method('getEstimate')
+            ->will($this->returnValue($estimate1));
 
-        $task1->expects($this->once())
-              ->method('getConsumed')
-              ->will($this->returnValue($consumed1));
+        $task1
+            ->expects($this->once())
+            ->method('getConsumed')
+            ->will($this->returnValue($consumed1));
 
-        $task1->expects($this->once())
-              ->method('getRemaining')
-              ->will($this->returnValue($remaining1));
+        $task1
+            ->expects($this->once())
+            ->method('getRemaining')
+            ->will($this->returnValue($remaining1));
 
         $task2 = new Task();
         $task2->setName($name);
