@@ -9,6 +9,7 @@ before_script:
   - npm install -g jasmine
 
 script:
+    - phpunit
     - npm test
 
 notifications:
