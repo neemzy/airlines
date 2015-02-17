@@ -1,5 +1,7 @@
 # Airlines
 
+![Travis CI](https://travis-ci.org/neemzy/airlines.svg)
+
 **Airlines** is a virtual team board manager, allowing every member to handle his tasks on a weekly basis.
 
 ## Usage
