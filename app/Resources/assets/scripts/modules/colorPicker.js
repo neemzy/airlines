@@ -17,5 +17,4 @@
 
         React.render(colorPickerComponent(), colorPickerElement)
     };
-})
-();
+})();

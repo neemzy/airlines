@@ -32,5 +32,4 @@
 
         React.render(boardComponent(params), boardElement);
     };
-})
-();
+})();
