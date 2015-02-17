@@ -1,7 +1,7 @@
 (function () {
     'use strict';
 
-    var DateHelper = require('../imports/dateHelper'),
+    var DateHelper = require('../../imports/dateHelper'),
         dateHelper = new DateHelper();
 
 
