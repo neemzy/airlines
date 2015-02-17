@@ -8,5 +8,6 @@
 
         board = new Board($('.board')),
         colorPicker = new ColorPicker($('.color-picker'));
-})
-(document.querySelector.bind(document));
+})(
+    document.querySelector.bind(document)
+);
