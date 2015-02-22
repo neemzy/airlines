@@ -100,7 +100,7 @@
                     </div>
                     <div className={remainingClass} title="Remaining">
                         <span className="numbers__label">Remaining</span>
-                        <span className="numbers__rvalue">{remaining}</span>
+                        <span className="numbers__value">{remaining}</span>
                     </div>
                 </div>
             );
