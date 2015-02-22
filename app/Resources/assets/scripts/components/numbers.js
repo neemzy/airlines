@@ -72,18 +72,36 @@
 
                 return (
                     <div className="numbers">
-                        <Editable className={estimateClass} title="Estimate" handleInput={handleEstimateInput}>{estimate}</Editable>
-                        <Editable className={consumedClass} title="Consumed" handleInput={handleConsumedInput}>{consumed}</Editable>
-                        <Editable className={remainingClass} title="Remaining" handleInput={handleRemainingInput}>{remaining}</Editable>
+                        <div className={estimateClass}>
+                            <span className="numbers__label">Estimate</span>
+                            <Editable title="Estimate" className="numbers_value" handleInput={handleEstimateInput}>{estimate}</Editable>
+                        </div>
+                        <div className={consumedClass}>
+                            <span className="numbers__label">Consumed</span>
+                            <Editable title="Consumed" className="numbers_value" handleInput={handleConsumedInput}>{consumed}</Editable>
+                        </div>
+                        <div className={remainingClass}>
+                            <span className="numbers__label">Remaining</span>
+                            <Editable title="Remaining" className="numbers_value" handleInput={handleRemainingInput}>{remaining}</Editable>
+                        </div>
                     </div>
                 );
             }
 
             return (
                 <div className="numbers">
-                    <div className={estimateClass} title="Estimate">{estimate}</div>
-                    <div className={consumedClass} title="Consumed">{consumed}</div>
-                    <div className={remainingClass} title="Remaining">{remaining}</div>
+                    <div className={estimateClass} title="Estimate">
+                        <span className="numbers__label">Estimate</span>
+                        <span className="numbers__value">{estimate}</span>
+                    </div>
+                    <div className={consumedClass} title="Consumed">
+                        <span className="numbers__label">Consumed</span>
+                        <span className="numbers__value">{consumed}</span>
+                    </div>
+                    <div className={remainingClass} title="Remaining">
+                        <span className="numbers__label">Remaining</span>
+                        <span className="numbers__value">{remaining}</span>
+                    </div>
                 </div>
             );
         }
