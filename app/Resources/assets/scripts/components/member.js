@@ -29,6 +29,9 @@
         /**
          * Updates this Member's Numbers from its Days
          *
+         * @param string date    Date of the Day to update the numbers for, used as key
+         * @param object numbers Estimate, consumed and remaining values
+         *
          * @return void
          */
         updateNumbers: function(date, numbers) {
