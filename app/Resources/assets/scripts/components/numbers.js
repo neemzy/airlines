@@ -73,16 +73,16 @@
                 return (
                     <div className="numbers">
                         <div className={estimateClass}>
-                            <label>Estimé</label>
-                            <Editable title="Estimate" handleInput={handleEstimateInput}>{estimate}</Editable>
+                            <span class="numbers__label">Estimate</span>
+                            <Editable title="Estimate" class="numbers_value" handleInput={handleEstimateInput}>{estimate}</Editable>
                         </div>
                         <div className={consumedClass}>
-                            <label>Consommé</label>
-                            <Editable title="Consumed" handleInput={handleConsumedInput}>{consumed}</Editable>
+                            <span class="numbers__label">Consumed</span>
+                            <Editable title="Consumed" class="numbers_value" handleInput={handleConsumedInput}>{consumed}</Editable>
                         </div>
                         <div className={remainingClass}>
-                            <label>Kirestafèr</label>
-                            <Editable title="Remaining" handleInput={handleRemainingInput}>{remaining}</Editable>
+                            <span class="numbers__label">Remaining</span>
+                            <Editable title="Remaining" class="numbers_value" handleInput={handleRemainingInput}>{remaining}</Editable>
                         </div>
                     </div>
                 );
@@ -91,16 +91,16 @@
             return (
                 <div className="numbers">
                     <div className={estimateClass} title="Estimate">
-                        <label>Estimé</label>
-                        <span>{estimate}</span>
+                        <span class="numbers__label">Estimate</span>
+                        <span class="numbers__value">{estimate}</span>
                     </div>
                     <div className={consumedClass} title="Consumed">
-                        <label>Consommé</label>
-                        <span>{consumed}</span>
+                        <span class="numbers__label">Consumed</span>
+                        <span class="numbers__value">{consumed}</span>
                     </div>
                     <div className={remainingClass} title="Remaining">
-                        <label>Kirestafèr</label>
-                        <span>{remaining}</span>
+                        <span class="numbers__label">Remaining</span>
+                        <span class="numbers__rvalue">{remaining}</span>
                     </div>
                 </div>
             );
