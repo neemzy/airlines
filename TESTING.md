@@ -46,6 +46,4 @@ Written tests will be marked with ✓.
 
 ### Editable
 
-- Change the value and check `handleInput is called`
-
-TODO
+- Change the value and check `handleInput` is called
