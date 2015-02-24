@@ -74,15 +74,15 @@
                     <div className="numbers">
                         <div className={estimateClass}>
                             <span className="numbers__label">Estimate</span>
-                            <Editable title="Estimate" className="numbers_value" handleInput={handleEstimateInput}>{estimate}</Editable>
+                            <Editable title="Estimate" className="numbers__value" handleInput={handleEstimateInput}>{estimate}</Editable>
                         </div>
                         <div className={consumedClass}>
                             <span className="numbers__label">Consumed</span>
-                            <Editable title="Consumed" className="numbers_value" handleInput={handleConsumedInput}>{consumed}</Editable>
+                            <Editable title="Consumed" className="numbers__value" handleInput={handleConsumedInput}>{consumed}</Editable>
                         </div>
                         <div className={remainingClass}>
                             <span className="numbers__label">Remaining</span>
-                            <Editable title="Remaining" className="numbers_value" handleInput={handleRemainingInput}>{remaining}</Editable>
+                            <Editable title="Remaining" className="numbers__value" handleInput={handleRemainingInput}>{remaining}</Editable>
                         </div>
                     </div>
                 );

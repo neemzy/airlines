@@ -31,9 +31,7 @@ Otherwise, upgrade it.
 #### Unit tests
 
 - Run PHP tests with `phpunit` (the `--testdox` option can be used for a more behavior-driven results display)
-- Run JS tests with `npm test`
-
-The latter will require you to run `npm install -g jasmine` if not already done.
+- Run JS tests with `jest`
 
 ### Deployment
 
@@ -45,5 +43,5 @@ Compiled assets are currently versioned as the project isn't linked to any speci
 
 ## Side notes
 
-- [Development log](LOG.md)
-- [React test tools and cases](TESTING.md)
+- [Development log](doc/log.md)
+- [React test cases](doc/testing.md)

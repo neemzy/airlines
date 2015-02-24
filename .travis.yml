@@ -7,11 +7,11 @@ php:
 
 before_script:
   - composer install
-  - npm install -g jasmine
+  - npm install -g jest-cli
 
 script:
     - phpunit
-    - npm test
+    - jest
 
 notifications:
     email: false
