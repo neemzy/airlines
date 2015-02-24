@@ -46,4 +46,4 @@ Compiled assets are currently versioned as the project isn't linked to any speci
 ## Side notes
 
 - [Development log](LOG.md)
-- [Test tools and cases](TESTING.md)
+- [React test tools and cases](TESTING.md)
