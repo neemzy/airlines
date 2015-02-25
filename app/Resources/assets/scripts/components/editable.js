@@ -39,7 +39,7 @@
             props.className += ' editable';
 
             return (
-                <span {...props} contentEditable onClick={this.handleInput} onInput={this.handleInput}>{this.props.children}</span>
+                <span {...props} contentEditable onInput={this.handleInput}>{this.props.children}</span>
             );
         }
     });
