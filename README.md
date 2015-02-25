@@ -1,6 +1,7 @@
 # Airlines
 
-![Travis CI](https://travis-ci.org/neemzy/airlines.svg)
+[![Travis CI](https://travis-ci.org/neemzy/airlines.svg)](https://travis-ci.org/neemzy/airlines)
+[![David DM](https://david-dm.org/neemzy/airlines/dev-status.svg)](https://david-dm.org/neemzy/airlines#info=devDependencies)
 
 **Airlines** is a virtual team board manager, allowing every member to handle his tasks on a weekly basis.
 
