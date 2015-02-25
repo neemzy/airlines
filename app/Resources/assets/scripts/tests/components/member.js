@@ -12,6 +12,22 @@
         'Member',
         function () {
             describe(
+                'Days',
+                function () {
+                    it(
+                        'should render as many as dates in props',
+                        function () {
+                            var date = '1970-01-01',
+                                member = React.addons.TestUtils.renderIntoDocument(<Member dates={['1970-01-01', '1970-01-02']} />),
+                                days = React.addons.TestUtils.scryRenderedComponentsWithType(member, Day);
+
+                            expect(days.length).toEqual(2);
+                        }
+                    )
+                }
+            );
+
+            describe(
                 'Numbers',
                 function () {
                     it(
@@ -76,7 +92,7 @@
                         }
                     );
                 }
-            )
+            );
         }
     );
 })();
