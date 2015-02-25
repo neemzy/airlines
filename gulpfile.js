@@ -1,7 +1,6 @@
 var gulp = require('gulp'),
     tasks = require('gulp-load-plugins')(),
     rimraf = require('rimraf'),
-    server = require('tiny-lr')(),
     openConfig = require('./open.json'),
     src = 'app/Resources/assets/',
     dist = 'web/';
@@ -28,7 +27,7 @@ gulp.task(
             .pipe(tasks.autoprefixer())
             .pipe(tasks.if(tasks.util.env.dist, tasks.csso()))
             .pipe(gulp.dest(dist))
-            .pipe(tasks.livereload(server));
+            .pipe(tasks.livereload());
     }
 );
 
@@ -62,7 +61,7 @@ gulp.task(
             }))
             .pipe(tasks.if(tasks.util.env.dist, tasks.uglify()))
             .pipe(gulp.dest(dist))
-            .pipe(tasks.livereload(server));
+            .pipe(tasks.livereload());
     }
 );
 
@@ -78,7 +77,7 @@ gulp.task(
         gulp.src('gulpfile.js')
             .pipe(tasks.open('', openConfig));
 
-        server.listen(
+        tasks.livereload.listen(
             35729,
             function (err) {
                 gulp.watch(src + 'stylesheets/**/*.less', ['stylesheets']);
@@ -87,7 +86,7 @@ gulp.task(
                 gulp.watch(
                     ['app/Resources/views/**/*.twig', 'src/Airlines/AppBundle/Resources/views/**/*.twig'],
                     function () {
-                        gulp.src('').pipe(tasks.livereload(server));
+                        gulp.src('').pipe(tasks.livereload());
                     }
                 );
             }
