@@ -47,7 +47,9 @@
                             });
 
                             // Inject Tasks
+                            console.warn = jest.genMockFunction();
                             day.updateTasks();
+                            expect(console.warn.mock.calls.length).toBeGreaterThan(0);
 
                             // Test Member's Numbers' values
                             var info = React.addons.TestUtils.findRenderedDOMComponentWithClass(member, 'member__info'),
