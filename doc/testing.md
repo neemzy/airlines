@@ -13,8 +13,8 @@ We will be using [Jest](http://facebook.github.io/jest/). Written tests will be 
 
 - Mock `loadDates` and check the Board's heading rendering
 - Mock `loadMembers` and check the Members rendering
-- Change the title and check `updateName` is called ✘
 - Drag-drop a Task from one Member to another and check again
+- Change the title and check `updateName` is called ✘
 
 ### Member ✔
 
@@ -37,10 +37,10 @@ We will be using [Jest](http://facebook.github.io/jest/). Written tests will be 
 - Click the corresponding link and check `split` is called ✘
 - Click the corresponding link and check `remove` is called ✘
 
-### Numbers
+### Numbers ✔
 
-- Check the right CSS classes are applied depending on the props' values
+- Check the right CSS classes are applied depending on the props' values ✔
 
-### Editable
+### Editable ✔
 
 - Change the value and check `handleInput` is called ✘
