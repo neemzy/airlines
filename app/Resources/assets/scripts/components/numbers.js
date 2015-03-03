@@ -6,6 +6,19 @@
 
     module.exports = React.createClass({
         /**
+         * Initial props React hook
+         *
+         * @return object
+         */
+        getDefaultProps: function() {
+            return {
+                estimate: 0,
+                consumed: 0,
+                remaining: 0
+            };
+        },
+
+        /**
          * Generic input handling method
          * Calls update method on parent Task
          *
