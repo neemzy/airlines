@@ -5,7 +5,7 @@ We need to be able to :
 - mock a component's methods, to provide dummy data instead of calling the server (unit testing)
 - test the effect of DOM events targeting one component on another one (integration testing)
 
-We will be using [Jest](http://facebook.github.io/jest/). Written tests will be marked with ✔, and unwritable tests with ✘ (see [these](https://github.com/facebook/jest/issues/207) [issues](https://github.com/facebook/react/issues/278) for more info).
+We will be using [Jest](http://facebook.github.io/jest/). Written tests will be marked with ✔, and unwritable tests with ✘ ([see](https://github.com/facebook/jest/issues/207) [these](https://github.com/facebook/react/issues/278) [issues](https://github.com/facebook/jest/issues/230) for more info).
 
 ## Test cases
 
@@ -23,9 +23,9 @@ We will be using [Jest](http://facebook.github.io/jest/). Written tests will be 
 - Edit a Task's Numbers and check again ✘
 - Drag-drop a Task from one Day to another and check again, also check `updateNumbers` is called, and `updateNumbers` and `updateTasks` are called for both days ✘
 
-### Day
+### Day ✔
 
-- Start dropping a Task and check CSS classes
+- Start dropping a Task and check CSS classes ✘
 - Drop a Task and check `move` is called for it ✘
 
 ### Task
