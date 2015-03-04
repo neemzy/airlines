@@ -14,6 +14,37 @@
             DragDropMixin
         ],
 
+        statics: {
+            /**
+             * Drag'n'drop mixin configuration callback
+             *
+             * @param function registerType Item type registration closure
+             */
+            configureDragDrop: function(registerType) {
+                var dateHelper = new DateHelper();
+
+                registerType(
+                    ItemTypes.TASK,
+                    {
+                        dragSource: {
+                            beginDrag: function(task) {
+                                return {
+                                    item: task
+                                };
+                            }
+                        },
+
+                        dropTarget: {
+                            acceptDrop: function(target, task) {
+                                target.merge(task.props.id);
+                            }
+                        }
+
+                    }
+                );
+            }
+        },
+
         /**
          * Removes this Task from the database and triggers reloading for the member and day it belongs to
          */
@@ -114,35 +145,6 @@
                     this.props.handleUpdate();
                 }.bind(this)
             });
-        },
-
-        /**
-         * Drag'n'drop mixin configuration callback
-         *
-         * @param function registerType Item type registration closure
-         */
-        configureDragDrop: function(registerType) {
-            var dateHelper = new DateHelper();
-
-            registerType(
-                ItemTypes.TASK,
-                {
-                    dragSource: {
-                        beginDrag: function() {
-                            return {
-                                item: this
-                            };
-                        }
-                    },
-
-                    dropTarget: {
-                        acceptDrop: function(task) {
-                            this.merge(task.props.id);
-                        }
-                    }
-
-                }
-            );
         },
 
         /**

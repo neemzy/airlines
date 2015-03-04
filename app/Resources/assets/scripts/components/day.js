@@ -13,6 +13,30 @@
             DragDropMixin
         ],
 
+        statics: {
+            /**
+             * Drag'n'drop mixin configuration callback
+             *
+             * @param function registerType Item type registration closure
+             */
+            configureDragDrop: function(registerType) {
+                registerType(
+                    ItemTypes.TASK,
+                    {
+                        dropTarget: {
+                            acceptDrop: function(day, task) {
+                                task.move(
+                                    day.props.member,
+                                    day.props.date,
+                                    day.updateTasks
+                                );
+                            }
+                        }
+                    }
+                );
+            }
+        },
+
         /**
          * Initial state React hook
          *
@@ -84,28 +108,6 @@
                     estimate: estimate,
                     consumed: consumed,
                     remaining: remaining
-                }
-            );
-        },
-
-        /**
-         * Drag'n'drop mixin configuration callback
-         *
-         * @param function registerType Item type registration closure
-         */
-        configureDragDrop: function(registerType) {
-            registerType(
-                ItemTypes.TASK,
-                {
-                    dropTarget: {
-                        acceptDrop: function(task) {
-                            task.move(
-                                this.props.member,
-                                this.props.date,
-                                this.updateTasks
-                            );
-                        }
-                    }
                 }
             );
         },
