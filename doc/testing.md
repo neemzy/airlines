@@ -13,7 +13,7 @@ We will be using [Jest](http://facebook.github.io/jest/). Written tests will be 
 
 - Mock `loadDates` and check the Board's heading rendering
 - Mock `loadMembers` and check the Members rendering
-- Drag-drop a Task from one Member to another and check again
+- Drag-drop a Task from one Member to another and check again ✘
 - Change the title and check `updateName` is called ✘
 
 ### Member ✔
@@ -28,10 +28,10 @@ We will be using [Jest](http://facebook.github.io/jest/). Written tests will be 
 - Start dropping a Task and check CSS classes ✘
 - Drop a Task and check `move` is called for it ✘
 
-### Task
+### Task ✔
 
-- Start dragging and check CSS classes
-- Start dropping one Task on another and check CSS classes
+- Start dragging and check CSS classes ✘
+- Start dropping one Task on another and check CSS classes ✘
 - Finish dropping and check `merge` is called ✘
 - Change the title and check `update` is called, do the same for the Numbers ✘
 - Click the corresponding link and check `split` is called ✘
