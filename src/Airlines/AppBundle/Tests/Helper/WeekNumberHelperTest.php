@@ -22,12 +22,8 @@ class WeekNumberHelperTest extends \PHPUnit_Framework_TestCase
         ];
     }
 
-
-
     /**
      * Checks working days dates per week number calculation
-     *
-     * @return void
      *
      * @testdox Can fetch working days dates for given week and year
      */
@@ -45,8 +41,6 @@ class WeekNumberHelperTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('2014-12-26', $days[4]);
     }
 
-
-
     /**
      * Checks previous and next week/year couples calculation
      *
@@ -56,8 +50,6 @@ class WeekNumberHelperTest extends \PHPUnit_Framework_TestCase
      * @param int $prevYear Expected previous week's year
      * @param int $nextWeek Expected next week number
      * @param int $nextYear Expected next week's year
-     *
-     * @return void
      *
      * @dataProvider weekYearProvider
      * @testdox Can fetch previous and next week/year couples for given week and year

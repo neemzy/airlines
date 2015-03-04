@@ -24,8 +24,6 @@
          *
          * @param string key   Key of parameter to update
          * @param string value New value
-         *
-         * @return void
          */
         handleInput: function(key, value) {
             var data = {};
@@ -39,8 +37,6 @@
         /**
          * Rendering React hook
          * Sets the right classes for each value and binds edition callbacks
-         *
-         * @return void
          */
         render: function() {
             var estimate = this.props.estimate.toFixed(3),

@@ -13,22 +13,16 @@ class MemberSerializationListener implements EventSubscriberInterface
      */
     private $manager;
 
-
-
     /**
      * Constructor
      * Binds the Member manager
      *
      * @param MemberManager $manager
-     *
-     * @return void
      */
     public function __construct(MemberManager $manager)
     {
         $this->manager = $manager;
     }
-
-
 
     /**
      * Defines serialization events this listener is subscribed to
@@ -46,15 +40,11 @@ class MemberSerializationListener implements EventSubscriberInterface
         ];
     }
 
-
-
     /**
      * Post-serialization callback
      * Binds API URLs to serialized Members
      *
      * @param ObjectEvent $event Subscribed event instance
-     *
-     * @return void
      */
     public function onPostSerialize(ObjectEvent $event)
     {

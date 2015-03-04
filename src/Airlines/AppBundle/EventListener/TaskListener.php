@@ -14,25 +14,17 @@ class TaskListener
      */
     private $emitter;
 
-
-
     /**
      * Constructor
      * Binds the Task emitter
-     *
-     * @return void
      */
     public function __construct(TaskEmitter $emitter)
     {
         $this->emitter = $emitter;
     }
 
-
-
     /**
      * Emits a Socket.IO event to notify a Task creation or update
-     *
-     * @return void
      *
      * @ORM\PostPersist()
      * @ORM\PostUpdate()

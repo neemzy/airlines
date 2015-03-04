@@ -26,8 +26,6 @@ class AbstractJsonController extends Controller
         return new Response($json, $code, ['content-type' => 'application/json']);
     }
 
-
-
     /**
      * Returns a "No Content" (204) response
      *

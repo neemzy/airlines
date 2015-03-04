@@ -8,8 +8,6 @@
         /**
          * Input event handler for the contentEditable element
          * Throttles AJAX saving process
-         *
-         * @return void
          */
         handleInput: function() {
             window.clearTimeout(throttle);
@@ -22,12 +20,8 @@
             );
         },
 
-
-
         /**
          * Rendering React hook
-         *
-         * @return void
          */
         render: function() {
             var props = JSON.parse(JSON.stringify(this.props));

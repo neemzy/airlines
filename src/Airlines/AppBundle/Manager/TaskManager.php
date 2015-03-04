@@ -26,8 +26,6 @@ class TaskManager
      */
     private $router;
 
-
-
     /**
      * Constructor
      * Binds dependencies
@@ -35,8 +33,6 @@ class TaskManager
      * @param ObjectManager      $manager
      * @param ValidatorInterface $validator
      * @param RouterInterface    $router
-     *
-     * @return void
      */
     public function __construct(ObjectManager $manager, ValidatorInterface $validator, RouterInterface $router)
     {
@@ -44,8 +40,6 @@ class TaskManager
         $this->validator = $validator;
         $this->router = $router;
     }
-
-
 
     /**
      * Hydrates a Task from a request's data
@@ -91,8 +85,6 @@ class TaskManager
         return $task;
     }
 
-
-
     /**
      * Fool-proofs a Task and persists it if it is valid
      *
@@ -111,8 +103,6 @@ class TaskManager
 
         return $errors;
     }
-
-
 
     /**
      * Splits a Task in two
@@ -146,8 +136,6 @@ class TaskManager
         return $split;
     }
 
-
-
     /**
      * Merges a Task into another
      *
@@ -173,8 +161,6 @@ class TaskManager
         return $target;
     }
 
-
-
     /**
      * Generates REST API URL for a Task
      *
@@ -187,8 +173,6 @@ class TaskManager
         return $this->router->generate('task.get', ['id' => $task->getId()]);
     }
 
-
-
     /**
      * Generates split API URL for a Task
      *
@@ -200,8 +184,6 @@ class TaskManager
     {
         return $this->router->generate('task.split', ['id' => $task->getId()]);
     }
-
-
 
     /**
      * Generates merge API URL for a Task

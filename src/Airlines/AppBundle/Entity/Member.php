@@ -284,8 +284,6 @@ class Member
 
     /**
      * Prepares avatar file uploading
-     *
-     * @return void
      */
     public function prepareAvatarUpload()
     {
@@ -298,8 +296,6 @@ class Member
 
     /**
      * Performs avatar file uploading
-     *
-     * @return void
      */
     public function uploadAvatar()
     {
@@ -324,8 +320,6 @@ class Member
 
     /**
      * Deletes avatar file
-     *
-     * @return void
      */
     public function deleteAvatar()
     {
@@ -366,8 +360,6 @@ class Member
      * Generates an unique name for uploaded avatar
      *
      * @param string $extension File extension
-     *
-     * @return void
      */
     protected function generateAvatarName($extension)
     {

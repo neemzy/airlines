@@ -19,8 +19,6 @@
             return { dates: [], members: [] };
         },
 
-
-
         /**
          * Loads the working days' dates for the current week
          *
@@ -45,8 +43,6 @@
                 }.bind(this)
             );
         },
-
-
 
         /**
          * Loads all Members from the database for this Board
@@ -73,14 +69,10 @@
             );
         },
 
-
-
         /**
          * Updates this Board's name
          *
          * @param string name New name
-         *
-         * @return void
          */
         updateName: function(name) {
             reqwest({
@@ -99,13 +91,9 @@
             });
         },
 
-
-
         /**
          * Pre-mount React hook
          * Triggers dates and Members loading
-         *
-         * @return void
          */
         componentWillMount: function() {
             this.loadDates()
@@ -129,13 +117,9 @@
                 );
         },
 
-
-
         /**
          * Rendering React hook
          * Builds the Board's header and the Members' containing rows
-         *
-         * @return void
          */
         render: function() {
             var members = [],

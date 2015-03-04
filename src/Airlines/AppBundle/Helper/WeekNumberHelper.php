@@ -24,8 +24,6 @@ class WeekNumberHelper
         return $dates;
     }
 
-
-
     /**
      * Determines previous and next week/year couples
      *

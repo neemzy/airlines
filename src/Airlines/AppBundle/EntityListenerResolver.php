@@ -17,13 +17,9 @@ class EntityListenerResolver extends DefaultEntityListenerResolver
      */
     private $mapping;
 
-
-
     /**
      * Constructor
      * Binds the service container
-     *
-     * @return void
      */
     public function __construct(ContainerInterface $container)
     {
@@ -31,19 +27,13 @@ class EntityListenerResolver extends DefaultEntityListenerResolver
         $this->mapping = [];
     }
 
-
-
     /**
      * Maps a service to an entity listener class
-     *
-     * @return void
      */
     public function addMapping($className, $service)
     {
         $this->mapping[$className] = $service;
     }
-
-
 
     /**
      * Resolves event listener class names

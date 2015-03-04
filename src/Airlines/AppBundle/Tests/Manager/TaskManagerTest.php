@@ -11,8 +11,6 @@ class TaskManagerTest extends \PHPUnit_Framework_TestCase
     /**
      * Checks task hydration from request
      *
-     * @return void
-     *
      * @testdox Can hydrate a task from a request
      */
     public function testHydrateFromRequest()
@@ -104,12 +102,8 @@ class TaskManagerTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($memberName, $task->getMember()->getName());
     }
 
-
-
     /**
      * Checks task splitting
-     *
-     * @return void
      *
      * @testdox Can split a task in two
      */
@@ -162,12 +156,8 @@ class TaskManagerTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($remaining / 2, $split->getRemaining());
     }
 
-
-
     /**
      * Checks task merging
-     *
-     * @return void
      *
      * @testdox Can merge two tasks
      */

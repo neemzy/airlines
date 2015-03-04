@@ -17,25 +17,17 @@
             };
         },
 
-
-
         /**
          * Updates the selected color
          * Makes the value uppercase
-         *
-         * @return void
          */
         updateColor: function(color) {
             this.setState({ color: color.toUpperCase() });
         },
 
-
-
         /**
          * Post-mount React hook
          * Attaches data-* HTML attributes to the inner input
-         *
-         * @return void
          */
         componentDidMount: function() {
             var parentNode = this.getDOMNode().parentNode,
@@ -62,12 +54,8 @@
             this.setState({ attrs: attrs });
         },
 
-
-
         /**
          * Rendering React hook
-         *
-         * @return void
          */
         render: function() {
             var style = { backgroundColor: this.state.color };

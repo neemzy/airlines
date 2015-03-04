@@ -24,15 +24,11 @@
             };
         },
 
-
-
         /**
          * Updates this Member's Numbers from its Days
          *
          * @param string date    Date of the Day to update the numbers for, used as key
          * @param object numbers Estimate, consumed and remaining values
-         *
-         * @return void
          */
         updateNumbers: function(date, numbers) {
             var estimate = this.state.estimate,
@@ -46,13 +42,9 @@
             this.setState({ estimate: estimate, consumed: consumed, remaining: remaining });
         },
 
-
-
         /**
          * Rendering React hook
          * Builds the whole Member's week row
-         *
-         * @return void
          */
         render: function() {
             var dateHelper = new DateHelper(),

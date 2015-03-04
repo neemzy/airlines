@@ -13,8 +13,6 @@
             DragDropMixin
         ],
 
-
-
         /**
          * Initial state React hook
          *
@@ -25,8 +23,6 @@
                 tasks: []
             };
         },
-
-
 
         /**
          * Loads Tasks from the database for this Day
@@ -53,12 +49,8 @@
             );
         },
 
-
-
         /**
          * Updates Tasks in commponent's state
-         *
-         * @return void
          */
         updateTasks: function() {
             this.loadTasks()
@@ -70,12 +62,8 @@
                 );
         },
 
-
-
         /**
          * Updates parent Member's Numbers
-         *
-         * @return void
          */
         updateNumbers: function() {
             var estimate = 0,
@@ -100,14 +88,10 @@
             );
         },
 
-
-
         /**
          * Drag'n'drop mixin configuration callback
          *
          * @param function registerType Item type registration closure
-         *
-         * @return void
          */
         configureDragDrop: function(registerType) {
             registerType(
@@ -126,24 +110,16 @@
             );
         },
 
-
-
         /**
          * Pre-mount React hook
          * Triggers Task loading
-         *
-         * @return void
          */
         componentWillMount: function() {
             this.updateTasks();
         },
 
-
-
         /**
          * Rendering React hook
-         *
-         * @return void
          */
         render: function() {
             var tasks = [],

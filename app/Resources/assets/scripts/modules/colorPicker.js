@@ -7,8 +7,6 @@
     /**
      * Constructor
      * Renders the React component
-     *
-     * @return void
      */
     var ColorPicker = module.exports = function(colorPickerElement) {
         if (null == colorPickerElement) {

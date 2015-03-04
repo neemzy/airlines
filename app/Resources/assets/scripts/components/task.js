@@ -14,12 +14,8 @@
             DragDropMixin
         ],
 
-
-
         /**
          * Removes this Task from the database and triggers reloading for the member and day it belongs to
-         *
-         * @return void
          */
         remove: function() {
             if (!confirm('Are you sure ?')) {
@@ -41,12 +37,8 @@
             });
         },
 
-
-
         /**
          * Splits this Task in two and triggers reloading for the member and day it belongs to
-         *
-         * @return void
          */
         split: function() {
             reqwest({
@@ -64,15 +56,11 @@
             });
         },
 
-
-
         /**
          * Updates this Task's fields
          *
          * @param object   data     Key-value pairs
          * @param function callback AJAX success callback
-         *
-         * @return void
          */
         update: function(data, callback) {
             reqwest({
@@ -92,16 +80,12 @@
             });
         },
 
-
-
         /**
          * Moves this Task to the given member and date
          *
          * @param int      member   Member id
          * @param string   date     New date
          * @param function callback AJAX success callback
-         *
-         * @return void
          */
         move: function(member, date, callback) {
             var dateHelper = new DateHelper();
@@ -111,14 +95,10 @@
             }
         },
 
-
-
         /**
          * Merges a Task into this one
          *
          * @param int task Task id
-         *
-         * @return void
          */
         merge: function(task) {
             reqwest({
@@ -136,14 +116,10 @@
             });
         },
 
-
-
         /**
          * Drag'n'drop mixin configuration callback
          *
          * @param function registerType Item type registration closure
-         *
-         * @return void
          */
         configureDragDrop: function(registerType) {
             var dateHelper = new DateHelper();
@@ -169,13 +145,9 @@
             );
         },
 
-
-
         /**
          * Rendering React hook
          * Passes props through to the Numbers and attaches action handlers
-         *
-         * @return void
          */
         render: function() {
             var style = {},

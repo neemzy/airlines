@@ -16,22 +16,16 @@ class MemberManager
      */
     private $router;
 
-
-
     /**
      * Constructor
      * Binds dependencies
      *
      * @param RouterInterface $router
-     *
-     * @return void
      */
     public function __construct(RouterInterface $router)
     {
         $this->router = $router;
     }
-
-
 
     /**
      * Generates root Task API URL for a Member

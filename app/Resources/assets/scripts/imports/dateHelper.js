@@ -3,8 +3,6 @@
 
     /**
      * Constructor
-     *
-     * @return void
      */
     var ConvertDate = module.exports = function() {
     };

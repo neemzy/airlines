@@ -12,8 +12,6 @@ class MemberListener
      * Prepares avatar file uploading
      * Is it really useful to do it prior to persistance ?
      *
-     * @return void
-     *
      * @ORM\PrePersist()
      * @ORM\PreUpdate()
      */
@@ -22,12 +20,8 @@ class MemberListener
         $member->prepareAvatarUpload();
     }
 
-
-
     /**
      * Performs avatar file uploading
-     *
-     * @return void
      *
      * @ORM\PostPersist()
      * @ORM\PostUpdate()
@@ -37,12 +31,8 @@ class MemberListener
         $member->uploadAvatar();
     }
 
-
-
     /**
      * Deletes avatar file
-     *
-     * @return void
      *
      * @ORM\PostRemove()
      */

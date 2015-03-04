@@ -31,9 +31,6 @@ class JsonTaskController extends AbstractJsonController
         return $this->createJsonResponse($task);
     }
 
-
-
-
     /**
      * Fetches all Tasks for the given Member and week number
      *
@@ -60,9 +57,6 @@ class JsonTaskController extends AbstractJsonController
         return $this->createJsonResponse($tasks);
     }
 
-
-
-
     /**
      * Fetches all Tasks for the given Member and date
      *
@@ -84,8 +78,6 @@ class JsonTaskController extends AbstractJsonController
 
         return $this->createJsonResponse($tasks);
     }
-
-
 
     /**
      * Creates a new Task for the given Member and date
@@ -116,8 +108,6 @@ class JsonTaskController extends AbstractJsonController
         return $this->createJsonResponse($task, Response::HTTP_CREATED);
     }
 
-
-
     /**
      * Updates a Task
      * The updated Task will be returned as JSON
@@ -145,8 +135,6 @@ class JsonTaskController extends AbstractJsonController
         return $this->createJsonResponse($task);
     }
 
-
-
     /**
      * Deletes a Task
      *
@@ -165,8 +153,6 @@ class JsonTaskController extends AbstractJsonController
 
         return $this->createNoContentResponse();
     }
-
-
 
     /**
      * Splits a Task in two
@@ -188,8 +174,6 @@ class JsonTaskController extends AbstractJsonController
 
         return $this->createNoContentResponse();
     }
-
-
 
     /**
      * Merges a Task into another

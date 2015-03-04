@@ -7,8 +7,6 @@
     /**
      * Constructor
      * Grabs parameters from the targeted DOM node and renders the React component
-     *
-     * @return void
      */
     var Board = module.exports = function(boardElement) {
         if (null == boardElement) {

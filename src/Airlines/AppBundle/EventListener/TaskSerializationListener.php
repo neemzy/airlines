@@ -13,22 +13,16 @@ class TaskSerializationListener implements EventSubscriberInterface
      */
     private $manager;
 
-
-
     /**
      * Constructor
      * Binds the Task manager
      *
      * @param TaskManager $manager
-     *
-     * @return void
      */
     public function __construct(TaskManager $manager)
     {
         $this->manager = $manager;
     }
-
-
 
     /**
      * Defines serialization events this listener is subscribed to
@@ -46,15 +40,11 @@ class TaskSerializationListener implements EventSubscriberInterface
         ];
     }
 
-
-
     /**
      * Post-serialization callback
      * Binds API URLs to serialized Tasks
      *
      * @param ObjectEvent $event Subscribed event instance
-     *
-     * @return void
      */
     public function onPostSerialize(ObjectEvent $event)
     {
