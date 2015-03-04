@@ -36,6 +36,7 @@ class Task
      * @var string
      *
      * @ORM\Column(name="date", type="date")
+     * @Assert\NotBlank
      */
     private $date;
 
@@ -43,6 +44,8 @@ class Task
      * @var string
      *
      * @ORM\Column(name="estimate", type="decimal", precision=5, scale=3)
+     * @Assert\NotBlank
+     * @Assert\Type("numeric")
      */
     private $estimate;
 
@@ -50,6 +53,8 @@ class Task
      * @var string
      *
      * @ORM\Column(name="consumed", type="decimal", precision=5, scale=3)
+     * @Assert\NotBlank
+     * @Assert\Type("numeric")
      */
     private $consumed;
 
@@ -57,12 +62,15 @@ class Task
      * @var string
      *
      * @ORM\Column(name="remaining", type="decimal", precision=5, scale=3)
+     * @Assert\NotBlank
+     * @Assert\Type("numeric")
      */
     private $remaining;
 
     /**
      * @ORM\ManyToOne(targetEntity="Member", inversedBy="tasks")
      * @ORM\JoinColumn(name="member_id", referencedColumnName="id")
+     * @Assert\NotBlank
      * @Serializer\Exclude
      */
     private $member;
