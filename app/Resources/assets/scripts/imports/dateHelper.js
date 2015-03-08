@@ -4,8 +4,7 @@
     /**
      * Constructor
      */
-    var ConvertDate = module.exports = function() {
-    };
+    var ConvertDate = module.exports = function() {};
 
 
 
@@ -17,15 +16,11 @@
      * @return string
      */
     ConvertDate.prototype.convert = function(date) {
-        if (date instanceof Date) {
-            date = date.toISOString();
+        if (!(date instanceof Date)) {
+            return this.convert(new Date(date));
         }
 
-        if ('string' != typeof date) {
-            return this.convert(new Date());
-        }
-
-        return date.split('T').shift(); // handle ISO strings
+        return date.toISOString().split('T').shift(); // handle ISO strings
     };
 
 

@@ -92,10 +92,9 @@
         },
 
         /**
-         * Pre-mount React hook
-         * Triggers dates and Members loading
+         * Fetches remote data and updates state
          */
-        componentWillMount: function() {
+        updateData: function() {
             this.loadDates()
                 .then(
                     function (dates) {
@@ -115,6 +114,14 @@
                         this.setState({ members: members });
                     }.bind(this)
                 );
+        },
+
+        /**
+         * Pre-mount React hook
+         * Triggers dates and Members loading
+         */
+        componentWillMount: function() {
+            this.updateData();
         },
 
         /**

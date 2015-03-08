@@ -49,6 +49,7 @@
                             // Inject Tasks
                             console.warn = jest.genMockFunction();
                             day.updateTasks();
+                            expect(day.loadTasks.mock.calls.length).toEqual(1);
                             expect(console.warn.mock.calls.length).toBeGreaterThan(0);
 
                             // Test Member's Numbers' values

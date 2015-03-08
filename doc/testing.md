@@ -9,26 +9,26 @@ We will be using [Jest](http://facebook.github.io/jest/). Written tests will be 
 
 ## Test cases
 
-### Board
+### Board ✘
 
-- Mock `loadDates` and check the Board's heading rendering
-- Mock `loadMembers` and check the Members rendering
+- Mock `loadDates` and check the Board's heading rendering ✔
+- Mock `loadMembers` and check the Members rendering ✔
 - Drag-drop a Task from one Member to another and check again ✘
 - Change the title and check `updateName` is called ✘
 
-### Member ✔
+### Member ✘
 
 - Check the Days rendering ✔
 - Inject some Days and Tasks and check the Numbers' values ✔
 - Edit a Task's Numbers and check again ✘
 - Drag-drop a Task from one Day to another and check again, also check `updateNumbers` is called, and `updateNumbers` and `updateTasks` are called for both days ✘
 
-### Day ✔
+### Day ✘
 
 - Start dropping a Task and check CSS classes ✘
 - Drop a Task and check `move` is called for it ✘
 
-### Task ✔
+### Task ✘
 
 - Start dragging and check CSS classes ✘
 - Start dropping one Task on another and check CSS classes ✘
@@ -41,6 +41,6 @@ We will be using [Jest](http://facebook.github.io/jest/). Written tests will be 
 
 - Check the right CSS classes are applied depending on the props' values ✔
 
-### Editable ✔
+### Editable ✘
 
 - Change the value and check `handleInput` is called ✘
