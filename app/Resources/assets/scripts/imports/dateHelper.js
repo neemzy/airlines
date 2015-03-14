@@ -11,11 +11,11 @@
      * @return {string}
      */
     ConvertDate.prototype.convert = function(date) {
-        if (!(date instanceof Date)) {
-            return this.convert(new Date(date));
+        if (date instanceof Date) {
+            date = date.toISOString();
         }
 
-        return date.toISOString().split('T').shift(); // handle ISO strings
+        return date.split('T').shift(); // handle ISO strings
     };
 
     /**

@@ -34,9 +34,9 @@
                             var headings = React.addons.TestUtils.scryRenderedDOMComponentsWithClass(board, 'board__head-day');
 
                             expect(headings.length).toEqual(3);
-                            expect(dateHelper.convert(headings[0].props.children)).toEqual('1970-01-01');
-                            expect(dateHelper.convert(headings[1].props.children)).toEqual('1970-01-02');
-                            expect(dateHelper.convert(headings[2].props.children)).toEqual('1970-01-03');
+                            expect(dateHelper.convert(new Date(headings[0].props.children))).toEqual('1970-01-01');
+                            expect(dateHelper.convert(new Date(headings[1].props.children))).toEqual('1970-01-02');
+                            expect(dateHelper.convert(new Date(headings[2].props.children))).toEqual('1970-01-03');
                         }
                     );
                 }
