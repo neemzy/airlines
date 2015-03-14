@@ -4,9 +4,7 @@
     jest.autoMockOff();
 
     var React = require('react/addons'),
-        Board = require('../../components/board'),
-        DateHelper = require('../../imports/dateHelper'),
-        dateHelper = new DateHelper();
+        Board = require('../../components/board');
 
     describe(
         'Board',
@@ -34,9 +32,9 @@
                             var headings = React.addons.TestUtils.scryRenderedDOMComponentsWithClass(board, 'board__head-day');
 
                             expect(headings.length).toEqual(3);
-                            expect(dateHelper.convert(new Date(headings[0].props.children))).toEqual('1970-01-01');
-                            expect(dateHelper.convert(new Date(headings[1].props.children))).toEqual('1970-01-02');
-                            expect(dateHelper.convert(new Date(headings[2].props.children))).toEqual('1970-01-03');
+                            expect(headings[0].props.children).toEqual(new Date('1970-01-01').toDateString());
+                            expect(headings[1].props.children).toEqual(new Date('1970-01-02').toDateString());
+                            expect(headings[2].props.children).toEqual(new Date('1970-01-03').toDateString());
                         }
                     );
                 }

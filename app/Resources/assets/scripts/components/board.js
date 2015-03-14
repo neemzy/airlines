@@ -126,9 +126,7 @@
             this.state.dates.forEach(
                 function (date) {
                     days.push(
-                        <div className="board__head-day" key={date.getTime()}>
-                            {date.toLocaleString({}, { weekday: 'long', day: 'numeric', month: 'numeric' })}
-                        </div>
+                        <div className="board__head-day" key={date.getTime()}>{date.toDateString()}</div>
                     );
                 }
             );
