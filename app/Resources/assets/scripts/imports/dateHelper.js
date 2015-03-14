@@ -1,19 +1,14 @@
 (function () {
     'use strict';
 
-    /**
-     * Constructor
-     */
     var ConvertDate = module.exports = function() {};
-
-
 
     /**
      * Converts a date to a YYYY-MM-DD string
      *
-     * @param mixed date Date instance or string
+     * @param {(Date|string)} date
      *
-     * @return string
+     * @return {string}
      */
     ConvertDate.prototype.convert = function(date) {
         if (!(date instanceof Date)) {
@@ -23,15 +18,13 @@
         return date.toISOString().split('T').shift(); // handle ISO strings
     };
 
-
-
     /**
-     * Compares two dates (regardless of time)
+     * Checks if two dates are equal (regardless of time)
      *
-     * @param mixed date1 Date instance or string
-     * @param mixed date2 Date instance or string
+     * @param {(Date|string)} date1
+     * @param {(Date|string)} date2
      *
-     * @return bool
+     * @return {boolean}
      */
     ConvertDate.prototype.compare = function(date1, date2) {
         date1 = this.convert(date1);

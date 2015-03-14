@@ -6,9 +6,7 @@
 
     module.exports = React.createClass({
         /**
-         * Initial props React hook
-         *
-         * @return object
+         * @return {object}
          */
         getDefaultProps: function() {
             return {
@@ -19,11 +17,11 @@
         },
 
         /**
-         * Generic input handling method
+         * Generic input handler
          * Calls update method on parent Task
          *
-         * @param string key   Key of parameter to update
-         * @param string value New value
+         * @param {string} key
+         * @param {string} value
          */
         handleInput: function(key, value) {
             var data = {};
@@ -32,11 +30,8 @@
             this.props.handleInput(data);
         },
 
-
-
         /**
-         * Rendering React hook
-         * Sets the right classes for each value and binds edition callbacks
+         * @return {object}
          */
         render: function() {
             var estimate = this.props.estimate.toFixed(3),

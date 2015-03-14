@@ -21,7 +21,7 @@
         },
 
         /**
-         * Rendering React hook
+         * @return {object}
          */
         render: function() {
             var props = JSON.parse(JSON.stringify(this.props));

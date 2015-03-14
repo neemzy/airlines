@@ -6,9 +6,7 @@
 
     module.exports = React.createClass({
         /**
-         * Initial state React hook
-         *
-         * @return object
+         * @return {object}
          */
         getInitialState: function() {
             return {
@@ -18,8 +16,7 @@
         },
 
         /**
-         * Updates the selected color
-         * Makes the value uppercase
+         * @param {string} color Hexadecimal notation
          */
         updateColor: function(color) {
             this.setState({ color: color.toUpperCase() });
@@ -55,7 +52,7 @@
         },
 
         /**
-         * Rendering React hook
+         * @return {object}
          */
         render: function() {
             var style = { backgroundColor: this.state.color };

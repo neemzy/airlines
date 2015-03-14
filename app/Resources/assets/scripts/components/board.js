@@ -11,9 +11,7 @@
 
     module.exports = React.createClass({
         /**
-         * Initial state React hook
-         *
-         * @return object
+         * @return {object}
          */
         getInitialState: function() {
             return { dates: [], members: [] };
@@ -70,9 +68,7 @@
         },
 
         /**
-         * Updates this Board's name
-         *
-         * @param string name New name
+         * @param {string} name
          */
         updateName: function(name) {
             reqwest({
@@ -92,7 +88,7 @@
         },
 
         /**
-         * Fetches remote data and updates state
+         * Loads dates and Members from the server
          */
         updateData: function() {
             this.loadDates()
@@ -116,17 +112,12 @@
                 );
         },
 
-        /**
-         * Pre-mount React hook
-         * Triggers dates and Members loading
-         */
         componentWillMount: function() {
             this.updateData();
         },
 
         /**
-         * Rendering React hook
-         * Builds the Board's header and the Members' containing rows
+         * @return {object}
          */
         render: function() {
             var members = [],

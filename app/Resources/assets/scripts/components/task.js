@@ -16,9 +16,7 @@
 
         statics: {
             /**
-             * Drag'n'drop mixin configuration callback
-             *
-             * @param function registerType Item type registration closure
+             * @param {function} registerType
              */
             configureDragDrop: function(registerType) {
                 var dateHelper = new DateHelper();
@@ -46,7 +44,7 @@
         },
 
         /**
-         * Removes this Task from the database and triggers reloading for the member and day it belongs to
+         * Removes this Task from the database and triggers reloading for the Member and Day it belongs to
          */
         remove: function() {
             if (!confirm('Are you sure ?')) {
@@ -58,10 +56,6 @@
                 type: 'json',
                 method: 'DELETE',
 
-                error: function(err) {
-                    // TODO: error handling, if there's any need
-                },
-
                 success: function(response) {
                     this.props.handleUpdate();
                 }.bind(this)
@@ -69,7 +63,7 @@
         },
 
         /**
-         * Splits this Task in two and triggers reloading for the member and day it belongs to
+         * Splits this Task in two and triggers reloading for the Member and Day it belongs to
          */
         split: function() {
             reqwest({
@@ -77,10 +71,6 @@
                 type: 'json',
                 method: 'POST',
 
-                error: function(err) {
-                    // TODO: error handling, if there's any need
-                },
-
                 success: function(response) {
                     this.props.handleUpdate();
                 }.bind(this)
@@ -88,10 +78,10 @@
         },
 
         /**
-         * Updates this Task's fields
+         * Updates this Task's data and triggers reloading for the Member and Day it belongs to
          *
-         * @param object   data     Key-value pairs
-         * @param function callback AJAX success callback
+         * @param {object}   data
+         * @param {function} callback
          */
         update: function(data, callback) {
             reqwest({
@@ -99,10 +89,6 @@
                 type: 'json',
                 method: 'PUT',
                 data: data,
-
-                error: function(err) {
-                    // TODO: error handling, if there's any need
-                },
 
                 success: function() {
                     ('function' === typeof callback) && callback();
@@ -112,34 +98,31 @@
         },
 
         /**
-         * Moves this Task to the given member and date
+         * Moves this Task to a different Member and/or Day
          *
-         * @param int      member   Member id
-         * @param string   date     New date
-         * @param function callback AJAX success callback
+         * @param {number}   memberId
+         * @param {string}   date
+         * @param {function} callback
          */
-        move: function(member, date, callback) {
+        move: function(memberId, date, callback) {
             var dateHelper = new DateHelper();
 
-            if (!dateHelper.compare(this.props.date, date) || (this.props.member != member)) {
-                this.update({ member: member, date: date }, callback);
+            // Only process the change if there actually is one
+            if (!dateHelper.compare(this.props.date, date) || (this.props.member != memberId)) {
+                this.update({ member: memberId, date: date }, callback);
             }
         },
 
         /**
-         * Merges a Task into this one
+         * Merges a Task into this one and triggers reloading for the Member and Day it belongs to
          *
-         * @param int task Task id
+         * @param {number} taskId
          */
-        merge: function(task) {
+        merge: function(taskId) {
             reqwest({
-                url: this.props.mergeUrl + task,
+                url: this.props.mergeUrl + taskId,
                 type: 'json',
                 method: 'POST',
-
-                error: function(err) {
-                    // TODO: error handling, if there's any need
-                },
 
                 success: function(response) {
                     this.props.handleUpdate();
@@ -148,8 +131,7 @@
         },
 
         /**
-         * Rendering React hook
-         * Passes props through to the Numbers and attaches action handlers
+         * @return {object}
          */
         render: function() {
             var style = {},

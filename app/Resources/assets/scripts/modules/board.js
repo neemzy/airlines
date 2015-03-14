@@ -4,15 +4,12 @@
     var React = require('react'),
         boardComponent = React.createFactory(require('../components/board'));
 
-    /**
-     * Constructor
-     * Grabs parameters from the targeted DOM node and renders the React component
-     */
     var Board = module.exports = function(boardElement) {
         if (null == boardElement) {
             return;
         }
 
+        // These parameters will be grabbed from the targeted DOM node's data-* attributes
         var params = {
                 name: null,
                 week: null,

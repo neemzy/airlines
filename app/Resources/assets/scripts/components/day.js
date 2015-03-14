@@ -15,9 +15,7 @@
 
         statics: {
             /**
-             * Drag'n'drop mixin configuration callback
-             *
-             * @param function registerType Item type registration closure
+             * @param {function} registerType
              */
             configureDragDrop: function(registerType) {
                 registerType(
@@ -38,9 +36,7 @@
         },
 
         /**
-         * Initial state React hook
-         *
-         * @return object
+         * @return {object}
          */
         getInitialState: function() {
             return {
@@ -51,7 +47,7 @@
         /**
          * Loads Tasks from the database for this Day
          *
-         * @return Promise
+         * @return {Promise}
          */
         loadTasks: function() {
             return new Promise(
@@ -71,19 +67,6 @@
                     });
                 }.bind(this)
             );
-        },
-
-        /**
-         * Updates Tasks in commponent's state
-         */
-        updateTasks: function() {
-            this.loadTasks()
-                .then(
-                    function (tasks) {
-                        this.setState({ tasks: tasks });
-                        this.updateNumbers();
-                    }.bind(this)
-                );
         },
 
         /**
@@ -112,16 +95,22 @@
             );
         },
 
-        /**
-         * Pre-mount React hook
-         * Triggers Task loading
-         */
+        updateTasks: function() {
+            this.loadTasks()
+                .then(
+                    function (tasks) {
+                        this.setState({ tasks: tasks });
+                        this.updateNumbers();
+                    }.bind(this)
+                );
+        },
+
         componentWillMount: function() {
             this.updateTasks();
         },
 
         /**
-         * Rendering React hook
+         * @return {object}
          */
         render: function() {
             var tasks = [],

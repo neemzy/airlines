@@ -11,9 +11,7 @@
 
     module.exports = React.createClass({
         /**
-         * Initial state React hook
-         *
-         * @return object
+         * @return {object}
          */
         getInitialState: function() {
             return {
@@ -27,8 +25,8 @@
         /**
          * Updates this Member's Numbers from its Days
          *
-         * @param string date    Date of the Day to update the numbers for, used as key
-         * @param object numbers Estimate, consumed and remaining values
+         * @param {string} date    Date of the Day to update the numbers for, used as key
+         * @param {object} numbers Estimate, consumed and remaining values
          */
         updateNumbers: function(date, numbers) {
             var estimate = this.state.estimate,
@@ -43,8 +41,7 @@
         },
 
         /**
-         * Rendering React hook
-         * Builds the whole Member's week row
+         * @return {object}
          */
         render: function() {
             var dateHelper = new DateHelper(),

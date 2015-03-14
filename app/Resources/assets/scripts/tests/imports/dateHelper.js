@@ -9,9 +9,6 @@
     describe(
         'DateHelper',
         function () {
-            /**
-             * Date instance or ISO string conversion to YYYY-MM-DD string tests
-             */
             describe(
                 'convert',
                 function () {
@@ -46,9 +43,6 @@
                 }
             );
 
-            /**
-             * Universal date comparison (regardless of time) tests
-             */
             describe(
                 'compare',
                 function () {
