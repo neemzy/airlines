@@ -3,7 +3,7 @@
     "type": "project",
     "description": "IT team planning board with a nice UI",
     "autoload": {
-        "psr-0": { "Airlines": "src/", "SymfonyStandard": "app/" }
+        "psr-4": { "Airlines\\": "src/" }
     },
     "require": {
         "php": ">=5.3.3",
