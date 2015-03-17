@@ -8,6 +8,8 @@ use Symfony\Component\DependencyInjection\ContainerBuilder;
 class DoctrineEntityListenerPass implements CompilerPassInterface
 {
     /**
+     * @param ContainerBuilder $container
+     *
      * @see http://egeloen.fr/2013/12/01/symfony2-doctrine2-entity-listener-as-serice/
      */
     public function process(ContainerBuilder $container)
