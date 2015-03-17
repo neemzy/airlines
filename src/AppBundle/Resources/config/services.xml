@@ -37,7 +37,7 @@
         <service id="airlines.event_listener.member_serialization"
                  class="Airlines\AppBundle\EventListener\MemberSerializationListener">
             <tag name="jms_serializer.event_subscriber" />
-            <argument type="service" id="airlines.manager.member" />
+            <argument type="service" id="airlines.url_generator.member" />
         </service>
 
         <service id="airlines.event_listener.task"
@@ -50,7 +50,7 @@
         <service id="airlines.event_listener.task_serialization"
                  class="Airlines\AppBundle\EventListener\TaskSerializationListener">
             <tag name="jms_serializer.event_subscriber" />
-            <argument type="service" id="airlines.manager.task" />
+            <argument type="service" id="airlines.url_generator.task" />
         </service>
 
         <!-- Factory -->
@@ -62,15 +62,21 @@
                  class="Airlines\AppBundle\Helper\WeekNumberHelper" />
 
         <!-- Manager -->
-        <service id="airlines.manager.member"
-                 class="Airlines\AppBundle\Manager\MemberManager">
-            <argument type="service" id="router" />
-        </service>
-
         <service id="airlines.manager.task"
                  class="Airlines\AppBundle\Manager\TaskManager">
             <argument type="service" id="doctrine.orm.entity_manager" />
             <argument type="service" id="validator" />
+            <argument type="service" id="router" />
+        </service>
+
+        <!-- UrlGenerator -->
+        <service id="airlines.url_generator.member"
+                 class="Airlines\AppBundle\UrlGenerator\MemberUrlGenerator">
+            <argument type="service" id="router" />
+        </service>
+
+        <service id="airlines.url_generator.task"
+                 class="Airlines\AppBundle\UrlGenerator\TaskUrlGenerator">
             <argument type="service" id="router" />
         </service>
     </services>

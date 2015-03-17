@@ -4,19 +4,19 @@ namespace Airlines\AppBundle\EventListener;
 
 use JMS\Serializer\EventDispatcher\EventSubscriberInterface;
 use JMS\Serializer\EventDispatcher\ObjectEvent;
-use Airlines\AppBundle\Manager\TaskManager;
+use Airlines\AppBundle\UrlGenerator\TaskUrlGenerator;
 
 class TaskSerializationListener implements EventSubscriberInterface
 {
-    /** @var TaskManager */
-    private $manager;
+    /** @var TaskUrlGenerator */
+    private $UrlGenerator;
 
     /**
-     * @param TaskManager $manager
+     * @param TaskUrlGenerator $UrlGenerator
      */
-    public function __construct(TaskManager $manager)
+    public function __construct(TaskUrlGenerator $UrlGenerator)
     {
-        $this->manager = $manager;
+        $this->UrlGenerator = $UrlGenerator;
     }
 
     /**
@@ -42,8 +42,8 @@ class TaskSerializationListener implements EventSubscriberInterface
     {
         $task = $event->getObject();
 
-        $event->getVisitor()->addData('restUrl', $this->manager->generateRestUrl($task));
-        $event->getVisitor()->addData('splitUrl', $this->manager->generateSplitUrl($task));
-        $event->getVisitor()->addData('mergeUrl', $this->manager->generateMergeUrl($task));
+        $event->getVisitor()->addData('restUrl', $this->UrlGenerator->generateRestUrl($task));
+        $event->getVisitor()->addData('splitUrl', $this->UrlGenerator->generateSplitUrl($task));
+        $event->getVisitor()->addData('mergeUrl', $this->UrlGenerator->generateMergeUrl($task));
     }
 }

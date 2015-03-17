@@ -2,29 +2,19 @@
 
 namespace Airlines\AppBundle\Manager;
 
-use Symfony\Component\Routing\RouterInterface;
-use Symfony\Component\Validator\ValidatorInterface;
-use Symfony\Component\HttpFoundation\Request;
-use Doctrine\Common\Persistence\ObjectManager;
-use Doctrine\Common\Collections\Collection;
 use Airlines\AppBundle\Entity\Task;
+use Doctrine\Common\Collections\Collection;
+use Doctrine\Common\Persistence\ObjectManager;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Validator\ValidatorInterface;
 
 class TaskManager
 {
-    /**
-     * @var ObjectManager
-     */
+    /** @var ObjectManager */
     private $manager;
 
-    /**
-     * @var ValidatorInterface
-     */
+    /** @var ValidatorInterface */
     private $validator;
-
-    /**
-     * @var RouterInterface
-     */
-    private $router;
 
     /**
      * Constructor
@@ -32,13 +22,11 @@ class TaskManager
      *
      * @param ObjectManager      $manager
      * @param ValidatorInterface $validator
-     * @param RouterInterface    $router
      */
-    public function __construct(ObjectManager $manager, ValidatorInterface $validator, RouterInterface $router)
+    public function __construct(ObjectManager $manager, ValidatorInterface $validator)
     {
         $this->manager = $manager;
         $this->validator = $validator;
-        $this->router = $router;
     }
 
     /**
@@ -159,41 +147,5 @@ class TaskManager
         $this->manager->flush();
 
         return $target;
-    }
-
-    /**
-     * Generates REST API URL for a Task
-     *
-     * @param Task $task
-     *
-     * @return string
-     */
-    public function generateRestUrl(Task $task)
-    {
-        return $this->router->generate('task.get', ['id' => $task->getId()]);
-    }
-
-    /**
-     * Generates split API URL for a Task
-     *
-     * @param Task $task
-     *
-     * @return string
-     */
-    public function generateSplitUrl(Task $task)
-    {
-        return $this->router->generate('task.split', ['id' => $task->getId()]);
-    }
-
-    /**
-     * Generates merge API URL for a Task
-     *
-     * @param Task $task
-     *
-     * @return string
-     */
-    public function generateMergeUrl(Task $task)
-    {
-        return rtrim($this->router->generate('task.merge', ['id' => $task->getId(), 'target' => 0]), '0');
     }
 }

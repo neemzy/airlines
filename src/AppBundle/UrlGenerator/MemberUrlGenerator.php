@@ -1,25 +1,16 @@
 <?php
 
-namespace Airlines\AppBundle\Manager;
+namespace Airlines\AppBundle\UrlGenerator;
 
-use Symfony\Component\Routing\RouterInterface;
-use Doctrine\Common\Persistence\ObjectManager;
-use Doctrine\Common\Collections\Collection;
-use Symfony\Component\Validator\Validator;
-use Symfony\Component\HttpFoundation\Request;
 use Airlines\AppBundle\Entity\Member;
+use Symfony\Component\Routing\RouterInterface;
 
-class MemberManager
+class MemberUrlGenerator
 {
-    /**
-     * @var RouterInterface
-     */
+    /** @var RouterInterface */
     private $router;
 
     /**
-     * Constructor
-     * Binds dependencies
-     *
      * @param RouterInterface $router
      */
     public function __construct(RouterInterface $router)

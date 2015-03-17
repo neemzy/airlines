@@ -4,19 +4,19 @@ namespace Airlines\AppBundle\EventListener;
 
 use JMS\Serializer\EventDispatcher\EventSubscriberInterface;
 use JMS\Serializer\EventDispatcher\ObjectEvent;
-use Airlines\AppBundle\Manager\MemberManager;
+use Airlines\AppBundle\UrlGenerator\MemberUrlGenerator;
 
 class MemberSerializationListener implements EventSubscriberInterface
 {
-    /** @var MemberManager */
-    private $manager;
+    /** @var MemberUrlGenerator */
+    private $urlGenerator;
 
     /**
-     * @param MemberManager $manager
+     * @param MemberUrlGenerator $urlGenerator
      */
-    public function __construct(MemberManager $manager)
+    public function __construct(MemberUrlGenerator $urlGenerator)
     {
-        $this->manager = $manager;
+        $this->urlGenerator = $urlGenerator;
     }
 
     /**
@@ -42,6 +42,6 @@ class MemberSerializationListener implements EventSubscriberInterface
     {
         $member = $event->getObject();
 
-        $event->getVisitor()->addData('taskUrl', $this->manager->generateRootTaskUrl($member));
+        $event->getVisitor()->addData('taskUrl', $this->urlGenerator->generateRootTaskUrl($member));
     }
 }
