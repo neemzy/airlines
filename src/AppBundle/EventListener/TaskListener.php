@@ -2,10 +2,10 @@
 
 namespace Airlines\AppBundle\EventListener;
 
+use Airlines\AppBundle\Emitter\TaskEmitter;
+use Airlines\AppBundle\Entity\Task;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\ORM\Event\LifecycleEventArgs;
-use Airlines\AppBundle\Entity\Task;
-use Airlines\AppBundle\Emitter\TaskEmitter;
 
 class TaskListener
 {

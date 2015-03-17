@@ -2,9 +2,9 @@
 
 namespace Airlines\AppBundle\EventListener;
 
+use Airlines\AppBundle\UrlGenerator\MemberUrlGenerator;
 use JMS\Serializer\EventDispatcher\EventSubscriberInterface;
 use JMS\Serializer\EventDispatcher\ObjectEvent;
-use Airlines\AppBundle\UrlGenerator\MemberUrlGenerator;
 
 class MemberSerializationListener implements EventSubscriberInterface
 {

@@ -2,9 +2,9 @@
 
 namespace Airlines\AppBundle\EventListener;
 
-use Doctrine\ORM\Mapping as ORM;
-use Doctrine\ORM\Event\LifecycleEventArgs;
 use Airlines\AppBundle\Entity\Member;
+use Doctrine\ORM\Event\LifecycleEventArgs;
+use Doctrine\ORM\Mapping as ORM;
 
 class MemberListener
 {

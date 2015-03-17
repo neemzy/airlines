@@ -2,8 +2,8 @@
 
 namespace Airlines\AppBundle\Emitter;
 
-use SocketIO\Emitter;
 use Airlines\AppBundle\Entity\Task;
+use SocketIO\Emitter;
 
 class TaskEmitter
 {

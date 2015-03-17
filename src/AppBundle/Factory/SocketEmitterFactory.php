@@ -2,8 +2,8 @@
 
 namespace Airlines\AppBundle\Factory;
 
-use Symfony\Component\Debug\Exception\ContextErrorException;
 use SocketIO\Emitter;
+use Symfony\Component\Debug\Exception\ContextErrorException;
 
 class SocketEmitterFactory
 {

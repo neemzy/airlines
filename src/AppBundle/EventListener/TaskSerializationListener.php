@@ -2,9 +2,9 @@
 
 namespace Airlines\AppBundle\EventListener;
 
+use Airlines\AppBundle\UrlGenerator\TaskUrlGenerator;
 use JMS\Serializer\EventDispatcher\EventSubscriberInterface;
 use JMS\Serializer\EventDispatcher\ObjectEvent;
-use Airlines\AppBundle\UrlGenerator\TaskUrlGenerator;
 
 class TaskSerializationListener implements EventSubscriberInterface
 {
