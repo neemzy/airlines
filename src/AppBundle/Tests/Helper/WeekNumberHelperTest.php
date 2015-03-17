@@ -7,15 +7,13 @@ use Airlines\AppBundle\Helper\WeekNumberHelper;
 class WeekNumberHelperTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * Provides week/year couples
-     * Values are provided in an array alongside expected previous and next values for both
-     *
      * @return array
      */
     public function weekYearProvider()
     {
         return [
-            // week, year, previous week number, previous week's year, next week number, next week's year
+            // week, year, expected previous week number, expected previous week's year,
+            // expected next week number, expected next week's year
             [40, 2014, 39, 2014, 41, 2014],
             [52, 2014, 51, 2014, 1, 2015],
             [1, 2015, 52, 2014, 2, 2015]
@@ -23,8 +21,6 @@ class WeekNumberHelperTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * Checks working days dates per week number calculation
-     *
      * @testdox Can fetch working days dates for given week and year
      */
     public function testGetWorkDaysForWeek()
@@ -42,8 +38,6 @@ class WeekNumberHelperTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * Checks previous and next week/year couples calculation
-     *
      * @param int $week
      * @param int $year
      * @param int $prevWeek Expected previous week number

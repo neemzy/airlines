@@ -5,12 +5,10 @@ namespace Airlines\AppBundle\Helper;
 class WeekNumberHelper
 {
     /**
-     * Fetches monday-to-friday dates for the given week number
-     *
-     * @param int $week
+     * @param int $week Week number
      * @param int $year
      *
-     * @return array DateTime instances
+     * @return array Monda-to-friday DateTime instances
      */
     public function getWorkDaysForWeek($week, $year = null)
     {
@@ -25,12 +23,10 @@ class WeekNumberHelper
     }
 
     /**
-     * Determines previous and next week/year couples
-     *
-     * @param int $week
+     * @param int $week Week number
      * @param int $year
      *
-     * @return array
+     * @return array Previous/next week numbers and years
      */
     public function getPrevNextWeekYear($week, $year)
     {

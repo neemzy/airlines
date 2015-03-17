@@ -9,8 +9,10 @@ use Airlines\AppBundle\Entity\Member;
 class MemberListener
 {
     /**
-     * Prepares avatar file uploading
-     * Is it really useful to do it prior to persistance ?
+     * Is it really useful to do this prior to persistance ?
+     *
+     * @param Member             $member
+     * @param LifecycleEventArgs $args
      *
      * @ORM\PrePersist()
      * @ORM\PreUpdate()
@@ -21,7 +23,8 @@ class MemberListener
     }
 
     /**
-     * Performs avatar file uploading
+     * @param Member             $member
+     * @param LifecycleEventArgs $args
      *
      * @ORM\PostPersist()
      * @ORM\PostUpdate()
@@ -32,7 +35,8 @@ class MemberListener
     }
 
     /**
-     * Deletes avatar file
+     * @param Member             $member
+     * @param LifecycleEventArgs $args
      *
      * @ORM\PostRemove()
      */

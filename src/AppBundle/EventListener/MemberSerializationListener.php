@@ -8,15 +8,10 @@ use Airlines\AppBundle\Manager\MemberManager;
 
 class MemberSerializationListener implements EventSubscriberInterface
 {
-    /**
-     * @var MemberManager
-     */
+    /** @var MemberManager */
     private $manager;
 
     /**
-     * Constructor
-     * Binds the Member manager
-     *
      * @param MemberManager $manager
      */
     public function __construct(MemberManager $manager)
@@ -25,8 +20,6 @@ class MemberSerializationListener implements EventSubscriberInterface
     }
 
     /**
-     * Defines serialization events this listener is subscribed to
-     *
      * @return array
      */
     public static function getSubscribedEvents()
@@ -41,10 +34,9 @@ class MemberSerializationListener implements EventSubscriberInterface
     }
 
     /**
-     * Post-serialization callback
      * Binds API URLs to serialized Members
      *
-     * @param ObjectEvent $event Subscribed event instance
+     * @param ObjectEvent
      */
     public function onPostSerialize(ObjectEvent $event)
     {

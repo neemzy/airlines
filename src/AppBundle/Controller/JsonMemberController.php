@@ -8,15 +8,11 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Airlines\AppBundle\Entity\Board;
 
 /**
- * JSON API Member management controller
- *
  * @Route("/api/member")
  */
 class JsonMemberController extends AbstractJsonController
 {
     /**
-     * Fetches all Members for the given Board
-     *
      * @param Board $board
      *
      * @return Response

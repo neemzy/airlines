@@ -10,15 +10,11 @@ use Airlines\AppBundle\Entity\Member;
 use Airlines\AppBundle\Entity\Task;
 
 /**
- * JSON API Task management controller
- *
  * @Route("/api/task")
  */
 class JsonTaskController extends AbstractJsonController
 {
     /**
-     * Fetches a Task
-     *
      * @param Task $task
      *
      * @return Response
@@ -32,10 +28,8 @@ class JsonTaskController extends AbstractJsonController
     }
 
     /**
-     * Fetches all Tasks for the given Member and week number
-     *
      * @param Member $member
-     * @param int    $week
+     * @param int    $week   Week number
      *
      * @return Response
      *
@@ -58,8 +52,6 @@ class JsonTaskController extends AbstractJsonController
     }
 
     /**
-     * Fetches all Tasks for the given Member and date
-     *
      * @param Member   $member
      * @param DateTime $date
      *
@@ -80,13 +72,10 @@ class JsonTaskController extends AbstractJsonController
     }
 
     /**
-     * Creates a new Task for the given Member and date
-     * The newly created Task will be returned as JSON
-     *
      * @param Member   $member
      * @param DateTime $date
      *
-     * @return Response
+     * @return Response Newly created Task as JSON
      *
      * @Route("/{id}/{date}", name="task.create", requirements={"id": "\d+", "date": "\d{4}-\d{2}-\d{2}"})
      * @Method("POST")
@@ -109,12 +98,9 @@ class JsonTaskController extends AbstractJsonController
     }
 
     /**
-     * Updates a Task
-     * The updated Task will be returned as JSON
-     *
      * @param Task $task
      *
-     * @return Response
+     * @return Response Updated Task as JSON
      *
      * @Route("/{id}", name="task.update", requirements={"id": "\d+"})
      * @Method("PUT")
@@ -136,8 +122,6 @@ class JsonTaskController extends AbstractJsonController
     }
 
     /**
-     * Deletes a Task
-     *
      * @param Task $task
      *
      * @return Response
@@ -155,7 +139,6 @@ class JsonTaskController extends AbstractJsonController
     }
 
     /**
-     * Splits a Task in two
      * The new Task will be created for the same member and date as the original one,
      * so we just have to fetch tasks according to these parameters again to update the view
      *
@@ -176,13 +159,12 @@ class JsonTaskController extends AbstractJsonController
     }
 
     /**
-     * Merges a Task into another
-     * The resulting Task will be returned as JSON (the merged one can be removed from the view)
+     * Merges a Task into another (it can then be safely removed from the view)
      *
      * @param Task $task   Merged Task
      * @param Task $target Target Task (in which the other one will be merged)
      *
-     * @return Response
+     * @return Response Updated Task as JSON
      *
      * @Route("/merge/{id}/{target}", name="task.merge", requirements={"id": "\d+", "target": "\d+"})
      * @Method("POST")

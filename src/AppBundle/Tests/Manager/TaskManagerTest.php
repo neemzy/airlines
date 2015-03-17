@@ -9,8 +9,6 @@ use Airlines\AppBundle\Manager\TaskManager;
 class TaskManagerTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * Checks task hydration from request
-     *
      * @testdox Can hydrate a task from a request
      */
     public function testHydrateFromRequest()
@@ -103,8 +101,6 @@ class TaskManagerTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * Checks task splitting
-     *
      * @testdox Can split a task in two
      */
     public function testSplit()
@@ -157,8 +153,6 @@ class TaskManagerTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * Checks task merging
-     *
      * @testdox Can merge two tasks
      */
     public function testMerge()

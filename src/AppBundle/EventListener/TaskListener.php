@@ -9,14 +9,11 @@ use Airlines\AppBundle\Emitter\TaskEmitter;
 
 class TaskListener
 {
-    /**
-     * @var TaskEmitter
-     */
+    /** @var TaskEmitter */
     private $emitter;
 
     /**
-     * Constructor
-     * Binds the Task emitter
+     * @param TaskEmitter $emitter
      */
     public function __construct(TaskEmitter $emitter)
     {

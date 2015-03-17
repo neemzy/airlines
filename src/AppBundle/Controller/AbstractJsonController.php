@@ -5,14 +5,9 @@ namespace Airlines\AppBundle\Controller;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
-/**
- * Abstract JSON API controller
- */
 class AbstractJsonController extends Controller
 {
     /**
-     * Returns a JSON response
-     *
      * @param mixed $data Data to serialize
      * @param int   $code HTTP response code
      *
@@ -27,8 +22,6 @@ class AbstractJsonController extends Controller
     }
 
     /**
-     * Returns a "No Content" (204) response
-     *
      * @return Response
      */
     protected function createNoContentResponse()

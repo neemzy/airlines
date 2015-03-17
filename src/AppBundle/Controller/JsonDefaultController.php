@@ -6,19 +6,15 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 
 /**
- * JSON API generic controller
- *
  * @Route("/api")
  */
 class JsonDefaultController extends AbstractJsonController
 {
     /**
-     * Fetches monday-to-friday dates for the given week number
-     *
-     * @param int $week
+     * @param int $week Week number
      * @param int $year
      *
-     * @return Response
+     * @return Response Monday-to-friday dates
      *
      * @Route("/weekdays/{week}/{year}", name="weekdays", requirements={"week": "\d+"})
      * @Method("GET")

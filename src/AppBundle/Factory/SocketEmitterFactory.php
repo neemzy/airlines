@@ -8,8 +8,6 @@ use SocketIO\Emitter;
 class SocketEmitterFactory
 {
     /**
-     * Crafts socket emitter instance
-     *
      * @param string $host
      * @param string $port
      *

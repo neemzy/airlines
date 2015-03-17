@@ -9,15 +9,12 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Airlines\AppBundle\Entity\Board;
 
 /**
- * JSON API Board management controller
- *
  * @Route("/api/board")
  */
 class JsonBoardController extends AbstractJsonController
 {
     /**
-     * Updates a Board
-     * We only take the "name" parameter into account
+     * Updates a Board, only taking the "name" parameter into account
      *
      * @param Board $board
      *

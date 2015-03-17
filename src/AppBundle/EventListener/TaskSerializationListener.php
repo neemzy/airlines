@@ -8,15 +8,10 @@ use Airlines\AppBundle\Manager\TaskManager;
 
 class TaskSerializationListener implements EventSubscriberInterface
 {
-    /**
-     * @var TaskManager
-     */
+    /** @var TaskManager */
     private $manager;
 
     /**
-     * Constructor
-     * Binds the Task manager
-     *
      * @param TaskManager $manager
      */
     public function __construct(TaskManager $manager)
@@ -25,8 +20,6 @@ class TaskSerializationListener implements EventSubscriberInterface
     }
 
     /**
-     * Defines serialization events this listener is subscribed to
-     *
      * @return array
      */
     public static function getSubscribedEvents()
@@ -41,10 +34,9 @@ class TaskSerializationListener implements EventSubscriberInterface
     }
 
     /**
-     * Post-serialization callback
      * Binds API URLs to serialized Tasks
      *
-     * @param ObjectEvent $event Subscribed event instance
+     * @param ObjectEvent $event
      */
     public function onPostSerialize(ObjectEvent $event)
     {

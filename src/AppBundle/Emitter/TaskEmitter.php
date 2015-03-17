@@ -7,15 +7,10 @@ use Airlines\AppBundle\Entity\Task;
 
 class TaskEmitter
 {
-    /**
-     * @var Emitter
-     */
+    /** @var Emitter */
     private $emitter;
 
     /**
-     * Constructor
-     * Binds the socket emitter instance
-     *
      * @param Emitter $emitter
      */
     public function __construct(Emitter $emitter = null)

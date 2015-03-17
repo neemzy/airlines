@@ -7,19 +7,14 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
 
 class EntityListenerResolver extends DefaultEntityListenerResolver
 {
-    /**
-     * @var ContainerInterface
-     */
+    /** @var ContainerInterface */
     private $container;
 
-    /**
-     * @var array
-     */
+    /** @var array */
     private $mapping;
 
     /**
-     * Constructor
-     * Binds the service container
+     * @param ContainerInterface $container
      */
     public function __construct(ContainerInterface $container)
     {
@@ -27,9 +22,6 @@ class EntityListenerResolver extends DefaultEntityListenerResolver
         $this->mapping = [];
     }
 
-    /**
-     * Maps a service to an entity listener class
-     */
     public function addMapping($className, $service)
     {
         $this->mapping[$className] = $service;
