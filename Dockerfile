@@ -32,4 +32,6 @@ RUN mkdir -p /etc/my_init.d
 ADD docker/docker_setup.sh /etc/my_init.d/docker_setup.sh
 RUN chmod +x /etc/my_init.d/docker_setup.sh
 
+RUN sed -i -e 's?/var/www/html?/var/www/html/web?' /etc/apache2/sites-enabled/000-default.conf
+
 VOLUME ["/var/www/html"]
