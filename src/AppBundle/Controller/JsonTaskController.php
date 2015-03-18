@@ -75,24 +75,27 @@ class JsonTaskController extends AbstractJsonController
      * @param Member   $member
      * @param DateTime $date
      *
-     * @return Response Newly created Task as JSON
+     * @return Response Newly created Task or validation errors, as JSON
      *
      * @Route("/{id}/{date}", name="task.create", requirements={"id": "\d+", "date": "\d{4}-\d{2}-\d{2}"})
      * @Method("POST")
      */
     public function postAction(Request $request, Member $member, \DateTime $date)
     {
-        $manager = $this->get('airlines.manager.task');
+        $task = $this
+            ->get('airlines.hydrator.task')
+            ->hydrateFromRequest(new Task(), $request);
 
-        $task = $manager->hydrateFromRequest(new Task(), $request);
-        $task->setDate($date);
         $task->setMember($member);
+        $task->setDate($date);
 
-        $errors = $manager->validateAndPersist($task);
-
-        if (0 < count($errors)) {
+        if (0 < count($errors = $this->get('validator')->validate($task))) {
             return $this->createJsonResponse($errors, Response::HTTP_BAD_REQUEST);
         }
+
+        $em = $this->getDoctrine()->getManager();
+        $em->persist($task);
+        $em->flush();
 
         return $this->createJsonResponse($task, Response::HTTP_CREATED);
     }
@@ -100,21 +103,24 @@ class JsonTaskController extends AbstractJsonController
     /**
      * @param Task $task
      *
-     * @return Response Updated Task as JSON
+     * @return Response Updated Task or validation errors, as JSON
      *
      * @Route("/{id}", name="task.update", requirements={"id": "\d+"})
      * @Method("PUT")
      */
     public function putAction(Request $request, Task $task)
     {
-        $manager = $this->get('airlines.manager.task');
+        $task = $this
+            ->get('airlines.hydrator.task')
+            ->hydrateFromRequest($task, $request);
 
-        $task = $manager->hydrateFromRequest($task, $request);
-        $errors = $manager->validateAndPersist($task);
-
-        if (0 < count($errors)) {
+        if (0 < count($errors = $this->get('validator')->validate($task))) {
             return $this->createJsonResponse($errors, Response::HTTP_BAD_REQUEST);
         }
+
+        $em = $this->getDoctrine()->getManager();
+        $em->persist($task);
+        $em->flush();
 
         // We use 200 OK instead of 204 No Content for a successful PUT,
         // because the latter prevents any content to be sent (which pretty much makes sense)
@@ -164,7 +170,7 @@ class JsonTaskController extends AbstractJsonController
      * @param Task $task   Merged Task
      * @param Task $target Target Task (in which the other one will be merged)
      *
-     * @return Response Updated Task as JSON
+     * @return Response Updated Task, as JSON
      *
      * @Route("/merge/{id}/{target}", name="task.merge", requirements={"id": "\d+", "target": "\d+"})
      * @Method("POST")

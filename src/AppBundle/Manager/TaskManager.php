@@ -3,93 +3,19 @@
 namespace Airlines\AppBundle\Manager;
 
 use Airlines\AppBundle\Entity\Task;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\Common\Persistence\ObjectManager;
-use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\Validator\ValidatorInterface;
 
 class TaskManager
 {
     /** @var ObjectManager */
     private $manager;
 
-    /** @var ValidatorInterface */
-    private $validator;
-
     /**
-     * Constructor
-     * Binds dependencies
-     *
-     * @param ObjectManager      $manager
-     * @param ValidatorInterface $validator
+     * @param ObjectManager $manager
      */
-    public function __construct(ObjectManager $manager, ValidatorInterface $validator)
+    public function __construct(ObjectManager $manager)
     {
         $this->manager = $manager;
-        $this->validator = $validator;
-    }
-
-    /**
-     * Hydrates a Task from a request's data
-     *
-     * @param Task    $task
-     * @param Request $request
-     *
-     * @return Task Hydrated instance
-     */
-    public function hydrateFromRequest(Task $task, Request $request)
-    {
-        if ($request->request->has('name')) {
-            // Strip HTML out, but preserve newlines
-            $name = $request->get('name');
-            $name = preg_replace('/<br([\s\/]*)>/', PHP_EOL, $name);
-            $name = strip_tags($name);
-
-            $task->setName($name);
-        }
-
-        if ($request->request->has('date')) {
-            $date = new \DateTime($request->get('date'));
-            $task->setDate($date);
-        }
-
-        if ($request->request->has('estimate')) {
-            $task->setEstimate($request->get('estimate'));
-        }
-
-        if ($request->request->has('consumed')) {
-            $task->setConsumed($request->get('consumed'));
-        }
-
-        if ($request->request->has('remaining')) {
-            $task->setRemaining($request->get('remaining'));
-        }
-
-        if ($request->request->has('member')) {
-            $member = $this->manager->getRepository('AirlinesAppBundle:Member')->find($request->get('member'));
-            $task->setMember($member);
-        }
-
-        return $task;
-    }
-
-    /**
-     * Fool-proofs a Task and persists it if it is valid
-     *
-     * @param Task $task
-     *
-     * @return array Error messages
-     */
-    public function validateAndPersist(Task $task)
-    {
-        $errors = $this->validator->validate($task);
-
-        if (0 == count($errors)) {
-            $this->manager->persist($task);
-            $this->manager->flush();
-        }
-
-        return $errors;
     }
 
     /**
