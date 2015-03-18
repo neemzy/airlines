@@ -30,10 +30,14 @@ class TaskHydrator
     public function hydrateFromRequest(Task $task, Request $request)
     {
         if ($request->request->has('name')) {
-            // Strip HTML out, but preserve newlines
             $name = $request->get('name');
+
+            // Strip HTML out, but preserve newlines
             $name = preg_replace('/<br([\s\/]*)>/', PHP_EOL, $name);
             $name = strip_tags($name);
+
+            // Remove unwanted entities
+            $name = str_replace('&nbsp;', ' ', $name);
 
             $task->setName($name);
         }
