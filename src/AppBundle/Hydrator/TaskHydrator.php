@@ -20,7 +20,8 @@ class TaskHydrator
     }
 
     /**
-     * Hydrates a Task from a request's data
+     * Hydrates a Task from a request's data, erasing potential null values to avoid persistence crashes
+     * There must be a better way to handle that last part
      *
      * @param Task    $task
      * @param Request $request
@@ -49,14 +50,20 @@ class TaskHydrator
 
         if ($request->request->has('estimate')) {
             $task->setEstimate($request->get('estimate'));
+        } else if (null === $task->getEstimate()) {
+            $task->setEstimate(0);
         }
 
         if ($request->request->has('consumed')) {
             $task->setConsumed($request->get('consumed'));
+        } else if (null === $task->getConsumed()) {
+            $task->setConsumed(0);
         }
 
         if ($request->request->has('remaining')) {
             $task->setRemaining($request->get('remaining'));
+        } else if (null === $task->getRemaining()) {
+            $task->setRemaining(0);
         }
 
         if ($request->request->has('member')) {

@@ -45,24 +45,30 @@
         },
 
         /**
-         * Loads Tasks from the database for this Day
+         * @param {string} method
+         * @param {object} data
          *
          * @return {Promise}
          */
-        loadTasks: function() {
+        makeRequest: function(method, data) {
+            if (undefined === method) {
+                method = 'GET';
+            }
+
             return new Promise(
                 function (resolve, reject) {
                     reqwest({
                         url: this.props.taskUrl,
                         type: 'json',
-                        method: 'GET',
+                        method: method,
+                        data: data,
 
                         error: function(err) {
                             reject(err);
                         },
 
-                        success: function(tasks) {
-                            resolve(tasks);
+                        success: function(response) {
+                            resolve(response);
                         }
                     });
                 }.bind(this)
@@ -96,11 +102,36 @@
         },
 
         updateTasks: function() {
-            this.loadTasks()
+            this.makeRequest()
                 .then(
                     function (tasks) {
+                        // We have to force a full re-render of this Day's Tasks,
+                        // as React is unable to detect the change in the Editable
+                        // when emptying a Task's name and failing to persist it
+                        this.setState(
+                            { tasks: [] },
+                            function () {
+                                this.setState(
+                                    { tasks: tasks },
+                                    function () {
+                                        this.updateNumbers();
+                                    }.bind(this)
+                                );
+                            }.bind(this)
+                        );
+                    }.bind(this)
+                );
+        },
+
+        createTask: function() {
+            this.makeRequest('POST', { name: 'Edit me' }) // dummy name
+                .then(
+                    function (task) {
+                        // Optimistic display
+                        var tasks = this.state.tasks;
+
+                        tasks.push(task);
                         this.setState({ tasks: tasks });
-                        this.updateNumbers();
                     }.bind(this)
                 );
         },
@@ -130,7 +161,12 @@
             );
 
             return (
-                <div className={classes} {...this.dropTargetFor(ItemTypes.TASK)}>{tasks}</div>
+                <div className={classes} {...this.dropTargetFor(ItemTypes.TASK)}>
+                    {tasks}
+                    <div className="action-group">
+                        <a className="action-group__item action-group__item--create" title="Create task" onClick={this.createTask}></a>
+                    </div>
+                </div>
             );
         }
     });

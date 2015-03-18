@@ -31,44 +31,4 @@
         text-transform: uppercase;
         white-space: pre-wrap;
     }
-
-    &__action-group {
-        position: absolute;
-        top: 0;
-        right: 0;
-        opacity: 0;
-    }
-
-    &:hover &__action-group {
-        opacity: 1;
-    }
-
-    &__action {
-        .glyphicon();
-
-        float: left;
-        width: @task-remove-width;
-        height: @task-remove-height;
-        line-height: @task-remove-height;
-        font-size: 0.8em;
-        text-align: center;
-        color: @gray-dark;
-        cursor: pointer;
-        transition: opacity .15s ease-in-out;
-
-        &:hover,
-        &:focus,
-        &:active {
-            text-decoration: none;
-            outline: none;
-        }
-
-        &--remove {
-            .glyphicon-remove();
-        }
-
-        &--split {
-            .glyphicon-tags();
-        }
-    }
 }

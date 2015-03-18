@@ -93,6 +93,11 @@
                 success: function() {
                     ('function' === typeof callback) && callback();
                     this.props.handleUpdate();
+                }.bind(this),
+
+                error: function() {
+                    // Restore initial data if save failed
+                    this.props.handleUpdate();
                 }.bind(this)
             });
         },
@@ -144,7 +149,7 @@
                 }),
 
                 handleNameInput = function(name) {
-                    this.update({ name : name });
+                    this.update({ name: name });
                 }.bind(this);
 
             return (
@@ -153,9 +158,9 @@
                         <Editable handleInput={handleNameInput}>{this.props.name}</Editable>
                     </div>
                     <Numbers estimate={this.props.estimate} consumed={this.props.consumed} remaining={this.props.remaining} handleInput={this.update} />
-                    <div className="task__action-group">
-                        <a className="task__action task__action--split" title="Split" onClick={this.split}></a>
-                        <a className="task__action task__action--remove" title="Delete" onClick={this.remove}></a>
+                    <div className="action-group">
+                        <a className="action-group__item action-group__item--split" title="Split" onClick={this.split}></a>
+                        <a className="action-group__item action-group__item--remove" title="Delete" onClick={this.remove}></a>
                     </div>
                 </div>
             );

@@ -1,4 +1,5 @@
-{% set routes = ['board', 'member', 'task'] %}
+{# add 'task' to the array below to restore access to the Task CRUD #}
+{% set routes = ['board', 'member'] %}
 
 <ul class="nav navbar-nav">
     {% for route in routes %}
