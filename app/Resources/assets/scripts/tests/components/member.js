@@ -37,7 +37,7 @@
                                 day = React.addons.TestUtils.findRenderedComponentWithType(member, Day);
 
                             // Mock Promise
-                            day.loadTasks = jest.genMockFunction().mockReturnValue({
+                            day.makeRequest = jest.genMockFunction().mockReturnValue({
                                 then: function(callback) {
                                     callback([
                                         { id: 1, estimate: 1, consumed: 0.5, remaining: 0.5 },
@@ -49,7 +49,7 @@
                             // Inject Tasks
                             console.warn = jest.genMockFunction();
                             day.updateTasks();
-                            expect(day.loadTasks.mock.calls.length).toEqual(1);
+                            expect(day.makeRequest.mock.calls.length).toEqual(1);
                             expect(console.warn.mock.calls.length).toBeGreaterThan(0);
 
                             // Test Member's Numbers' values
