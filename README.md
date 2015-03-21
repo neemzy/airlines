@@ -18,6 +18,9 @@ All commands shall be ran at the application's root unless otherwise specified.
 - Run `composer install` to install back-end dependencies
 - Run `npm install` to install front-end dependencies
 
+You can also install Airlines using [Docker](https://www.docker.com/). If you are interested in using this method, just
+follow the [guide](doc/docker_installation.md).
+
 ### Development
 
 - Run `cp open.json.dist open.json` and edit the latter to define the app's root URL
