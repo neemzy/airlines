@@ -6,7 +6,7 @@
 
     module.exports = React.createClass({
         /**
-         * @return {object}
+         * @return {Object}
          */
         getDefaultProps: function() {
             return {
@@ -20,8 +20,8 @@
          * Generic input handler
          * Calls update method on parent Task
          *
-         * @param {string} key
-         * @param {string} value
+         * @param {String} key
+         * @param {String} value
          */
         handleInput: function(key, value) {
             var data = {};
@@ -31,7 +31,7 @@
         },
 
         /**
-         * @return {object}
+         * @return {Object}
          */
         render: function() {
             var estimate = this.props.estimate.toFixed(3),

@@ -16,7 +16,7 @@
 
         statics: {
             /**
-             * @param {function} registerType
+             * @param {Function} registerType
              */
             configureDragDrop: function(registerType) {
                 var dateHelper = new DateHelper();
@@ -80,8 +80,8 @@
         /**
          * Updates this Task's data and triggers reloading for the Member and Day it belongs to
          *
-         * @param {object}   data
-         * @param {function} callback
+         * @param {Object}   data
+         * @param {Function} callback
          */
         update: function(data, callback) {
             reqwest({
@@ -105,9 +105,9 @@
         /**
          * Moves this Task to a different Member and/or Day
          *
-         * @param {number}   memberId
-         * @param {string}   date
-         * @param {function} callback
+         * @param {Number}   memberId
+         * @param {String}   date
+         * @param {Function} callback
          */
         move: function(memberId, date, callback) {
             var dateHelper = new DateHelper();
@@ -121,7 +121,7 @@
         /**
          * Merges a Task into this one and triggers reloading for the Member and Day it belongs to
          *
-         * @param {number} taskId
+         * @param {Number} taskId
          */
         merge: function(taskId) {
             reqwest({
@@ -136,7 +136,7 @@
         },
 
         /**
-         * @return {object}
+         * @return {Object}
          */
         render: function() {
             var style = {},

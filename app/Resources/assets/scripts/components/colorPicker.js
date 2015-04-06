@@ -6,7 +6,7 @@
 
     module.exports = React.createClass({
         /**
-         * @return {object}
+         * @return {Object}
          */
         getInitialState: function() {
             return {
@@ -16,7 +16,7 @@
         },
 
         /**
-         * @param {string} color Hexadecimal notation
+         * @param {String} color Hexadecimal notation
          */
         updateColor: function(color) {
             this.setState({ color: color.toUpperCase() });
@@ -52,7 +52,7 @@
         },
 
         /**
-         * @return {object}
+         * @return {Object}
          */
         render: function() {
             var style = { backgroundColor: this.state.color };

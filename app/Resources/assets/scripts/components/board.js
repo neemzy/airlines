@@ -11,7 +11,7 @@
 
     module.exports = React.createClass({
         /**
-         * @return {object}
+         * @return {Object}
          */
         getInitialState: function() {
             return { dates: [], members: [] };
@@ -20,7 +20,7 @@
         /**
          * Loads the working days' dates for the current week
          *
-         * @return Promise
+         * @return {Promise}
          */
         loadDates: function() {
             return new Promise(
@@ -45,7 +45,7 @@
         /**
          * Loads all Members from the database for this Board
          *
-         * @return Promise
+         * @return {Promise}
          */
         loadMembers: function() {
             return new Promise(
@@ -68,22 +68,14 @@
         },
 
         /**
-         * @param {string} name
+         * @param {String} name
          */
         updateName: function(name) {
             reqwest({
                 url: this.props.boardUrl,
                 type: 'json',
                 method: 'PUT',
-                data: { name: name },
-
-                error: function(err) {
-                    // TODO: error handling, if there's any need
-                },
-
-                success: function() {
-                    // Nothing more to do
-                }
+                data: { name: name }
             });
         },
 
@@ -117,7 +109,7 @@
         },
 
         /**
-         * @return {object}
+         * @return {Object}
          */
         render: function() {
             var members = [],

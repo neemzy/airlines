@@ -21,7 +21,7 @@
         },
 
         /**
-         * @return {object}
+         * @return {Object}
          */
         render: function() {
             var props = JSON.parse(JSON.stringify(this.props));

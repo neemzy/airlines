@@ -4,11 +4,11 @@
     var ConvertDate = module.exports = function() {};
 
     /**
-     * Converts a date to a YYYY-MM-DD string
+     * Converts a date to its YYYY-MM-DD notation
      *
-     * @param {(Date|string)} date
+     * @param {(Date|String)} date
      *
-     * @return {string}
+     * @return {String}
      */
     ConvertDate.prototype.convert = function(date) {
         if (date instanceof Date) {
@@ -21,10 +21,10 @@
     /**
      * Checks if two dates are equal (regardless of time)
      *
-     * @param {(Date|string)} date1
-     * @param {(Date|string)} date2
+     * @param {(Date|String)} date1
+     * @param {(Date|String)} date2
      *
-     * @return {boolean}
+     * @return {Boolean}
      */
     ConvertDate.prototype.compare = function(date1, date2) {
         date1 = this.convert(date1);

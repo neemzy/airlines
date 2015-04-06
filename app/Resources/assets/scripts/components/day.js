@@ -15,7 +15,7 @@
 
         statics: {
             /**
-             * @param {function} registerType
+             * @param {Function} registerType
              */
             configureDragDrop: function(registerType) {
                 registerType(
@@ -36,7 +36,7 @@
         },
 
         /**
-         * @return {object}
+         * @return {Object}
          */
         getInitialState: function() {
             return {
@@ -45,8 +45,8 @@
         },
 
         /**
-         * @param {string} method
-         * @param {object} data
+         * @param {String} method
+         * @param {Object} data
          *
          * @return {Promise}
          */
@@ -141,7 +141,7 @@
         },
 
         /**
-         * @return {object}
+         * @return {Object}
          */
         render: function() {
             var tasks = [],
