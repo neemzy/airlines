@@ -1,7 +1,8 @@
 (function () {
     'use strict';
 
-    var React = require('react/addons'),
+    var React = require('react'),
+        classNames = require('classnames'),
         Editable = require('./editable');
 
     module.exports = React.createClass({
@@ -46,16 +47,16 @@
                 handleRemainingInput,
                 content,
 
-                estimateClass = React.addons.classSet({
+                estimateClass = classNames({
                     'numbers__estimate': true
                 }),
 
-                consumedClass = React.addons.classSet({
+                consumedClass = classNames({
                     'numbers__consumed': true,
                     'is-over': isOverConsumed
                 }),
 
-                remainingClass = React.addons.classSet({
+                remainingClass = classNames({
                     'numbers__remaining': true,
                     'is-over': wasUnderEstimated && 0 < this.props.remaining,
                     'is-under': wasOverEstimated

@@ -18,6 +18,7 @@
   },
   "devDependencies": {
     "bootstrap": "~3.3.1",
+    "classnames": "^1.2.0",
     "gulp": "~3.8.10",
     "gulp-autoprefixer": "^2.1.0",
     "gulp-browserify": "~0.5.0",

@@ -1,8 +1,9 @@
 (function () {
     'use strict';
 
-    var React = require('react/addons'),
+    var React = require('react'),
         reqwest = require('reqwest'),
+        classNames = require('classnames'),
         DragDropMixin = require('react-dnd').DragDropMixin,
         ItemTypes = require('../imports/itemTypes'),
         DateHelper = require('../imports/dateHelper'),
@@ -142,7 +143,7 @@
             var style = {},
                 nameStyle = { backgroundColor: this.props.color },
 
-                classes = React.addons.classSet({
+                classes = classNames({
                     'task': true,
                     'task--dragged': this.getDragState(ItemTypes.TASK).isDragging,
                     'task--hovered': this.getDropState(ItemTypes.TASK).isHovering

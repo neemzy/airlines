@@ -1,9 +1,10 @@
 (function () {
     'use strict';
 
-    var React = require('react/addons'),
+    var React = require('react'),
         Promise = require('promise'),
         reqwest = require('reqwest'),
+        classNames = require('classnames'),
         DragDropMixin = require('react-dnd').DragDropMixin,
         ItemTypes = require('../imports/itemTypes'),
         Task = require('./task');
@@ -146,7 +147,7 @@
         render: function() {
             var tasks = [],
 
-                classes = React.addons.classSet({
+                classes = classNames({
                     'day': true,
                     'day--hovered': this.getDropState(ItemTypes.TASK).isHovering
                 });
