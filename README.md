@@ -20,10 +20,9 @@ All commands shall be ran at the application's root unless otherwise specified.
 
 ### Development
 
-- Run `cp open.json.dist open.json` and edit the latter to define the app's root URL
-- Run `gulp` to recompile development assets, start the livereload server and have your browser opened at the URL defined above
+Run `gulp` to recompile development assets, start the livereload server and have your browser opened at the app's root.
 
-*Note : You can also force the use of a specific browser by adding an `app` parameter to `open.json` (see [gulp-open](https://www.npmjs.com/package/gulp-open)'s documentation about that).*
+*Note : The URL reached by the latter can be specified in the `open.json` file created by the build if it does not exist. You can also force the use of a specific browser with the `app` parameter (see [gulp-open](https://www.npmjs.com/package/gulp-open)'s documentation about that).*
 
 If you are unfamiliar with running Symfony applications, you may want to [RTFM](http://symfony.com/doc/current/cookbook/configuration/web_server_configuration.html).  
 **TL;DR:** if your PHP is >= 5.4, run `php app/console server:start` to run the app on `localhost:8000`.  

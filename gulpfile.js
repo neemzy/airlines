@@ -1,11 +1,10 @@
 var gulp = require('gulp'),
     tasks = require('gulp-load-plugins')(),
     rimraf = require('rimraf'),
-    openConfig = require('./open.json'),
+    fs = require('fs'),
+    open = './open.json',
     src = 'app/Resources/assets/',
     dist = 'web/';
-
-
 
 gulp.task(
     'clean',
@@ -15,8 +14,6 @@ gulp.task(
         callback();
     }
 );
-
-
 
 gulp.task(
     'stylesheets',
@@ -31,8 +28,6 @@ gulp.task(
     }
 );
 
-
-
 gulp.task(
     'fonts',
     function () {
@@ -40,8 +35,6 @@ gulp.task(
             .pipe(gulp.dest(dist + 'fonts/'));
     }
 );
-
-
 
 gulp.task(
     'scripts',
@@ -65,8 +58,6 @@ gulp.task(
     }
 );
 
-
-
 gulp.task(
     'workflow',
     function () {
@@ -74,8 +65,22 @@ gulp.task(
             return;
         }
 
-        gulp.src('gulpfile.js')
-            .pipe(tasks.open('', openConfig));
+        fs.stat(
+            open,
+            function (err) {
+                var cb = function() {
+                    gulp.src('gulpfile.js')
+                        .pipe(tasks.open('', require(open)));
+                };
+
+                if (null === err) {
+                    cb();
+                } else {
+                    console.log('gulp-open configuration file not found, creating it with default values...');
+                    fs.writeFile(open, '{"url": "http://localhost:8000/app_dev.php"}', cb);
+                }
+            }
+        );
 
         tasks.livereload.listen(
             35729,
@@ -93,7 +98,5 @@ gulp.task(
         );
     }
 );
-
-
 
 gulp.task('default', ['clean', 'stylesheets', 'fonts', 'scripts', 'workflow']);
