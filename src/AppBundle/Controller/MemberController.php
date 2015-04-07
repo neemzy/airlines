@@ -196,6 +196,12 @@ class MemberController extends Controller
                 throw $this->createNotFoundException('Unable to find Member entity.');
             }
 
+            $tasks = $em->getRepository('AirlinesAppBundle:Task')->findByMember($id);
+
+            foreach ($tasks as $task) {
+                $em->remove($task);
+            }
+
             $em->remove($entity);
             $em->flush();
         }
