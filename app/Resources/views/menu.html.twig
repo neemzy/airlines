@@ -3,8 +3,8 @@
 
 <ul class="nav navbar-nav">
     {% for route in routes %}
-        {% set path = path(route)|replace({ '/app_dev.php/': '/' }) %}
-        <li{% if path in app.request.pathinfo %} class="active"{% endif %}>
+        {% set path = path(route) %}
+        <li{% if path|replace({ '/app_dev.php/': '/' }) in app.request.pathinfo %} class="active"{% endif %}>
             <a href="{{ path }}">{{ route|title }}s</a>
         </li>
     {% endfor %}
