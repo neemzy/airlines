@@ -1,10 +1,5 @@
 language: php
 
-php:
-    - 5.4
-    - 5.5
-    - 5.6
-
 before_script:
     - composer install --prefer-source
     - npm install
@@ -13,6 +8,22 @@ before_script:
 script:
     - phpunit
     - jest
+    - gulp --dist
+
+after_success:
+    - sudo apt-get -y install sshpass
+    - mkdir build
+    - mv * build
+    - tar -czf package.tgz build --exclude="doc" --exclude="gulpfile.js" --exclude="node_modules" --exclude="package.json" --exclude="phpunit.xml" --exclude="README.md" --exclude="web/app_dev.php" --exclude="web/config.php"
+    - sshpass -p $DEPLOY_PASS scp -o stricthostkeychecking=no package.tgz $DEPLOY_USER@$DEPLOY_HOST:$DEPLOY_PATH
+    - sshpass -p $DEPLOY_PASS ssh $DEPLOY_USER@$DEPLOY_HOST sh $DEPLOY_PATH/deploy.sh
+
+env:
+    global:
+        - secure: "ZvSbxBR2g5M8UUWUQ9BJHcW2ril70dlsydHK2ZT/w14/Am6TV44B1PoHU+ELw9U78T1oPg74bdqc63avSzXshOfXk+xWQXZj9WdSAZ55XLUeRaa3ndsj69JP80Fet2Wh2kpk3hdwFeriXH0fMK/6L31UdWhpAUfNrHHUWZqg53E="
+        - secure: "Oub9zOaEq8/uF4AvPLoErFi4RVOmmASCyJqBGJwwSBnxdPJmf6m570Prra9KR7oXOX/Mn+E9XxGKsehXkoPuOYUxAHBxkH2iOmNSQrs8aN6UkY3iKI4e/dHu8E86mwxkKQYqfxJnHTnUpdiCF8xUMUOJDaRi/8LxfbViQSK1wj8="
+        - secure: "K20JAsU0L//3B7JpDhh5rDv65mZSsMCXiqSQ4aD3t+pBWLjH36W19P6+CQwjcv3tcW1/iBnpnwmobOHp4r/q/HAO/hEGPG0neykYhv2np3EFNf+AE2Z4X22ho4zIXm2lgsaKlv2FzR8JbdkIr+VVnjvJae5b+uhoKCyo2g70vj8="
+        - secure: "VzEGxwsasDMtSrEJWPTXM4cE1t3Cf+WNYXKjRluxJMSJwI+yznwBCdZxvzK7UH2bAzp/yENfrY28EX3gQbM5zKlf26wglC7KfPuBtMWl6qiJ1qUdNcOBjupSCK7Wxj69kqCxICoTWw7rXufh9ysGzDs/O4izhDoQraF0/uFf+s0="
 
 notifications:
     email: false
