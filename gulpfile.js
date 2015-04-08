@@ -11,6 +11,7 @@ gulp.task(
     function (callback) {
         rimraf.sync(dist + 'app.css');
         rimraf.sync(dist + 'app.js');
+        rimraf.sync(dist + 'fonts/');
         callback();
     }
 );

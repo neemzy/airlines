@@ -20,7 +20,7 @@ All commands shall be ran at the application's root unless otherwise specified.
 
 ### Development
 
-Run `gulp` to recompile development assets, start the livereload server and have your browser opened at the app's root.
+Run `gulp` to compile development assets, start the livereload server and have your browser opened at the app's root.
 
 *Note : The URL reached by the latter can be specified in the `open.json` file created by the build if it does not exist. You can also force the use of a specific browser with the `app` parameter (see [gulp-open](https://www.npmjs.com/package/gulp-open)'s documentation about that).*
 
@@ -36,10 +36,6 @@ Otherwise, upgrade it.
 ### Deployment
 
 Run `gulp --dist` to compile production-ready assets.
-
-#### A word on assets
-
-Compiled assets are currently versioned as the project isn't linked to any specific deployment process/tool. A better way to handle this would be to `.gitignore` these files and make the command above part of your deployment workflow. In the meantime, please make sure to run it before committing changes to assets in order to minimize the resulting diff.
 
 ## Side notes
 
