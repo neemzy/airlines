@@ -66,6 +66,8 @@ gulp.task(
             return;
         }
 
+        // Create gulp-open config file if it doesn't exist yet,
+        // and run the task either way
         fs.stat(
             open,
             function (err) {
