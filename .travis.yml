@@ -11,7 +11,7 @@ script:
     - gulp --dist
 
 after_success:
-    - test $TRAVIS_PULL_REQUEST == "false" && test $TRAVIS_BRANCH == "master" && composer install --no-dev -o
+    - test $TRAVIS_PULL_REQUEST == "false" && test $TRAVIS_BRANCH == "master" && export SYMFONY_ENV=prod && composer install --no-dev -o
     - test $TRAVIS_PULL_REQUEST == "false" && test $TRAVIS_BRANCH == "master" && sudo apt-get -y install sshpass
     - test $TRAVIS_PULL_REQUEST == "false" && test $TRAVIS_BRANCH == "master" && mkdir build
     - test $TRAVIS_PULL_REQUEST == "false" && test $TRAVIS_BRANCH == "master" && mv * build
