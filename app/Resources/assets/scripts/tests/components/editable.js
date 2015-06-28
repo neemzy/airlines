@@ -20,6 +20,7 @@
                             editable.handleInput = jest.genMockFunction();
                             React.addons.TestUtils.Simulate.keyDown(editable, { key: 'a' });
 
+                            // see https://github.com/facebook/jest/issues/207
                             //expect(editable.handleInput.mock.calls.length).toEqual(1);
                         }
                     );
