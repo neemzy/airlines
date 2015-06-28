@@ -1,0 +1,18 @@
+<VirtualHost *:80>
+    ServerName localhost
+    ServerAlias localhost
+
+	DocumentRoot /var/www/html/web
+    
+    <Directory /var/www/html/web >
+        AllowOverride All
+        Allow from All
+        Options -Indexes
+        DirectoryIndex app.php
+    </Directory>
+
+   	ServerAdmin webmaster@localhost
+
+    ErrorLog ${APACHE_LOG_DIR}/error.log
+    CustomLog ${APACHE_LOG_DIR}/access.log combined
+</VirtualHost>
