@@ -18,6 +18,9 @@ All commands shall be ran at the application's root unless otherwise specified.
 - Run `composer install` to install back-end dependencies
 - Run `npm install` to install front-end dependencies
 
+You can also install Airlines using [Docker](https://www.docker.com/). If you are interested in using this method, just
+follow the [guide](doc/docker_installation.md).
+
 ### Development
 
 Run `gulp` to compile development assets, start the livereload server and have your browser opened at the app's root.
