@@ -2,7 +2,6 @@
 
 namespace Airlines\AppBundle\Tests\Manager;
 
-use Airlines\AppBundle\Entity\Member;
 use Airlines\AppBundle\Entity\Task;
 use Airlines\AppBundle\Manager\TaskManager;
 

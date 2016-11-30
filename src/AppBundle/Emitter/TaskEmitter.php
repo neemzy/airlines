@@ -27,6 +27,6 @@ class TaskEmitter
             return;
         }
 
-        $this->emitter->emit('task', [ 'id' => $task->getId() ]);
+        $this->emitter->emit('task', ['id' => $task->getId()]);
     }
 }
