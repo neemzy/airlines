@@ -127,12 +127,12 @@ class MemberController extends Controller
     }
 
     /**
-    * Creates a form to edit a Member entity.
-    *
-    * @param Member $entity The entity
-    *
-    * @return \Symfony\Component\Form\Form The form
-    */
+     * Creates a form to edit a Member entity.
+     *
+     * @param Member $entity The entity
+     *
+     * @return \Symfony\Component\Form\Form The form
+     */
     private function createEditForm(Member $entity)
     {
         $form = $this->createForm(new MemberType(), $entity, array(

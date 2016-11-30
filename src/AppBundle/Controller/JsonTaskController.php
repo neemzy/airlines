@@ -53,7 +53,7 @@ class JsonTaskController extends AbstractJsonController
 
     /**
      * @param Member   $member
-     * @param DateTime $date
+     * @param \DateTime $date
      *
      * @return Response
      *
@@ -73,7 +73,7 @@ class JsonTaskController extends AbstractJsonController
 
     /**
      * @param Member   $member
-     * @param DateTime $date
+     * @param \DateTime $date
      *
      * @return Response Newly created Task or validation errors, as JSON
      *
